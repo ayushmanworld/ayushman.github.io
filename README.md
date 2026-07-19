@@ -1,137 +1,157 @@
-# Ayushman — AI-Powered Autism Support Platform
+# Ayushman — Full-Stack Platform
 
-> *Empowering Abilities. Enriching Lives.*
+> Empowering Abilities. Enriching Lives. An NGO for Special-Abled Kids.
 
-[![CI](https://github.com/ayushman-ngo/ayushman/actions/workflows/ci.yml/badge.svg)](https://github.com/ayushman-ngo/ayushman/actions/workflows/ci.yml)
-[![License](https://img.shields.io/badge/license-Proprietary-red.svg)](LICENSE)
-[![Node.js](https://img.shields.io/badge/node-%3E%3D20-brightgreen)](https://nodejs.org)
-[![pnpm](https://img.shields.io/badge/pnpm-9.x-orange)](https://pnpm.io)
+## Overview
 
-Ayushman is India's most comprehensive AI-powered platform for autism and ADHD support — connecting parents, therapists, schools, NGOs, hospitals, volunteers, government schemes and researchers across India.
+Ayushman is a production-grade full-stack platform for managing an NGO focused on autism and ADHD support. It includes a public-facing website, a donor portal, an AI-powered research & resource finder, a partner registration system, a curated video library, and a complete admin dashboard — all backed by a robust NestJS API, PostgreSQL database, and a RAG-based AI layer.
 
 ---
-
-## Mission
-
-Founded in Bangalore by a parent of a child with autism, Ayushman exists to ensure that no family navigates the journey of autism or ADHD alone. Every feature on this platform is built with one question: **does this help a child thrive?**
-
----
-
-## Architecture
-
-```
-ayushman/
-├── apps/
-│   ├── web/        Next.js 15 — Public website & parent portal
-│   ├── api/        NestJS    — REST API + WebSockets
-│   └── admin/      Next.js 15 — Founder admin dashboard
-├── packages/
-│   ├── ui/         Shared component library (shadcn/ui)
-│   ├── types/      Shared TypeScript types
-│   ├── config/     Shared runtime configuration
-│   ├── utils/      Shared utility functions
-│   ├── eslint-config/ Shared ESLint rules
-│   └── tsconfig/   Shared TypeScript configs
-├── database/
-│   ├── prisma/     Schema + migrations
-│   └── seeds/      Development seed data
-├── infrastructure/
-│   ├── docker/     Dockerfiles + Compose
-│   ├── terraform/  AWS infrastructure as code
-│   ├── nginx/      Reverse proxy configuration
-│   └── kubernetes/ K8s manifests
-└── docs/           Architecture + ADRs
-```
 
 ## Tech Stack
 
 | Layer | Technology |
 |---|---|
-| **Frontend** | Next.js 15, React 19, TypeScript, Tailwind CSS, shadcn/ui |
-| **Backend** | NestJS, Prisma ORM, PostgreSQL 16 + pgvector |
-| **Auth** | NextAuth v5, Passport JWT, bcrypt |
-| **AI** | Claude API (Anthropic), OpenAI Embeddings, LangChain, RAG |
-| **Cache** | Redis (via IORedis) |
-| **Queue** | BullMQ |
-| **Search** | Meilisearch |
-| **Payments** | Razorpay |
-| **Email** | Resend |
-| **Storage** | AWS S3 |
-| **Monitoring** | Sentry, PostHog |
-| **Infrastructure** | Docker, AWS ECS, Terraform, GitHub Actions |
+| Frontend | Next.js 14 (App Router), TypeScript, Tailwind CSS, shadcn/ui |
+| Backend | NestJS, TypeScript, REST + WebSockets |
+| Database | PostgreSQL + Prisma ORM |
+| Auth | NextAuth.js (frontend) + JWT + Passport (backend) |
+| AI | Claude claude-sonnet-4-6 (Anthropic) + LangChain + pgvector (RAG) |
+| Storage | AWS S3 / Cloudflare R2 |
+| Cache | Redis |
+| Search | Meilisearch |
+| Payments | Razorpay (India) |
+| Maps | Google Maps API |
+| Email | Resend |
+| Monitoring | Sentry + PostHog |
+| CI/CD | GitHub Actions |
+| Containers | Docker + Docker Compose |
+| Cloud | AWS (ECS + RDS + S3) / Vercel (frontend) |
 
 ---
 
-## Getting Started
+## Project Structure
+
+```
+Ayushman/
+├── frontend/          # Next.js 14 App Router
+├── backend/           # NestJS REST API
+├── database/          # Prisma schema + migrations + seeds
+├── ai/                # RAG pipeline + embeddings + prompts
+├── infrastructure/    # Docker, Terraform, Kubernetes, CI/CD
+└── docs/              # Architecture, API docs, runbooks
+```
+
+---
+
+## Quick Start
 
 ### Prerequisites
-
-- Node.js ≥ 20
-- pnpm ≥ 9
+- Node.js 20+
 - Docker + Docker Compose
+- PostgreSQL 16
+- Redis 7
 
-### Quick Start
-
+### 1. Clone & Install
 ```bash
-# 1. Clone
 git clone https://github.com/ayushman-ngo/ayushman.git
-cd ayushman
+cd Ayushman
 
-# 2. Run the automated setup script
-bash scripts/setup.sh
-
-# 3. Start development
-pnpm dev
+# Install all dependencies
+npm run install:all
 ```
 
-See [docs/ENVIRONMENT_SETUP.md](docs/ENVIRONMENT_SETUP.md) for detailed instructions.
+### 2. Environment Setup
+```bash
+cp frontend/.env.example frontend/.env.local
+cp backend/.env.example backend/.env
+```
 
-### Development URLs
+### 3. Database Setup
+```bash
+cd database
+npx prisma migrate dev
+npx prisma db seed
+```
 
-| Service | URL |
-|---|---|
-| Web App | http://localhost:3000 |
-| API | http://localhost:4000/api/v1 |
-| API Docs | http://localhost:4000/api/v1/docs |
-| Admin | http://localhost:3001 |
-| Adminer (DB) | http://localhost:8080 |
-| Mailpit (Email) | http://localhost:8025 |
-| Meilisearch | http://localhost:7700 |
+### 4. Start Development
+```bash
+# Start everything with Docker Compose
+docker-compose -f infrastructure/docker/docker-compose.dev.yml up
+
+# Or start individually:
+cd frontend && npm run dev      # http://localhost:3000
+cd backend && npm run start:dev  # http://localhost:4000
+```
+
+### 5. Seed the database
+```bash
+cd database && npm run seed
+```
 
 ---
 
-## Development Scripts
+## Environment Variables
 
-```bash
-pnpm dev              # Start all apps in parallel
-pnpm build            # Build all packages
-pnpm lint             # Lint all packages
-pnpm type-check       # TypeScript check all packages
-pnpm test             # Run all tests
-pnpm format           # Format all files with Prettier
-
-pnpm db:migrate       # Run Prisma migrations
-pnpm db:seed          # Seed database
-pnpm db:studio        # Open Prisma Studio
-
-pnpm docker:dev       # Start Docker dev services
-pnpm docker:dev:down  # Stop Docker dev services
+### Frontend (`frontend/.env.local`)
 ```
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=http://localhost:3000
+NEXT_PUBLIC_API_URL=http://localhost:4000
+NEXT_PUBLIC_GOOGLE_MAPS_KEY=
+NEXT_PUBLIC_RAZORPAY_KEY=
+NEXT_PUBLIC_POSTHOG_KEY=
+SENTRY_DSN=
+```
+
+### Backend (`backend/.env`)
+```
+DATABASE_URL=postgresql://user:pass@localhost:5432/ayushman
+REDIS_URL=redis://localhost:6379
+JWT_SECRET=
+JWT_REFRESH_SECRET=
+ANTHROPIC_API_KEY=
+RAZORPAY_KEY_ID=
+RAZORPAY_KEY_SECRET=
+RESEND_API_KEY=
+GOOGLE_MAPS_API_KEY=
+AWS_ACCESS_KEY_ID=
+AWS_SECRET_ACCESS_KEY=
+AWS_S3_BUCKET=
+MEILISEARCH_HOST=http://localhost:7700
+MEILISEARCH_KEY=
+SENTRY_DSN=
+```
+
+---
+
+## Module Overview
+
+### Frontend Modules
+- `/` — Public homepage
+- `/research` — AI-powered resource finder
+- `/videos` — Verified video library
+- `/partners` — Partner registration
+- `/dashboard` — Donor & parent dashboard
+- `/admin` — Founder admin panel
+
+### Backend Modules
+- `AuthModule` — JWT auth, refresh tokens, role-based access
+- `UsersModule` — Donors, parents, admins
+- `ChildrenModule` — Child profiles & progress
+- `DonationsModule` — Razorpay integration, 80G receipts
+- `PartnersModule` — Partner registration & approval workflow
+- `ResourcesModule` — Resource database + Meilisearch
+- `VideosModule` — Video metadata, search, analytics
+- `AnalyticsModule` — Search logs, donor heatmaps, country tracking
+- `AIModule` — RAG queries, embeddings, Claude integration
 
 ---
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md) for our contribution guidelines, coding standards, and pull request process.
-
-## Security
-
-See [SECURITY.md](SECURITY.md) to report vulnerabilities responsibly.
+See [docs/CONTRIBUTING.md](docs/CONTRIBUTING.md)
 
 ## License
 
-Proprietary. All rights reserved. © 2026 Ayushman NGO.
-
----
-
-*Built with ♥ for Ayushman — and every extraordinary child like him.*
+MIT — See [LICENSE](LICENSE)
