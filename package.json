@@ -1,39 +1,59 @@
 {
   "name": "ayushman",
-  "version": "1.0.0",
+  "version": "0.0.0",
   "private": true,
-  "description": "Ayushman NGO — Full-Stack Platform",
-  "workspaces": ["frontend", "backend", "database"],
-  "scripts": {
-    "install:all": "npm install && cd frontend && npm install && cd ../backend && npm install && cd ../database && npm install",
-    "dev": "concurrently \"npm run dev:backend\" \"npm run dev:frontend\"",
-    "dev:frontend": "cd frontend && npm run dev",
-    "dev:backend": "cd backend && npm run start:dev",
-    "dev:docker": "docker-compose -f infrastructure/docker/docker-compose.dev.yml up",
-    "db:migrate": "cd database && npx prisma migrate dev",
-    "db:migrate:prod": "cd database && npx prisma migrate deploy",
-    "db:seed": "cd database && npx ts-node seed/index.ts",
-    "db:studio": "cd database && npx prisma studio",
-    "db:reset": "cd database && npx prisma migrate reset",
-    "ai:ingest": "cd ai && npx ts-node rag/ingest.ts",
-    "build:frontend": "cd frontend && npm run build",
-    "build:backend": "cd backend && npm run build",
-    "build:all": "npm run build:frontend && npm run build:backend",
-    "test": "npm run test:frontend && npm run test:backend",
-    "test:frontend": "cd frontend && npm test",
-    "test:backend": "cd backend && npm test",
-    "lint": "cd frontend && npm run lint && cd ../backend && npm run lint",
-    "type-check": "cd frontend && npm run type-check",
-    "docker:up": "docker-compose -f infrastructure/docker/docker-compose.dev.yml up -d",
-    "docker:down": "docker-compose -f infrastructure/docker/docker-compose.dev.yml down",
-    "docker:logs": "docker-compose -f infrastructure/docker/docker-compose.dev.yml logs -f"
-  },
-  "devDependencies": {
-    "concurrently": "^8.2.2",
-    "typescript": "^5.4.0"
-  },
+  "description": "Ayushman – AI-Powered Autism Support Platform",
   "engines": {
     "node": ">=20.0.0",
-    "npm": ">=10.0.0"
+    "pnpm": ">=9.0.0"
+  },
+  "packageManager": "pnpm@9.4.0",
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev --parallel",
+    "lint": "turbo run lint",
+    "lint:fix": "turbo run lint:fix",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "test:e2e": "turbo run test:e2e",
+    "test:coverage": "turbo run test:coverage",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md,yaml,yml}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,js,jsx,json,md,yaml,yml}\"",
+    "clean": "turbo run clean && rm -rf node_modules",
+    "db:generate": "cd database && pnpm prisma generate",
+    "db:migrate": "cd database && pnpm prisma migrate dev",
+    "db:migrate:deploy": "cd database && pnpm prisma migrate deploy",
+    "db:push": "cd database && pnpm prisma db push",
+    "db:seed": "cd database && pnpm ts-node seeds/index.ts",
+    "db:studio": "cd database && pnpm prisma studio",
+    "db:reset": "cd database && pnpm prisma migrate reset",
+    "docker:dev": "docker compose up -d",
+    "docker:dev:down": "docker compose down",
+    "docker:dev:logs": "docker compose logs -f",
+    "docker:prod": "docker compose -f docker-compose.prod.yml up -d",
+    "prepare": "husky",
+    "check-env": "ts-node scripts/check-env.ts",
+    "release": "release-it"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@release-it/conventional-changelog": "^8.0.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.2",
+    "release-it": "^17.3.0",
+    "turbo": "^2.0.9",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {},
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yaml,yml}": [
+      "prettier --write"
+    ]
   }
 }
