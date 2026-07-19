@@ -6,18 +6,24 @@ import { ScheduleModule } from '@nestjs/schedule'
 import { BullModule } from '@nestjs/bull'
 import { CacheModule } from '@nestjs/cache-manager'
 import { redisStore } from 'cache-manager-ioredis-yet'
+import { APP_GUARD, APP_FILTER, APP_INTERCEPTOR } from '@nestjs/core'
+
+import { PrismaModule } from './prisma/prisma.module'
+import { RbacModule } from './rbac/rbac.module'
+import { AuditModule } from './audit/audit.module'
+import { EmailModule } from './email/email.module'
+import { AuthModule } from './auth/auth.module'
+import { UsersModule } from './users/users.module'
 import { HealthModule } from './health/health.module'
 import { environmentValidation } from './config/environment.validation'
+import { GlobalExceptionFilter } from './common/filters/global-exception.filter'
+import { ResponseInterceptor } from './common/interceptors/response.interceptor'
+import { JwtAuthGuard } from './auth/guards/auth.guards'
+import { RolesGuard } from './auth/guards/auth.guards'
+import { PermissionsGuard } from './auth/guards/auth.guards'
 
-/**
- * AppModule — Root application module.
- *
- * Domain feature modules are imported here as they are implemented in
- * subsequent phases. Phase 0 only bootstraps the infrastructure layer.
- */
 @Module({
   imports: [
-    // ─── Configuration ──────────────────────────────
     ConfigModule.forRoot({
       isGlobal: true,
       envFilePath: ['.env.local', '.env'],
@@ -25,7 +31,6 @@ import { environmentValidation } from './config/environment.validation'
       expandVariables: true,
     }),
 
-    // ─── Rate Limiting ──────────────────────────────
     ThrottlerModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -49,20 +54,20 @@ import { environmentValidation } from './config/environment.validation'
       }),
     }),
 
-    // ─── Cache (Redis) ──────────────────────────────
     CacheModule.registerAsync({
       isGlobal: true,
       inject: [ConfigService],
       useFactory: async (config: ConfigService) => ({
         store: await redisStore({
-          socket: { host: new URL(config.get<string>('REDIS_URL', 'redis://localhost:6379')).hostname },
+          socket: {
+            host: new URL(config.get<string>('REDIS_URL', 'redis://localhost:6379')).hostname,
+          },
           password: config.get<string>('REDIS_PASSWORD'),
           ttl: config.get<number>('REDIS_TTL_DEFAULT', 300) * 1000,
         }),
       }),
     }),
 
-    // ─── Queue (BullMQ via Bull) ────────────────────
     BullModule.forRootAsync({
       inject: [ConfigService],
       useFactory: (config: ConfigService) => ({
@@ -80,7 +85,6 @@ import { environmentValidation } from './config/environment.validation'
       }),
     }),
 
-    // ─── Events ─────────────────────────────────────
     EventEmitterModule.forRoot({
       wildcard: true,
       delimiter: '.',
@@ -88,22 +92,34 @@ import { environmentValidation } from './config/environment.validation'
       verboseMemoryLeak: true,
     }),
 
-    // ─── Scheduling ─────────────────────────────────
     ScheduleModule.forRoot(),
 
-    // ─── Feature Modules (added per phase) ──────────
+    // Core infrastructure (global)
+    PrismaModule,
+    RbacModule,
+    AuditModule,
+    EmailModule,
+
+    // Phase 1: Auth + Users
+    AuthModule,
+    UsersModule,
+
+    // Utilities
     HealthModule,
 
-    // Phase 1: AuthModule, UsersModule, PrismaModule
-    // Phase 3: ParentDashboardModule
-    // Phase 4: ChildrenModule
-    // Phase 5: TherapyModule
-    // Phase 6: ResourcesModule, VideosModule
-    // Phase 7: AiModule
-    // Phase 8: PartnersModule
-    // Phase 9: DonationsModule
-    // Phase 10: AnalyticsModule
-    // Phase 11: AdminModule, CmsModule
+    // Phase 2+: feature modules added per phase
+  ],
+  providers: [
+    // Global exception handler
+    { provide: APP_FILTER, useClass: GlobalExceptionFilter },
+
+    // Global response envelope
+    { provide: APP_INTERCEPTOR, useClass: ResponseInterceptor },
+
+    // Global guards (JWT first, then roles, then permissions)
+    { provide: APP_GUARD, useClass: JwtAuthGuard },
+    { provide: APP_GUARD, useClass: RolesGuard },
+    { provide: APP_GUARD, useClass: PermissionsGuard },
   ],
 })
 export class AppModule {}
