@@ -1,0 +1,14 @@
+User-agent: *
+Allow: /
+
+# Disallow admin and private routes
+Disallow: /admin
+Disallow: /dashboard
+Disallow: /settings
+Disallow: /api/
+
+# Crawl delay for bots
+Crawl-delay: 10
+
+# Sitemap
+Sitemap: https://ayushman.world/sitemap.xml
