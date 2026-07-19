@@ -1,0 +1,89 @@
+# ==============================================================================
+# Ayushman API — Multi-stage Production Dockerfile
+# Base: Node.js 20 LTS Alpine
+# ==============================================================================
+
+ARG NODE_VERSION=20
+ARG ALPINE_VERSION=3.20
+
+# ─────────────────────────────────────────────────
+# Stage 1: Dependency installer
+# ─────────────────────────────────────────────────
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache libc6-compat openssl && \
+    rm -rf /var/cache/apk/*
+
+RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
+
+WORKDIR /app
+
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY apps/api/package.json ./apps/api/
+COPY packages/types/package.json ./packages/types/
+COPY packages/config/package.json ./packages/config/
+COPY packages/utils/package.json ./packages/utils/
+COPY packages/tsconfig/package.json ./packages/tsconfig/
+
+RUN pnpm install --frozen-lockfile --ignore-scripts
+
+# ─────────────────────────────────────────────────
+# Stage 2: Builder
+# ─────────────────────────────────────────────────
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache libc6-compat openssl && \
+    rm -rf /var/cache/apk/*
+
+RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
+
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/api/node_modules ./apps/api/node_modules
+
+COPY . .
+
+# Generate Prisma client
+RUN pnpm --filter @ayushman/api exec prisma generate
+
+# Build NestJS application
+RUN pnpm --filter @ayushman/api build
+
+# ─────────────────────────────────────────────────
+# Stage 3: Production runner
+# ─────────────────────────────────────────────────
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache curl openssl && \
+    rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV PORT=4000
+
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nestjs
+
+# Copy built application
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/dist ./dist
+COPY --from=builder --chown=nestjs:nodejs /app/node_modules ./node_modules
+COPY --from=builder --chown=nestjs:nodejs /app/apps/api/package.json ./package.json
+
+# Copy Prisma schema and generated client
+COPY --from=builder --chown=nestjs:nodejs /app/database/prisma ./prisma
+COPY --from=builder --chown=nestjs:nodejs /app/node_modules/.prisma ./node_modules/.prisma
+COPY --from=builder --chown=nestjs:nodejs /app/node_modules/@prisma ./node_modules/@prisma
+
+USER nestjs
+
+EXPOSE 4000
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:4000/api/v1/health || exit 1
+
+CMD ["node", "dist/main.js"]

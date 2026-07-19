@@ -1,0 +1,16 @@
+{
+  "extends": "@ayushman/tsconfig/nestjs.json",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@ayushman/types": ["../../packages/types/src"],
+      "@ayushman/config": ["../../packages/config/src"],
+      "@ayushman/utils": ["../../packages/utils/src"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "dist", "test"]
+}

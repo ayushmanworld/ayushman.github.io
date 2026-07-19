@@ -1,0 +1,112 @@
+# ==============================================================================
+# Ayushman Web — Multi-stage Production Dockerfile
+# Base: Node.js 20 LTS Alpine
+# ==============================================================================
+
+ARG NODE_VERSION=20
+ARG ALPINE_VERSION=3.20
+
+# ─────────────────────────────────────────────────
+# Stage 1: Dependency installer
+# ─────────────────────────────────────────────────
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS deps
+
+# Install security updates and build dependencies
+RUN apk update && apk upgrade && \
+    apk add --no-cache libc6-compat openssl && \
+    rm -rf /var/cache/apk/*
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
+
+WORKDIR /app
+
+# Copy workspace manifests
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+
+# Copy package manifests for all workspaces
+COPY apps/web/package.json ./apps/web/
+COPY packages/ui/package.json ./packages/ui/
+COPY packages/types/package.json ./packages/types/
+COPY packages/config/package.json ./packages/config/
+COPY packages/utils/package.json ./packages/utils/
+COPY packages/tsconfig/package.json ./packages/tsconfig/
+COPY packages/eslint-config/package.json ./packages/eslint-config/
+
+# Install dependencies with frozen lockfile
+RUN pnpm install --frozen-lockfile --ignore-scripts
+
+# ─────────────────────────────────────────────────
+# Stage 2: Builder
+# ─────────────────────────────────────────────────
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS builder
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache libc6-compat openssl && \
+    rm -rf /var/cache/apk/*
+
+RUN corepack enable && corepack prepare pnpm@9.4.0 --activate
+
+WORKDIR /app
+
+# Copy installed dependencies
+COPY --from=deps /app/node_modules ./node_modules
+COPY --from=deps /app/apps/web/node_modules ./apps/web/node_modules
+
+# Copy all source files
+COPY . .
+
+# Build arguments for Next.js public env vars
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_APP_URL
+ARG NEXT_PUBLIC_APP_NAME=Ayushman
+ARG NEXT_PUBLIC_POSTHOG_KEY
+ARG NEXT_PUBLIC_POSTHOG_HOST=https://app.posthog.com
+ARG NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+ARG NEXT_PUBLIC_RAZORPAY_KEY_ID
+
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_APP_URL=$NEXT_PUBLIC_APP_URL
+ENV NEXT_PUBLIC_APP_NAME=$NEXT_PUBLIC_APP_NAME
+ENV NEXT_PUBLIC_POSTHOG_KEY=$NEXT_PUBLIC_POSTHOG_KEY
+ENV NEXT_PUBLIC_POSTHOG_HOST=$NEXT_PUBLIC_POSTHOG_HOST
+ENV NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=$NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+ENV NEXT_PUBLIC_RAZORPAY_KEY_ID=$NEXT_PUBLIC_RAZORPAY_KEY_ID
+
+# Build the web application
+RUN pnpm --filter @ayushman/web build
+
+# ─────────────────────────────────────────────────
+# Stage 3: Production runner
+# ─────────────────────────────────────────────────
+FROM node:${NODE_VERSION}-alpine${ALPINE_VERSION} AS runner
+
+RUN apk update && apk upgrade && \
+    apk add --no-cache curl && \
+    rm -rf /var/cache/apk/*
+
+WORKDIR /app
+
+# Set production environment
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+ENV PORT=3000
+ENV HOSTNAME=0.0.0.0
+
+# Create non-root user for security
+RUN addgroup --system --gid 1001 nodejs && \
+    adduser --system --uid 1001 nextjs
+
+# Copy only what's needed for production
+COPY --from=builder /app/apps/web/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/apps/web/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
+  CMD curl -f http://localhost:3000/api/health || exit 1
+
+CMD ["node", "server.js"]
