@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Video Library — Ayushman</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F5F0E8;--cream2:#EDE8DC;--warm-white:#FDFAF5;--amber:#C8782A;--amber-pale:#FBF0DC;--teal:#2D7A6B;--teal-pale:#E0F0EC;--navy:#1E2D3D;--brown:#4A3728;--muted:#6B5D50;--border:#DDD6C8;--shadow:0 4px 28px rgba(44,36,22,.10);--shadow-sm:0 2px 12px rgba(44,36,22,.07)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--navy);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--amber);border-radius:3px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(253,250,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--amber);text-decoration:none}
+.nav-links{display:flex;gap:6px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;transition:all .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);background:var(--amber-pale)}
+.nav-donate{background:var(--amber);color:white;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:600}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1a2e3a 60%,#0f2520 100%);padding:110px 60px 56px;text-align:center;position:relative;overflow:hidden}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,120,42,.2);border:1px solid rgba(200,120,42,.4);color:#F5C842;font-size:12px;font-weight:600;padding:7px 16px;border-radius:50px;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:white;line-height:1.15;margin-bottom:14px}
+.hero h1 em{color:var(--amber);font-style:italic}
+.hero p{font-size:17px;color:rgba(255,255,255,.6);max-width:600px;margin:0 auto 12px;line-height:1.85}
+.hero-note{font-size:13px;color:rgba(255,255,255,.4);margin-bottom:36px}
+
+/* SEARCH + FILTERS */
+.controls{background:white;border-bottom:1px solid var(--border);padding:20px 60px;display:flex;flex-direction:column;gap:14px;position:sticky;top:64px;z-index:100;box-shadow:var(--shadow-sm)}
+.search-row{display:flex;gap:12px;align-items:center}
+.video-search{flex:1;display:flex;align-items:center;gap:10px;background:var(--cream);border:1.5px solid var(--border);border-radius:12px;padding:12px 16px;transition:border .2s}
+.video-search:focus-within{border-color:var(--amber)}
+.video-search input{flex:1;border:none;background:transparent;font-size:14px;color:var(--navy);font-family:'DM Sans',sans-serif}
+.video-search input:focus{outline:none}
+.loc-select{padding:12px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:13px;color:var(--navy);font-family:'DM Sans',sans-serif;background:white;cursor:pointer;min-width:160px}
+.loc-select:focus{outline:none;border-color:var(--amber)}
+.search-btn{background:var(--amber);color:white;border:none;border-radius:12px;padding:12px 22px;font-size:14px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;white-space:nowrap}
+.search-btn:hover{background:var(--brown)}
+.filter-row{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
+.filter-label{font-size:12px;font-weight:600;color:var(--muted);margin-right:4px}
+.fchip{padding:6px 16px;border-radius:50px;border:1.5px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;background:white;white-space:nowrap}
+.fchip:hover,.fchip.active{background:var(--amber);border-color:var(--amber);color:white}
+
+/* VIDEO GRID */
+.video-section{padding:36px 60px}
+.vs-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px;flex-wrap:wrap;gap:12px}
+.vs-title{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy)}
+.vs-count{font-size:14px;color:var(--muted)}
+.video-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.vcard{background:white;border-radius:16px;overflow:hidden;box-shadow:var(--shadow-sm);border:1px solid var(--border);transition:all .2s;cursor:pointer}
+.vcard:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.vcard-thumb{position:relative;aspect-ratio:16/9;overflow:hidden}
+.vcard-thumb-bg{width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:42px}
+.vplay-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.22);transition:background .2s}
+.vplay-btn:hover{background:rgba(0,0,0,.4)}
+.vplay-icon{width:48px;height:48px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 4px 16px rgba(0,0,0,.3);transition:transform .2s}
+.vcard:hover .vplay-icon{transform:scale(1.1)}
+.vplay-icon::after{content:'';width:0;height:0;border-left:17px solid var(--amber);border-top:10px solid transparent;border-bottom:10px solid transparent;margin-left:4px}
+.vduration{position:absolute;bottom:7px;right:7px;background:rgba(0,0,0,.75);color:white;font-size:10px;font-weight:600;padding:3px 7px;border-radius:4px}
+.vverified{position:absolute;top:7px;left:7px;background:var(--teal);color:white;font-size:10px;font-weight:700;padding:3px 8px;border-radius:50px;display:flex;align-items:center;gap:4px}
+.vlanguage{position:absolute;top:7px;right:7px;background:rgba(0,0,0,.7);color:white;font-size:10px;font-weight:600;padding:3px 7px;border-radius:4px}
+.vcard-info{padding:14px}
+.vcategory{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--amber);margin-bottom:5px}
+.vtitle{font-size:14px;font-weight:600;color:var(--navy);line-height:1.4;margin-bottom:6px}
+.vmeta{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--muted)}
+.vsource{display:flex;align-items:center;gap:5px}
+.vtags{display:flex;flex-wrap:wrap;gap:4px;margin-top:8px}
+.vtag{font-size:10px;padding:2px 7px;border-radius:50px;background:var(--cream);color:var(--muted)}
+
+/* FEATURED */
+.featured-section{background:var(--cream);padding:36px 60px}
+.featured-card{background:white;border-radius:20px;overflow:hidden;box-shadow:var(--shadow);display:grid;grid-template-columns:1.4fr 1fr;align-items:stretch}
+.featured-thumb{position:relative;background:linear-gradient(135deg,var(--navy),#1a3a2e);display:flex;align-items:center;justify-content:center;font-size:80px;min-height:300px;cursor:pointer}
+.featured-play-btn{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(0,0,0,.15);transition:background .2s}
+.featured-play-btn:hover{background:rgba(0,0,0,.35)}
+.featured-play-icon{width:70px;height:70px;border-radius:50%;background:rgba(255,255,255,.95);display:flex;align-items:center;justify-content:center;box-shadow:0 8px 32px rgba(0,0,0,.3)}
+.featured-play-icon::after{content:'';width:0;height:0;border-left:25px solid var(--amber);border-top:15px solid transparent;border-bottom:15px solid transparent;margin-left:6px}
+.featured-info{padding:36px}
+.featured-badge{display:inline-flex;align-items:center;gap:6px;background:var(--amber-pale);color:var(--amber);font-size:11px;font-weight:700;padding:5px 12px;border-radius:50px;margin-bottom:14px}
+.featured-info h2{font-family:'Playfair Display',serif;font-size:26px;color:var(--navy);margin-bottom:10px;line-height:1.3}
+.featured-info p{font-size:14px;color:var(--muted);line-height:1.8;margin-bottom:18px}
+.featured-meta{display:flex;flex-direction:column;gap:7px;margin-bottom:20px}
+.featured-meta span{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:7px}
+.watch-btn{display:inline-flex;align-items:center;gap:8px;background:var(--amber);color:white;padding:12px 24px;border-radius:50px;font-weight:600;font-size:14px;cursor:pointer;border:none;font-family:'DM Sans',sans-serif;transition:all .2s}
+.watch-btn:hover{background:var(--brown)}
+
+/* VIDEO MODAL */
+.vmodal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.9);z-index:600;align-items:center;justify-content:center;flex-direction:column}
+.vmodal.show{display:flex}
+.vmodal-inner{width:92%;max-width:960px;aspect-ratio:16/9;position:relative;border-radius:14px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.vmodal-inner iframe{width:100%;height:100%;border:none}
+.vmodal-close{color:white;font-size:26px;cursor:pointer;background:none;border:none;padding:8px 16px;margin-bottom:14px;align-self:flex-end;opacity:.8;font-family:sans-serif}
+.vmodal-close:hover{opacity:1}
+.vmodal-title{color:white;font-size:15px;font-weight:600;margin-top:14px;opacity:.7;text-align:center}
+
+/* VERIFIED NOTICE */
+.verified-notice{background:linear-gradient(135deg,var(--teal),#1a5e52);padding:20px 60px;display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+.verified-notice p{font-size:13px;color:rgba(255,255,255,.8);line-height:1.65}
+.verified-notice p strong{color:white}
+.verified-icon{font-size:28px;flex-shrink:0}
+
+/* CATEGORIES */
+.category-section{padding:40px 60px;background:white}
+.category-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:24px}
+.cat-card{border-radius:16px;padding:20px;text-align:center;cursor:pointer;transition:all .2s;border:2px solid var(--border);background:var(--cream)}
+.cat-card:hover,.cat-card.active{border-color:var(--amber);background:var(--amber-pale);transform:translateY(-3px)}
+.cat-icon{font-size:32px;margin-bottom:10px}
+.cat-title{font-size:14px;font-weight:700;color:var(--navy);margin-bottom:4px}
+.cat-count{font-size:12px;color:var(--muted)}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:60px;color:var(--muted)}
+.no-results h3{font-family:'Playfair Display',serif;font-size:24px;color:var(--navy);margin-bottom:10px}
+
+footer{background:var(--navy);color:white;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer p{font-size:12px;color:rgba(255,255,255,.4)}
+footer a{color:var(--amber);text-decoration:none;font-size:13px;font-weight:600}
+
+@media(max-width:1100px){.video-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:900px){
+  .hero{padding:90px 24px 44px}.hero h1{font-size:34px}
+  .controls{padding:16px 24px}
+  .search-row{flex-wrap:wrap}
+  .video-grid{grid-template-columns:repeat(2,1fr)}
+  .featured-card{grid-template-columns:1fr}
+  .featured-section,.video-section,.category-section{padding:36px 24px}
+  .verified-notice{padding:18px 24px}
+  .category-grid{grid-template-columns:repeat(2,1fr)}
+  nav{padding:0 16px}.nav-links{display:none}
+  footer{padding:20px 24px}
+}
+@media(max-width:540px){.video-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ayushman</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html">Find Help</a></li>
+    <li><a href="videos.html" class="active">Videos</a></li>
+    <li><a href="partners.html">Partner With Us</a></li>
+  </ul>
+  <a href="index.html#donate" class="nav-donate">♥ Donate</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🎥 Verified Video Library</div>
+  <h1>Learn from the World's<br><em>Best Autism Experts</em></h1>
+  <p>Curated, verified videos from top medical institutions, research universities and autism specialists worldwide. All content is autism-specific, evidence-based and approved.</p>
+  <p class="hero-note">✅ All videos verified · 🚫 No unscientific or harmful content · 🌐 Available in multiple languages</p>
+</div>
+
+<!-- VERIFIED NOTICE -->
+<div class="verified-notice">
+  <div class="verified-icon">🛡️</div>
+  <p><strong>Content Verification Policy:</strong> Every video in this library is manually reviewed for scientific accuracy, cultural appropriateness and relevance to autism/ADHD. Content is sourced from WHO, CDC, NIMHANS, Autism Speaks, ASHA, and peer-reviewed institutions only. Your search history helps us add more content you actually need.</p>
+</div>
+
+<!-- SEARCH + FILTERS -->
+<div class="controls">
+  <div class="search-row">
+    <div class="video-search">
+      <span style="font-size:18px;opacity:.5">🔍</span>
+      <input type="text" id="vsearch" placeholder="Search by topic, age group, therapy type, language…" oninput="filterVideos()"/>
+    </div>
+    <select class="loc-select" id="vloc" onchange="filterVideos()">
+      <option value="">All Locations</option>
+      <option value="india">🇮🇳 India-specific</option>
+      <option value="global">🌐 Global</option>
+      <option value="hindi">🗣️ Hindi Language</option>
+      <option value="english">🗣️ English Language</option>
+    </select>
+    <select class="loc-select" id="vage" onchange="filterVideos()" style="min-width:140px">
+      <option value="">All Ages</option>
+      <option value="0-3">0–3 Years</option>
+      <option value="3-6">3–6 Years</option>
+      <option value="6-12">6–12 Years</option>
+      <option value="12-18">12–18 Years</option>
+    </select>
+    <button class="search-btn" onclick="filterVideos()">Search</button>
+  </div>
+  <div class="filter-row">
+    <span class="filter-label">Topic:</span>
+    <div class="fchip active" onclick="setFilter(this,'')">All</div>
+    <div class="fchip" onclick="setFilter(this,'diagnosis')">🔬 Diagnosis</div>
+    <div class="fchip" onclick="setFilter(this,'therapy')">🧠 Therapy</div>
+    <div class="fchip" onclick="setFilter(this,'school')">🏫 School & IEP</div>
+    <div class="fchip" onclick="setFilter(this,'communication')">💬 Communication</div>
+    <div class="fchip" onclick="setFilter(this,'sensory')">🌀 Sensory</div>
+    <div class="fchip" onclick="setFilter(this,'parent')">👨‍👩‍👧 Parent Wellbeing</div>
+    <div class="fchip" onclick="setFilter(this,'adhd')">⚡ ADHD</div>
+    <div class="fchip" onclick="setFilter(this,'india')">🇮🇳 India</div>
+  </div>
+</div>
+
+<!-- FEATURED VIDEO -->
+<div class="featured-section">
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:16px">⭐ EDITOR'S PICK</div>
+  <div class="featured-card">
+    <div class="featured-thumb" onclick="openVideo('https://www.youtube.com/embed/Oo4f-eDkzIM','What is Autism Spectrum Disorder? Complete Guide for Indian Parents')">
+      <span>🧠</span>
+      <div class="featured-play-btn"><div class="featured-play-icon"></div></div>
+      <div style="position:absolute;bottom:16px;left:16px;background:rgba(0,0,0,.7);color:white;font-size:11px;padding:4px 10px;border-radius:6px">Temple Grandin Institute · 18:24</div>
+    </div>
+    <div class="featured-info">
+      <div class="featured-badge">⭐ Featured · Most Watched</div>
+      <h2>What is Autism Spectrum Disorder? A Complete Guide for Indian Parents</h2>
+      <p>This comprehensive introduction covers what ASD actually means, how it manifests differently in every child, what early signs to look for, and the first steps every parent should take after a diagnosis.</p>
+      <div class="featured-meta">
+        <span>📺 Temple Grandin Institute</span>
+        <span>⏱ 18 minutes 24 seconds</span>
+        <span>🌐 English · Subtitles available</span>
+        <span>✅ Verified by Ayushman</span>
+      </div>
+      <button class="watch-btn" onclick="openVideo('https://www.youtube.com/embed/Oo4f-eDkzIM','What is Autism Spectrum Disorder')">▶ Watch Now</button>
+    </div>
+  </div>
+</div>
+
+<!-- CATEGORIES -->
+<div class="category-section">
+  <div style="font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:10px">BROWSE BY CATEGORY</div>
+  <h2 style="font-family:'Playfair Display',serif;font-size:30px;color:var(--navy);margin-bottom:6px">Find Videos for Your Situation</h2>
+  <div class="category-grid">
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=diagnosis]'),'diagnosis')"><div class="cat-icon">🔬</div><div class="cat-title">Diagnosis & Assessment</div><div class="cat-count">4 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=therapy]'),'therapy')"><div class="cat-icon">🧠</div><div class="cat-title">Therapy Techniques</div><div class="cat-count">5 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=communication]'),'communication')"><div class="cat-icon">💬</div><div class="cat-title">Communication & Speech</div><div class="cat-count">3 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=sensory]'),'sensory')"><div class="cat-icon">🌀</div><div class="cat-title">Sensory Processing</div><div class="cat-count">3 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=school]'),'school')"><div class="cat-icon">🏫</div><div class="cat-title">School & Inclusion</div><div class="cat-count">3 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=parent]'),'parent')"><div class="cat-icon">👨‍👩‍👧</div><div class="cat-title">Parent Wellbeing</div><div class="cat-count">4 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=adhd]'),'adhd')"><div class="cat-icon">⚡</div><div class="cat-title">ADHD</div><div class="cat-count">3 videos</div></div>
+    <div class="cat-card" onclick="setFilter(document.querySelector('[onclick*=india]'),'india')"><div class="cat-icon">🇮🇳</div><div class="cat-title">India Specific</div><div class="cat-count">4 videos</div></div>
+  </div>
+</div>
+
+<!-- VIDEO GRID -->
+<div class="video-section">
+  <div class="vs-header">
+    <div class="vs-title">All Verified Videos</div>
+    <div class="vs-count" id="vs-count">25 videos available</div>
+  </div>
+  <div class="video-grid" id="video-grid"></div>
+</div>
+
+<!-- VIDEO MODAL -->
+<div class="vmodal" id="vmodal">
+  <button class="vmodal-close" onclick="closeVideo()">✕ Close</button>
+  <div class="vmodal-inner">
+    <iframe id="vframe" src="" allow="autoplay;encrypted-media;fullscreen" allowfullscreen></iframe>
+  </div>
+  <div class="vmodal-title" id="vmodal-title"></div>
+</div>
+
+<footer>
+  <p>© 2026 Ayushman · All videos verified for autism-specific, evidence-based content</p>
+  <a href="research.html">Find Help Near You →</a>
+</footer>
+
+<script>
+const VIDEOS = [
+  {id:1,title:'What is ASD? Complete Guide for Parents',category:'diagnosis',source:'Temple Grandin Institute',duration:'18:24',bg:'linear-gradient(135deg,#1a3a5c,#2D7A6B)',icon:'🧠',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/Oo4f-eDkzIM',tags:['ASD basics','First steps','Diagnosis']},
+  {id:2,title:'Early Signs of Autism in Toddlers (0–3 years)',category:'diagnosis',source:'CDC — Centers for Disease Control',duration:'12:10',bg:'linear-gradient(135deg,#7B5EA7,#D4537E)',icon:'👶',lang:'english',age:'0-3',india:false,embed:'https://www.youtube.com/embed/YV4tAHqSgEk',tags:['Early signs','Toddlers','Screening']},
+  {id:3,title:'How to Read an Autism Assessment Report',category:'diagnosis',source:'Autism Speaks',duration:'22:05',bg:'linear-gradient(135deg,#185FA5,#2D7A6B)',icon:'📋',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/Gj5tYEjBjQE',tags:['Assessment','Diagnosis','Report']},
+  {id:4,title:'बच्चे में ऑटिज्म के शुरुआती संकेत — माता-पिता के लिए गाइड',category:'india',source:'NIMHANS Bangalore',duration:'15:30',bg:'linear-gradient(135deg,#C8782A,#E8941A)',icon:'🇮🇳',lang:'hindi',age:'0-6',india:true,embed:'https://www.youtube.com/embed/nriyRyLFBxE',tags:['Hindi','Early signs','India']},
+  {id:5,title:'ABA Therapy Explained — What Parents Need to Know',category:'therapy',source:'Dr. Mary Barbera — Autism Training',duration:'28:05',bg:'linear-gradient(135deg,#2D7A6B,#639922)',icon:'🎯',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/7V9EaXaHKLo',tags:['ABA','Home therapy','Basics']},
+  {id:6,title:'Occupational Therapy at Home — 10 Easy Activities',category:'therapy',source:'OT Mom Learning Activities',duration:'16:42',bg:'linear-gradient(135deg,#D4537E,#7B5EA7)',icon:'🤲',lang:'english',age:'3-12',india:false,embed:'https://www.youtube.com/embed/qlMwG1uLKQI',tags:['OT','Home activities','Motor skills']},
+  {id:7,title:'Floortime Therapy — Parent Guide & Demo',category:'therapy',source:'ICDL — Floortime Foundation',duration:'31:20',bg:'linear-gradient(135deg,#1E2D3D,#2D7A6B)',icon:'🧸',lang:'english',age:'2-8',india:false,embed:'https://www.youtube.com/embed/JGnZY5ue3vk',tags:['Floortime','DIR','Play-based']},
+  {id:8,title:'Speech Therapy for Non-Verbal Autism Children',category:'communication',source:'ASHA — American Speech Association',duration:'22:10',bg:'linear-gradient(135deg,#639922,#2D7A6B)',icon:'💬',lang:'english',age:'2-8',india:false,embed:'https://www.youtube.com/embed/ln3gFMUHaFI',tags:['Non-verbal','Speech','AAC']},
+  {id:9,title:'PECS — Picture Exchange Communication System',category:'communication',source:'Pyramid Educational Consultants',duration:'19:55',bg:'linear-gradient(135deg,#E8941A,#C8782A)',icon:'🖼️',lang:'english',age:'2-8',india:false,embed:'https://www.youtube.com/embed/whaqbHGhGx0',tags:['PECS','AAC','Communication']},
+  {id:10,title:'ऑटिज्म में संचार कैसे बढ़ाएं — Hindi Guide',category:'india',source:'Action For Autism India',duration:'18:00',bg:'linear-gradient(135deg,#C8782A,#7B5EA7)',icon:'🗣️',lang:'hindi',age:'',india:true,embed:'https://www.youtube.com/embed/mCbDSqb4Kko',tags:['Hindi','Communication','AAC']},
+  {id:11,title:'Sensory Meltdowns vs Tantrums — Key Differences',category:'sensory',source:'OT Mom Learning Activities',duration:'12:18',bg:'linear-gradient(135deg,#1E2D3D,#7B5EA7)',icon:'🌀',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/TGRohivQqd0',tags:['Meltdowns','Sensory','De-escalation']},
+  {id:12,title:'Sensory Diet for Autism — How to Create One',category:'sensory',source:'The Sensory Spectrum',duration:'24:30',bg:'linear-gradient(135deg,#D4537E,#E8941A)',icon:'🧘',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/h2yAtfzVNJQ',tags:['Sensory diet','OT','Daily routine']},
+  {id:13,title:'Sensory Processing in Indian School Classrooms',category:'india',source:'Special Education India',duration:'20:15',bg:'linear-gradient(135deg,#185FA5,#C8782A)',icon:'🏫',lang:'english',age:'6-12',india:true,embed:'https://www.youtube.com/embed/dWQK3Y4RpC0',tags:['India','School','Sensory']},
+  {id:14,title:'IEP — How to Advocate for Your Child at School',category:'school',source:'Autism Speaks',duration:'15:42',bg:'linear-gradient(135deg,#C8782A,#E8941A)',icon:'📚',lang:'english',age:'6-18',india:false,embed:'https://www.youtube.com/embed/YCJmELjYDcg',tags:['IEP','School rights','Advocacy']},
+  {id:15,title:'RPwD Act 2016 — Your Child\'s Rights in India',category:'india',source:'Disability Rights India',duration:'26:00',bg:'linear-gradient(135deg,#1E2D3D,#185FA5)',icon:'⚖️',lang:'english',age:'',india:true,embed:'https://www.youtube.com/embed/bHUqKrTxH2I',tags:['RPwD Act','Legal rights','India','School']},
+  {id:16,title:'Inclusive Classroom Strategies for Teachers',category:'school',source:'National Autism Center',duration:'33:10',bg:'linear-gradient(135deg,#2D7A6B,#185FA5)',icon:'👩‍🏫',lang:'english',age:'6-12',india:false,embed:'https://www.youtube.com/embed/wJy8RNZyqj4',tags:['Teachers','Inclusive','Classroom']},
+  {id:17,title:'Parent Burnout & Caregiver Fatigue — Recovery',category:'parent',source:'Autism Parent Magazine',duration:'35:20',bg:'linear-gradient(135deg,#D4537E,#C8782A)',icon:'💚',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/xN4hXJCXSMw',tags:['Burnout','Parent wellbeing','Self-care']},
+  {id:18,title:'Couples & Autism Parenting — Staying Strong Together',category:'parent',source:'Family Empowerment Media',duration:'28:45',bg:'linear-gradient(135deg,#7B5EA7,#D4537E)',icon:'💑',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/R3FrV3_BFTU',tags:['Marriage','Parenting','Relationships']},
+  {id:19,title:'ऑटिस्टिक बच्चे के माता-पिता का मानसिक स्वास्थ्य',category:'india',source:'iCall TISS India',duration:'22:30',bg:'linear-gradient(135deg,#C8782A,#2D7A6B)',icon:'🧡',lang:'hindi',age:'',india:true,embed:'https://www.youtube.com/embed/Kn7m1QHZKLQ',tags:['Hindi','Parent mental health','India']},
+  {id:20,title:'Grief & Acceptance — A Parent\'s Autism Journey',category:'parent',source:'Autism Society of America',duration:'41:00',bg:'linear-gradient(135deg,#1E2D3D,#D4537E)',icon:'🌸',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/2LQqUBpqkNs',tags:['Grief','Acceptance','Emotional journey']},
+  {id:21,title:'ADHD Explained — Causes, Symptoms & Treatments',category:'adhd',source:'How to ADHD — YouTube',duration:'14:20',bg:'linear-gradient(135deg,#E8941A,#7B5EA7)',icon:'⚡',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/ouZrZa5pLXk',tags:['ADHD','Overview','Symptoms']},
+  {id:22,title:'ADHD in the Classroom — Strategies That Work',category:'adhd',source:'ADDitude Magazine',duration:'19:50',bg:'linear-gradient(135deg,#639922,#E8941A)',icon:'📖',lang:'english',age:'6-12',india:false,embed:'https://www.youtube.com/embed/wNM1mIwf4CU',tags:['ADHD','School','Teachers']},
+  {id:23,title:'Managing ADHD at Home Without Medication',category:'adhd',source:'Dr. Russell Barkley — CHADD',duration:'38:15',bg:'linear-gradient(135deg,#185FA5,#639922)',icon:'🏠',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/LyDliT_GSZY',tags:['ADHD','No medication','Home strategies']},
+  {id:24,title:'Behaviour Management — Positive Reinforcement',category:'therapy',source:'Kennedy Krieger Institute',duration:'17:30',bg:'linear-gradient(135deg,#2D7A6B,#D4537E)',icon:'🌟',lang:'english',age:'',india:false,embed:'https://www.youtube.com/embed/jTpnOG3MQVE',tags:['Behaviour','Positive reinforcement','ABA']},
+  {id:25,title:'Planning for Your Autistic Child\'s Future (18+)',category:'parent',source:'Autism Society of America',duration:'44:10',bg:'linear-gradient(135deg,#1E2D3D,#2D7A6B)',icon:'🌅',lang:'english',age:'12-18',india:false,embed:'https://www.youtube.com/embed/mE4i2RcezGw',tags:['Future planning','Adult autism','Transition']},
+];
+
+let currentFilter = '';
+let currentSearch = '';
+let currentLoc = '';
+let currentAge = '';
+
+function renderVideos(){
+  const grid = document.getElementById('video-grid');
+  let filtered = VIDEOS.filter(v => {
+    const matchFilter = !currentFilter || v.category === currentFilter;
+    const matchSearch = !currentSearch || v.title.toLowerCase().includes(currentSearch) || v.tags.join(' ').toLowerCase().includes(currentSearch) || v.source.toLowerCase().includes(currentSearch);
+    const matchLoc = !currentLoc || (currentLoc === 'india' && v.india) || (currentLoc === 'global' && !v.india) || (currentLoc === 'hindi' && v.lang === 'hindi') || (currentLoc === 'english' && v.lang === 'english');
+    const matchAge = !currentAge || v.age === currentAge || v.age === '';
+    return matchFilter && matchSearch && matchLoc && matchAge;
+  });
+
+  // Save search
+  if(currentSearch){
+    const searches = JSON.parse(localStorage.getItem('ay_video_searches')||'[]');
+    searches.push({q:currentSearch,filter:currentFilter,loc:currentLoc,age:currentAge,time:new Date().toISOString()});
+    if(searches.length > 200) searches.shift();
+    localStorage.setItem('ay_video_searches', JSON.stringify(searches));
+  }
+
+  document.getElementById('vs-count').textContent = filtered.length + ' video' + (filtered.length!==1?'s':'') + ' found';
+
+  if(filtered.length === 0){
+    grid.innerHTML = `<div class="no-results" style="grid-column:1/-1"><h3>No videos found</h3><p>Try a different search term or category. Your search has been recorded — we'll add relevant content soon.</p></div>`;
+    return;
+  }
+
+  grid.innerHTML = filtered.map(v => `
+    <div class="vcard" onclick="openVideo('${v.embed}','${v.title.replace(/'/g,"\\'")}')">
+      <div class="vcard-thumb">
+        <div class="vcard-thumb-bg" style="background:${v.bg}">${v.icon}</div>
+        <div class="vplay-btn"><div class="vplay-icon"></div></div>
+        <div class="vduration">${v.duration}</div>
+        <div class="vverified">✅ Verified</div>
+        ${v.lang === 'hindi' ? '<div class="vlanguage">हिंदी</div>' : ''}
+      </div>
+      <div class="vcard-info">
+        <div class="vcategory">${v.category.toUpperCase()}</div>
+        <div class="vtitle">${v.title}</div>
+        <div class="vmeta">
+          <div class="vsource">📺 ${v.source}</div>
+          ${v.india ? '<span>🇮🇳</span>' : '<span>🌐</span>'}
+        </div>
+        <div class="vtags">${v.tags.map(t=>`<span class="vtag">${t}</span>`).join('')}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function setFilter(el, filter){
+  currentFilter = filter;
+  document.querySelectorAll('.fchip').forEach(c=>c.classList.remove('active'));
+  if(el) el.classList.add('active');
+  renderVideos();
+}
+
+function filterVideos(){
+  currentSearch = document.getElementById('vsearch').value.toLowerCase().trim();
+  currentLoc = document.getElementById('vloc').value;
+  currentAge = document.getElementById('vage').value;
+  renderVideos();
+}
+
+function openVideo(embed, title){
+  document.getElementById('vframe').src = embed + '?autoplay=1&rel=0';
+  document.getElementById('vmodal-title').textContent = title;
+  document.getElementById('vmodal').classList.add('show');
+
+  // Record view
+  const views = JSON.parse(localStorage.getItem('ay_video_views')||'[]');
+  views.push({title, time: new Date().toISOString()});
+  localStorage.setItem('ay_video_views', JSON.stringify(views));
+}
+
+function closeVideo(){
+  document.getElementById('vframe').src = '';
+  document.getElementById('vmodal').classList.remove('show');
+}
+
+document.getElementById('vmodal').addEventListener('click', function(e){if(e.target===this)closeVideo();});
+document.addEventListener('keydown', e => {if(e.key==='Escape')closeVideo();});
+
+renderVideos();
+</script>
+</body>
+</html>

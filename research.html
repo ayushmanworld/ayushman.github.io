@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Research & Find Help — Ayushman</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--cream:#F5F0E8;--cream2:#EDE8DC;--warm-white:#FDFAF5;--amber:#C8782A;--amber-pale:#FBF0DC;--teal:#2D7A6B;--teal-pale:#E0F0EC;--navy:#1E2D3D;--brown:#4A3728;--muted:#6B5D50;--border:#DDD6C8;--shadow:0 4px 28px rgba(44,36,22,.10);--shadow-sm:0 2px 12px rgba(44,36,22,.07)}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--warm-white);color:var(--navy);line-height:1.6;overflow-x:hidden}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-thumb{background:var(--amber);border-radius:3px}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:300;background:rgba(253,250,245,.97);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px}
+.nav-logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--amber);text-decoration:none}
+.nav-links{display:flex;gap:6px;list-style:none}
+.nav-links a{text-decoration:none;color:var(--muted);font-size:13px;font-weight:500;padding:6px 12px;border-radius:8px;transition:all .2s}
+.nav-links a:hover,.nav-links a.active{color:var(--amber);background:var(--amber-pale)}
+.nav-donate{background:var(--amber);color:white;padding:8px 18px;border-radius:50px;text-decoration:none;font-size:13px;font-weight:600;transition:all .2s}
+.nav-donate:hover{background:var(--brown)}
+
+/* HERO */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#0f2538 60%,#1a3a2e 100%);padding:110px 60px 60px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='2'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");pointer-events:none}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(200,120,42,.2);border:1px solid rgba(200,120,42,.4);color:#F5C842;font-size:12px;font-weight:600;padding:7px 16px;border-radius:50px;margin-bottom:20px}
+.hero h1{font-family:'Playfair Display',serif;font-size:52px;font-weight:700;color:white;line-height:1.15;margin-bottom:16px}
+.hero h1 em{color:var(--amber);font-style:italic}
+.hero p{font-size:17px;color:rgba(255,255,255,.65);max-width:640px;margin:0 auto 40px;line-height:1.85}
+
+/* SMART FINDER */
+.finder-card{background:white;border-radius:24px;padding:36px;max-width:860px;margin:0 auto;box-shadow:0 20px 60px rgba(0,0,0,.25);position:relative;z-index:2}
+.finder-title{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:6px}
+.finder-sub{font-size:14px;color:var(--muted);margin-bottom:24px}
+.finder-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.finder-field label{display:block;font-size:12px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.finder-field select,.finder-field input{width:100%;padding:13px 14px;border:1.5px solid var(--border);border-radius:12px;font-size:14px;color:var(--navy);font-family:'DM Sans',sans-serif;background:var(--cream);transition:border .2s;cursor:pointer}
+.finder-field select:focus,.finder-field input:focus{outline:none;border-color:var(--amber)}
+.finder-btn{width:100%;background:linear-gradient(135deg,var(--amber),var(--brown));color:white;border:none;border-radius:50px;padding:15px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:9px;margin-top:4px}
+.finder-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(200,120,42,.4)}
+
+/* RESULTS SECTION */
+.results-section{padding:60px;background:var(--cream)}
+.results-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px;flex-wrap:wrap;gap:12px}
+.results-title{font-family:'Playfair Display',serif;font-size:28px;color:var(--navy)}
+.results-count{background:var(--amber);color:white;font-size:13px;font-weight:600;padding:6px 16px;border-radius:50px}
+.filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+.filter-chip{padding:7px 16px;border-radius:50px;border:1.5px solid var(--border);color:var(--muted);font-size:12px;font-weight:600;cursor:pointer;transition:all .2s;background:white}
+.filter-chip:hover,.filter-chip.active{background:var(--amber);border-color:var(--amber);color:white}
+.results-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.result-card{background:white;border-radius:18px;padding:24px;box-shadow:var(--shadow-sm);border:1px solid var(--border);transition:all .2s;position:relative;overflow:hidden}
+.result-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.result-card.therapy::before{background:var(--teal)}
+.result-card.school::before{background:#E8941A}
+.result-card.hospital::before{background:#D4537E}
+.result-card.sports::before{background:#639922}
+.result-card.govt::before{background:#185FA5}
+.result-card:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.rc-type{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;padding:4px 10px;border-radius:50px;margin-bottom:12px}
+.rc-type.therapy{background:#e0f0ec;color:var(--teal)}
+.rc-type.school{background:#fef3dc;color:#9a6500}
+.rc-type.hospital{background:#fdf0ea;color:#b03070}
+.rc-type.sports{background:#eef5e0;color:#4a7010}
+.rc-type.govt{background:#e8eef5;color:#185FA5}
+.result-card h3{font-family:'Playfair Display',serif;font-size:17px;color:var(--navy);margin-bottom:6px;line-height:1.3}
+.result-card .location{font-size:12px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;gap:5px}
+.result-card p{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:14px}
+.rc-contact{display:flex;flex-direction:column;gap:5px;margin-bottom:14px;padding:10px 12px;background:var(--cream);border-radius:10px}
+.rc-contact span{font-size:12px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.rc-tags{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px}
+.rc-tag{font-size:10px;padding:3px 8px;border-radius:50px;background:var(--cream2);color:var(--muted);font-weight:500}
+.rc-actions{display:flex;gap:8px}
+.rc-btn{flex:1;padding:9px 10px;border-radius:10px;border:1.5px solid var(--border);background:white;font-size:12px;font-weight:600;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;text-decoration:none;text-align:center;color:var(--navy)}
+.rc-btn:hover{border-color:var(--amber);color:var(--amber)}
+.rc-btn.primary{background:var(--amber);border-color:var(--amber);color:white}
+.rc-btn.primary:hover{background:var(--brown)}
+
+/* SITUATION GUIDE */
+.situation-section{padding:60px;background:white}
+.situation-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:36px}
+.situation-card{border-radius:20px;padding:28px;cursor:pointer;transition:all .2s;border:2px solid var(--border);background:var(--cream)}
+.situation-card:hover{border-color:var(--amber);transform:translateY(-3px);box-shadow:var(--shadow)}
+.situation-card.expanded{border-color:var(--teal);background:white}
+.sc-icon{font-size:36px;margin-bottom:14px}
+.sc-title{font-family:'Playfair Display',serif;font-size:18px;color:var(--navy);margin-bottom:8px}
+.sc-desc{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:14px}
+.sc-expand{font-size:12px;font-weight:700;color:var(--amber)}
+.sc-detail{display:none;margin-top:14px;padding-top:14px;border-top:1px solid var(--border)}
+.situation-card.expanded .sc-detail{display:block}
+.sc-detail h4{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;text-transform:uppercase;letter-spacing:.7px}
+.sc-detail ul{list-style:none;display:flex;flex-direction:column;gap:6px}
+.sc-detail ul li{font-size:13px;color:var(--muted);display:flex;align-items:flex-start;gap:7px;line-height:1.5}
+.sc-detail ul li::before{content:'→';color:var(--amber);font-weight:700;flex-shrink:0;margin-top:1px}
+.sc-detail a{color:var(--teal);font-weight:600;text-decoration:none}
+
+/* DATA CAPTURE NOTICE */
+.data-notice{background:linear-gradient(135deg,var(--teal),#1a5e52);padding:28px 40px;display:flex;align-items:center;gap:20px;flex-wrap:wrap}
+.data-notice p{font-size:14px;color:rgba(255,255,255,.8);line-height:1.7}
+.data-notice p strong{color:white}
+.data-icon{font-size:32px;flex-shrink:0}
+
+/* PARTNER PREVIEW */
+.partner-preview{padding:50px 60px;background:var(--cream);text-align:center}
+.partner-preview h3{font-family:'Playfair Display',serif;font-size:28px;color:var(--navy);margin-bottom:10px}
+.partner-preview p{font-size:15px;color:var(--muted);max-width:560px;margin:0 auto 24px}
+.pending-badge{display:inline-flex;align-items:center;gap:8px;background:var(--amber-pale);border:1px solid rgba(200,120,42,.3);color:var(--amber);font-size:13px;font-weight:600;padding:8px 18px;border-radius:50px;margin-bottom:28px}
+.partner-slots{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.partner-slot{width:140px;height:80px;border-radius:14px;border:2px dashed var(--border);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:var(--muted);font-size:12px;background:white;transition:all .2s}
+.partner-slot:hover{border-color:var(--amber);color:var(--amber)}
+
+/* STATS BAR */
+.stats-bar{background:var(--navy);padding:24px 60px;display:flex;align-items:center;justify-content:space-around;flex-wrap:wrap;gap:20px}
+.sb-stat{text-align:center}
+.sb-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:700;color:var(--amber)}
+.sb-label{font-size:11px;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+
+/* MODAL */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(30,45,61,.75);backdrop-filter:blur(4px);z-index:500;align-items:center;justify-content:center}
+.modal-bg.show{display:flex}
+.modal-box{background:white;border-radius:22px;padding:36px;max-width:560px;width:92%;max-height:88vh;overflow-y:auto;position:relative}
+.modal-close{position:absolute;top:14px;right:14px;width:30px;height:30px;border-radius:50%;background:var(--cream);border:none;cursor:pointer;font-size:15px;color:var(--muted);font-family:sans-serif}
+.modal-box h3{font-family:'Playfair Display',serif;font-size:22px;color:var(--navy);margin-bottom:6px}
+.modal-box p{font-size:13px;color:var(--muted);margin-bottom:18px}
+.field{width:100%;padding:12px 13px;border:1.5px solid var(--border);border-radius:11px;font-size:13px;color:var(--navy);font-family:'DM Sans',sans-serif;background:var(--cream);margin-bottom:10px}
+.field:focus{outline:none;border-color:var(--amber)}
+.mfield-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:5px;display:block}
+.submit-btn{width:100%;background:var(--amber);color:white;border:none;border-radius:50px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:'DM Sans',sans-serif;margin-top:6px;transition:all .2s}
+.submit-btn:hover{background:var(--brown)}
+
+footer{background:var(--navy);color:white;padding:28px 60px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}
+footer p{font-size:12px;color:rgba(255,255,255,.4)}
+footer a{color:var(--amber);text-decoration:none;font-size:13px;font-weight:600}
+
+@media(max-width:900px){
+  .hero{padding:90px 24px 48px}.hero h1{font-size:36px}
+  .finder-grid,.results-grid,.situation-grid{grid-template-columns:1fr}
+  .results-section,.situation-section,.partner-preview{padding:44px 24px}
+  .stats-bar{padding:20px 24px}.data-notice{padding:20px 24px}
+  nav{padding:0 16px}.nav-links{display:none}
+  footer{padding:20px 24px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Ayushman</a>
+  <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="research.html" class="active">Find Help</a></li>
+    <li><a href="videos.html">Videos</a></li>
+    <li><a href="partners.html">Partner With Us</a></li>
+  </ul>
+  <a href="index.html#donate" class="nav-donate">♥ Donate</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">🔍 Smart Resource Finder</div>
+  <h1>Find the Right Help,<br><em>Right Near You</em></h1>
+  <p>Tell us about your situation and location — we'll show you therapy centres, schools, hospitals, sports academies and government resources matched to your needs.</p>
+
+  <div class="finder-card">
+    <div class="finder-title">🎯 Find Resources for Your Child</div>
+    <div class="finder-sub">All searches are anonymous. Your inputs help us improve results for every family.</div>
+    <div class="finder-grid">
+      <div class="finder-field">
+        <label>Child's Age</label>
+        <select id="f-age">
+          <option value="">Select age range</option>
+          <option value="0-3">0–3 years (Early Intervention)</option>
+          <option value="3-6">3–6 years (Pre-school)</option>
+          <option value="6-12">6–12 years (School age)</option>
+          <option value="12-18">12–18 years (Adolescent)</option>
+          <option value="18+">18+ years (Adult)</option>
+        </select>
+      </div>
+      <div class="finder-field">
+        <label>Primary Diagnosis</label>
+        <select id="f-diagnosis">
+          <option value="">Select condition</option>
+          <option value="autism">Autism Spectrum Disorder (ASD)</option>
+          <option value="adhd">ADHD / ADD</option>
+          <option value="both">Autism + ADHD</option>
+          <option value="delay">Developmental Delay</option>
+          <option value="speech">Speech & Language Delay</option>
+          <option value="sensory">Sensory Processing Disorder</option>
+          <option value="other">Other / Not yet diagnosed</option>
+        </select>
+      </div>
+      <div class="finder-field">
+        <label>What Do You Need?</label>
+        <select id="f-need">
+          <option value="">Select resource type</option>
+          <option value="therapy">Therapy Centre (Speech / OT / ABA)</option>
+          <option value="school">Inclusive / Special School</option>
+          <option value="hospital">Specialist Hospital / Diagnostic</option>
+          <option value="sports">Sports Academy / Physical Program</option>
+          <option value="govt">Government Schemes & Benefits</option>
+          <option value="parent">Parent Support Group</option>
+          <option value="all">Show All Resources</option>
+        </select>
+      </div>
+      <div class="finder-field">
+        <label>Your City / State</label>
+        <select id="f-location">
+          <option value="">Select location</option>
+          <optgroup label="Karnataka">
+            <option value="bangalore">Bangalore</option>
+            <option value="mysore">Mysore</option>
+          </optgroup>
+          <optgroup label="Maharashtra">
+            <option value="mumbai">Mumbai</option>
+            <option value="pune">Pune</option>
+          </optgroup>
+          <optgroup label="Delhi NCR">
+            <option value="delhi">Delhi</option>
+            <option value="gurugram">Gurugram</option>
+          </optgroup>
+          <optgroup label="Tamil Nadu">
+            <option value="chennai">Chennai</option>
+          </optgroup>
+          <optgroup label="Telangana">
+            <option value="hyderabad">Hyderabad</option>
+          </optgroup>
+          <optgroup label="Kerala">
+            <option value="kochi">Kochi</option>
+          </optgroup>
+          <optgroup label="West Bengal">
+            <option value="kolkata">Kolkata</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+    <div class="finder-field" style="margin-bottom:14px">
+      <label>Describe Your Situation (optional — helps us match better)</label>
+      <input type="text" id="f-query" placeholder="e.g. non-verbal 5 year old, looking for ABA therapy under ₹5000/month…"/>
+    </div>
+    <button class="finder-btn" onclick="doSearch()">
+      🔍 Find Resources Now
+    </button>
+  </div>
+</div>
+
+<!-- DATA NOTICE -->
+<div class="data-notice">
+  <div class="data-icon">📊</div>
+  <p><strong>Your searches shape this platform.</strong> Every search query is recorded anonymously to help us understand what families need most — so we can onboard more service providers, add more resources, and build better tools. No personal data is stored without your consent.</p>
+</div>
+
+<!-- RESULTS -->
+<div class="results-section" id="results-section" style="display:none">
+  <div class="results-header">
+    <div class="results-title" id="results-title">Results for your search</div>
+    <div class="results-count" id="results-count">0 found</div>
+  </div>
+  <div class="filter-bar" id="filter-bar"></div>
+  <div class="results-grid" id="results-grid"></div>
+</div>
+
+<!-- SITUATION GUIDE -->
+<div class="situation-section">
+  <div style="text-align:center;margin-bottom:8px">
+    <div style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--amber);margin-bottom:10px">SITUATION GUIDE</div>
+    <h2 style="font-family:'Playfair Display',serif;font-size:38px;color:var(--navy);margin-bottom:12px">What Should I Do If…</h2>
+    <p style="font-size:15px;color:var(--muted);max-width:560px;margin:0 auto">Click any situation to see step-by-step guidance, who to contact, and what to expect.</p>
+  </div>
+  <div class="situation-grid">
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">🆘</div>
+      <div class="sc-title">My child was just diagnosed with autism</div>
+      <div class="sc-desc">First steps after receiving an ASD diagnosis — what to do in the next 30 days.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Immediate Steps (First 30 Days)</h4>
+        <ul>
+          <li>Don't panic — early intervention changes outcomes dramatically. Start within weeks, not months.</li>
+          <li>Request a detailed assessment from a developmental paediatrician at NIMHANS or Fortis.</li>
+          <li>Download the <a href="https://www.autismspeaks.org/tool-kit" target="_blank">Autism Speaks 100-Day Kit</a> — free, available in Hindi.</li>
+          <li>Contact your nearest therapy centre for speech and OT evaluation (use our finder above).</li>
+          <li>Inform your child's school — request an IEP meeting under RPwD Act 2016.</li>
+          <li>Join a local parent support group — ask Ayushman to connect you (+91 82800 56665).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">🏫</div>
+      <div class="sc-title">Schools are refusing to admit my child</div>
+      <div class="sc-desc">Your child has a legal right to inclusive education. Here's how to enforce it.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Your Legal Rights</h4>
+        <ul>
+          <li>Under RPwD Act 2016, all government schools MUST admit children with disabilities. Private schools must make reasonable accommodations.</li>
+          <li>Send a formal written request to the Principal citing Section 16 of RPwD Act 2016.</li>
+          <li>If refused, file a complaint with the District Education Officer (DEO) of your area.</li>
+          <li>Contact <a href="https://www.actionforautism.org" target="_blank">Action For Autism</a> — they provide free legal support for school admission cases.</li>
+          <li>Consider special schools (Tamana, Sethu) while mainstreaming advocacy continues.</li>
+          <li>Request a shadow teacher/aide through your school — Ayushman can help fund this.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">💸</div>
+      <div class="sc-title">Therapy is too expensive — I can't afford it</div>
+      <div class="sc-desc">Options and subsidies available for families who cannot afford full-price therapy.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Financial Support Options</h4>
+        <ul>
+          <li>Apply for the <strong>ADIP Scheme</strong> (Assistance to Disabled Persons) — free assistive devices and some therapy funding from Govt of India.</li>
+          <li>Contact NIMHANS outpatient — govt-subsidised rates for speech/OT therapy.</li>
+          <li>Apply to Ayushman NGO for therapy subsidy — we cover up to 12 sessions/month for qualifying families.</li>
+          <li>Check your state's disability welfare board — most states have free therapy camps.</li>
+          <li>Request a sliding scale fee from private therapists — many offer 20–40% reduction for low-income families.</li>
+          <li>Explore home-based therapy training — trained parents can deliver 60% of ABA at home.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">🗣️</div>
+      <div class="sc-title">My child is non-verbal — what therapy helps?</div>
+      <div class="sc-desc">Evidence-based communication therapies for minimally verbal or non-verbal children.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Communication Therapies</h4>
+        <ul>
+          <li><strong>AAC (Augmentative & Alternative Communication)</strong> — PECS picture cards or Proloquo2Go app. Start immediately, even at age 2.</li>
+          <li><strong>Speech-Language Therapy (SLT)</strong> — minimum 3x/week. Look for therapists trained in PROMPT or Hanen method.</li>
+          <li><strong>Floortime / DIR</strong> — parent-led play-based therapy that builds communication through relationship. Free training available online.</li>
+          <li>Avoid waiting for "readiness" — the brain is most plastic before age 5. Start now.</li>
+          <li>Use visual supports at home — label everything with pictures + words.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">😤</div>
+      <div class="sc-title">My child has severe meltdowns and aggression</div>
+      <div class="sc-desc">Understanding triggers and evidence-based de-escalation strategies.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Managing Meltdowns</h4>
+        <ul>
+          <li>Meltdowns are NOT tantrums — they are neurological overload. Never punish during a meltdown.</li>
+          <li>Identify triggers using an ABC chart (Antecedent-Behaviour-Consequence) — track for 2 weeks.</li>
+          <li>Create a sensory calm-down kit: noise-cancelling headphones, weighted blanket, fidget tools.</li>
+          <li>Consult an OT for a sensory diet — a personalised daily activity plan that prevents overload.</li>
+          <li>If aggression is escalating, consult a child psychiatrist at NIMHANS (not for medication first, but for assessment).</li>
+          <li>NEVER restrain physically except for safety — it escalates trauma responses.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">🏃</div>
+      <div class="sc-title">I want my child to do sports / physical activity</div>
+      <div class="sc-desc">Sports programs proven to benefit autistic children — and how to find them.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Sports & Physical Programs</h4>
+        <ul>
+          <li><strong>Swimming</strong> — #1 recommended sport for autism. Improves motor control, body awareness, anxiety. Look for Halliwick method pools.</li>
+          <li><strong>Martial Arts</strong> (especially Taekwondo / Karate) — builds focus, self-regulation and confidence. Many academies now have autism-friendly classes.</li>
+          <li><strong>Equine therapy (horse riding)</strong> — strong evidence base. Search for therapeutic riding centres in your city.</li>
+          <li><strong>Yoga and gymnastics</strong> — excellent for proprioception and calming the nervous system.</li>
+          <li>Use our finder above to locate sports academies with autism experience near you.</li>
+          <li>Special Olympics India — free participation for children with intellectual disabilities. <a href="https://www.specialolympicsbharat.org" target="_blank">Register here.</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">📋</div>
+      <div class="sc-title">What government schemes can my child access?</div>
+      <div class="sc-desc">Central and state government benefits, disability certificates and entitlements.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Key Government Schemes</h4>
+        <ul>
+          <li><strong>Disability Certificate (UDID)</strong> — get this first. Needed for all schemes. Apply at your district hospital.</li>
+          <li><strong>ADIP Scheme</strong> — free assistive devices including AAC devices, hearing aids, sensory tools.</li>
+          <li><strong>National Trust Schemes</strong> — Niramaya (health insurance), Gharaunda (care homes), Samarth (skill development).</li>
+          <li><strong>Income Tax Deduction</strong> — Section 80DD allows ₹75,000–1,25,000 deduction for parents of disabled children.</li>
+          <li><strong>Free education</strong> — RPwD Act mandates free and appropriate education up to age 18 in all govt schools.</li>
+          <li><a href="https://disabilityaffairs.gov.in" target="_blank">disabilityaffairs.gov.in</a> — official portal for all central schemes.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">😔</div>
+      <div class="sc-title">I as a parent am burning out</div>
+      <div class="sc-desc">Parent mental health matters. You cannot pour from an empty cup.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Parent Support Resources</h4>
+        <ul>
+          <li>Call iCall: 9152987821 — free, confidential counselling in English and Hindi. Specialists in caregiver burnout.</li>
+          <li>Join Ayushman's parent support group — monthly meetups in Bangalore, online nationwide.</li>
+          <li>Read: "The Reason I Jump" by Naoki Higashida — shifts perspective and reduces caregiver grief.</li>
+          <li>Request respite care — many NGOs in India offer short-term care so parents can rest.</li>
+          <li>Connect with other parents on <a href="https://www.autism-india.org" target="_blank">Autism India forums</a> — real stories, real solutions.</li>
+          <li>Remember: your child's best therapy is a regulated, rested parent. Your wellbeing IS their therapy.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="situation-card" onclick="toggleSituation(this)">
+      <div class="sc-icon">🌐</div>
+      <div class="sc-title">Planning for my child's future (18+)</div>
+      <div class="sc-desc">Long-term planning, adult services, employment and residential care options.</div>
+      <div class="sc-expand">▼ See what to do</div>
+      <div class="sc-detail">
+        <h4>Future Planning</h4>
+        <ul>
+          <li><strong>Legal guardianship</strong> — after age 18, you must apply for legal guardianship under the Mental Health Care Act 2017 to continue making decisions.</li>
+          <li><strong>National Trust</strong> — Gharaunda scheme for adult residential care with dignity.</li>
+          <li><strong>Samarth scheme</strong> — vocational skill training for adults with autism funded by National Trust.</li>
+          <li><strong>Will and trust planning</strong> — set up a special needs trust to ensure lifetime financial security.</li>
+          <li><strong>Supported employment</strong> — many companies (SAP, Microsoft, Infosys) have dedicated autism hiring programs.</li>
+          <li>Start transition planning at age 14 — don't wait until 18. Contact Ayushman for guidance.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNER PREVIEW -->
+<div class="partner-preview">
+  <div class="pending-badge">⏳ Awaiting Founder Approval</div>
+  <h3>Our Verified Partners</h3>
+  <p>Service providers are currently being reviewed and approved by our founder. Verified partners will appear here once approved — ensuring only trusted, quality providers are listed.</p>
+  <div class="partner-slots">
+    <div class="partner-slot">➕<span>Pending</span></div>
+    <div class="partner-slot">➕<span>Pending</span></div>
+    <div class="partner-slot">➕<span>Pending</span></div>
+    <div class="partner-slot">➕<span>Pending</span></div>
+    <div class="partner-slot">➕<span>Pending</span></div>
+  </div>
+  <p style="font-size:13px;color:var(--muted);margin-top:16px">Are you a service provider? <a href="partners.html" style="color:var(--amber);font-weight:700">Register your organisation →</a></p>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="sb-stat"><div class="sb-num" id="stat-searches">0</div><div class="sb-label">Total Searches</div></div>
+  <div class="sb-stat"><div class="sb-num">12</div><div class="sb-label">Verified Resources</div></div>
+  <div class="sb-stat"><div class="sb-num" id="stat-cities">7</div><div class="sb-label">Cities Covered</div></div>
+  <div class="sb-stat"><div class="sb-num" id="stat-partners">0</div><div class="sb-label">Verified Partners</div></div>
+</div>
+
+<!-- CONTACT MODAL -->
+<div class="modal-bg" id="contactModal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal('contactModal')">✕</button>
+    <h3 id="modal-resource-name">Contact Resource</h3>
+    <p>Fill in your details and we'll connect you with this resource within 24 hours.</p>
+    <label class="mfield-label">Your Name</label>
+    <input type="text" class="field" placeholder="Your full name"/>
+    <label class="mfield-label">Phone Number</label>
+    <input type="tel" class="field" placeholder="+91 XXXXX XXXXX"/>
+    <label class="mfield-label">Child's Age & Diagnosis</label>
+    <input type="text" class="field" placeholder="e.g. 7 years, ASD Level 2"/>
+    <label class="mfield-label">Your Query</label>
+    <textarea class="field" rows="3" placeholder="What specific help do you need from this centre?" style="resize:none"></textarea>
+    <button class="submit-btn" onclick="submitContact()">Send Request — We'll Connect You</button>
+  </div>
+</div>
+
+<footer>
+  <p>© 2026 Ayushman · ayushman.world · Bangalore, India · +91 82800 56665</p>
+  <a href="partners.html">Register as Partner →</a>
+</footer>
+
+<script>
+// ── Resource database ──
+const RESOURCES = [
+  {id:1,name:'NIMHANS Child & Adolescent Psychiatry',type:'hospital',city:'bangalore',diagnosis:['autism','adhd','both','delay','speech','sensory','other'],need:['hospital','all'],address:'Hosur Road, Bangalore 560029',phone:'080-46110007',email:'info@nimhans.ac.in',web:'nimhans.ac.in',hours:'Mon–Sat 9am–5pm',tags:['Diagnosis','Child Psychiatry','Neurology','Free OPD'],desc:'India\'s premier centre for autism & ADHD diagnosis. Offers govt-subsidised OPD. Long wait times — book early.'},
+  {id:2,name:'Action For Autism (AFA)',type:'therapy',city:'delhi',diagnosis:['autism','adhd','both','delay','speech'],need:['therapy','school','parent','all'],address:'Community Centre, Sheikh Sarai Phase 1, New Delhi',phone:'011-26972114',email:'contact@autism.net.in',web:'actionforautism.org',hours:'Mon–Fri 9am–5pm',tags:['ABA','Early Intervention','Training','Advocacy'],desc:'India\'s leading autism advocacy. Offers ABA therapy, parent training and inclusive education support.'},
+  {id:3,name:'Tamana — Special Education Centre',type:'school',city:'delhi',diagnosis:['autism','adhd','both','delay'],need:['school','all'],address:'A-1 Nizamuddin West, New Delhi 110013',phone:'011-24354601',email:'tamana@vsnl.net',web:'tamana.org',hours:'Mon–Sat 8:30am–3pm',tags:['Special School','Vocational','Life Skills','Inclusive'],desc:'Specialised school with vocational training. Curriculum adapted for autism, Down syndrome & cerebral palsy.'},
+  {id:4,name:'Sethu — Autism School Chennai',type:'school',city:'chennai',diagnosis:['autism','adhd','both'],need:['school','all'],address:'7 Ashok Nagar, Chennai 600083',phone:'044-23711196',email:'sethu@sethu.org',web:'sethu.org',hours:'Mon–Fri 8am–3:30pm',tags:['TEACCH','Structured Learning','Sensory'],desc:'Uses TEACCH methodology and sensory integration. Structured learning environments with low child-to-teacher ratio.'},
+  {id:5,name:'AACT Applied Behaviour Mumbai',type:'therapy',city:'mumbai',diagnosis:['autism','adhd','both','delay'],need:['therapy','all'],address:'Andheri West, Mumbai 400058',phone:'022-26734521',email:'info@aact.org.in',web:'aact.org.in',hours:'Mon–Sat 9am–7pm',tags:['ABA','Early Intervention','Social Skills','Parent Training'],desc:'ABA therapy, early intervention programs, social skills groups and parent training workshops.'},
+  {id:6,name:'Fortis Child Development Unit',type:'hospital',city:'bangalore',diagnosis:['autism','adhd','both','delay','speech','sensory','other'],need:['hospital','all'],address:'Bannerghatta Road, Bangalore 560076',phone:'1800-500-1116',email:'contactus@fortis.in',web:'fortishealthcare.com',hours:'Mon–Sat 9am–6pm',tags:['Paediatric Neurology','Diagnosis','OT','Speech'],desc:'Paediatric neurology and developmental paediatrics. Autism & ADHD diagnostic clinics with multidisciplinary team.'},
+  {id:7,name:'iCall — Free Mental Health Helpline',type:'therapy',city:'all',diagnosis:['autism','adhd','both','delay','speech','sensory','other'],need:['therapy','parent','all'],address:'Online + Phone (Pan India)',phone:'9152987821',email:'icall@tiss.edu',web:'icallpsy.org',hours:'Mon–Sat 8am–10pm',tags:['Free','Counselling','Parent Support','Hindi & English'],desc:'Free confidential counselling for families. Specialists in caregiver burnout and autism parent support.'},
+  {id:8,name:'Special Olympics Bharat',type:'sports',city:'all',diagnosis:['autism','adhd','both','delay'],need:['sports','all'],address:'Pan India — local chapters nationwide',phone:'011-40177300',email:'info@specialolympicsbharat.org',web:'specialolympicsbharat.org',hours:'Varies by chapter',tags:['Free','Swimming','Athletics','Football','Inclusive'],desc:'Free sports programs and competitions for children with intellectual disabilities. Chapters in all major cities.'},
+  {id:9,name:'Disability Affairs — Govt Schemes Portal',type:'govt',city:'all',diagnosis:['autism','adhd','both','delay','speech','sensory','other'],need:['govt','all'],address:'Online Portal (All India)',phone:'1800-11-4321',email:'secretary-da@nic.in',web:'disabilityaffairs.gov.in',hours:'24/7 Online',tags:['UDID','ADIP Scheme','National Trust','RPwD Act'],desc:'Official government portal for disability certificates, ADIP scheme, National Trust registration and all central benefits.'},
+  {id:10,name:'Ayushman Parent Support Circle',type:'therapy',city:'bangalore',diagnosis:['autism','adhd','both','delay','speech','sensory','other'],need:['parent','all'],address:'Kodichikhnahallai, Bangalore 560076',phone:'+91 82800 56665',email:'ayushmans@outlook.in',web:'ayushman.world',hours:'Every 2nd Saturday 10am',tags:['Free','Parent Community','Bangalore','Monthly'],desc:'Monthly parent support group — share, learn, and grow with other families navigating autism in Bangalore and online.'},
+];
+
+// ── Search logic ──
+function doSearch(){
+  const age = document.getElementById('f-age').value;
+  const diag = document.getElementById('f-diagnosis').value;
+  const need = document.getElementById('f-need').value;
+  const loc = document.getElementById('f-location').value;
+  const query = document.getElementById('f-query').value.toLowerCase();
+
+  // Save search to localStorage
+  const searches = JSON.parse(localStorage.getItem('ay_searches')||'[]');
+  searches.push({age,diag,need,loc,query,time:new Date().toISOString()});
+  localStorage.setItem('ay_searches',JSON.stringify(searches));
+  localStorage.setItem('ay_search_count',(parseInt(localStorage.getItem('ay_search_count')||'0')+1).toString());
+  updateStats();
+
+  let results = RESOURCES.filter(r => {
+    const cityMatch = !loc || r.city === loc || r.city === 'all';
+    const needMatch = !need || r.need.includes(need) || r.need.includes('all');
+    const diagMatch = !diag || r.diagnosis.includes(diag) || r.diagnosis.includes('other');
+    const queryMatch = !query || r.name.toLowerCase().includes(query) || r.desc.toLowerCase().includes(query) || r.tags.join(' ').toLowerCase().includes(query);
+    return cityMatch && needMatch && diagMatch && queryMatch;
+  });
+
+  if(results.length === 0) results = RESOURCES.filter(r => r.city === 'all');
+
+  showResults(results, loc, need, diag);
+  document.getElementById('results-section').style.display = 'block';
+  document.getElementById('results-section').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function showResults(results, loc, need, diag){
+  const title = `${results.length} resource${results.length!==1?'s':''} found${loc?' in '+loc.charAt(0).toUpperCase()+loc.slice(1):''}`;
+  document.getElementById('results-title').textContent = title;
+  document.getElementById('results-count').textContent = results.length + ' found';
+
+  // Filter bar
+  const types = [...new Set(results.map(r=>r.type))];
+  const fb = document.getElementById('filter-bar');
+  fb.innerHTML = '<div class="filter-chip active" onclick="filterResults(this,\'\')">All</div>';
+  types.forEach(t=>{
+    const labels={therapy:'🧠 Therapy',school:'🏫 School',hospital:'🏥 Hospital',sports:'🏃 Sports',govt:'📋 Govt'};
+    fb.innerHTML += `<div class="filter-chip" onclick="filterResults(this,'${t}')">${labels[t]||t}</div>`;
+  });
+
+  renderCards(results);
+}
+
+function renderCards(results){
+  const grid = document.getElementById('results-grid');
+  if(results.length===0){grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--muted)">No results found. Try broadening your search or <a href="tel:+918280056665" style="color:var(--amber);font-weight:600">call us directly</a>.</div>';return;}
+  const icons={therapy:'🧠',school:'🏫',hospital:'🏥',sports:'🏃',govt:'📋'};
+  const labels={therapy:'Therapy Centre',school:'Inclusive School',hospital:'Hospital',sports:'Sports Academy',govt:'Govt Resource'};
+  grid.innerHTML = results.map(r=>`
+    <div class="result-card ${r.type}" data-type="${r.type}">
+      <div class="rc-type ${r.type}">${icons[r.type]||'📍'} ${labels[r.type]||r.type}</div>
+      <h3>${r.name}</h3>
+      <div class="location">📍 ${r.address}</div>
+      <p>${r.desc}</p>
+      <div class="rc-contact">
+        <span>📞 ${r.phone}</span>
+        ${r.email?`<span>✉ ${r.email}</span>`:''}
+        <span>🕐 ${r.hours}</span>
+        ${r.web?`<span>🌐 <a href="https://${r.web}" target="_blank" style="color:var(--teal)">${r.web}</a></span>`:''}
+      </div>
+      <div class="rc-tags">${r.tags.map(t=>`<span class="rc-tag">${t}</span>`).join('')}</div>
+      <div class="rc-actions">
+        <a href="tel:${r.phone}" class="rc-btn primary">📞 Call Now</a>
+        <button class="rc-btn" onclick="openContact('${r.name.replace(/'/g,"\\'")}')">✉ Request Help</button>
+        ${r.web?`<a href="https://${r.web}" target="_blank" class="rc-btn">🌐 Website</a>`:''}
+      </div>
+    </div>
+  `).join('');
+}
+
+function filterResults(el, type){
+  document.querySelectorAll('.filter-chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  let results = RESOURCES;
+  if(type) results = results.filter(r=>r.type===type);
+  renderCards(results);
+}
+
+function toggleSituation(card){
+  const expanded = card.classList.contains('expanded');
+  document.querySelectorAll('.situation-card').forEach(c=>{c.classList.remove('expanded');c.querySelector('.sc-expand').textContent='▼ See what to do';});
+  if(!expanded){card.classList.add('expanded');card.querySelector('.sc-expand').textContent='▲ Close';}
+}
+
+function openContact(name){
+  document.getElementById('modal-resource-name').textContent = 'Connect with ' + name;
+  document.getElementById('contactModal').classList.add('show');
+}
+function closeModal(id){document.getElementById(id).classList.remove('show');}
+document.getElementById('contactModal').addEventListener('click',function(e){if(e.target===this)closeModal('contactModal');});
+
+function submitContact(){
+  // Save contact request
+  const requests = JSON.parse(localStorage.getItem('ay_contact_requests')||'[]');
+  requests.push({resource:document.getElementById('modal-resource-name').textContent,time:new Date().toISOString()});
+  localStorage.setItem('ay_contact_requests',JSON.stringify(requests));
+  closeModal('contactModal');
+  alert('✅ Request sent! Ayushman will connect you with this resource within 24 hours.\n\nCall us directly anytime: +91 82800 56665');
+}
+
+function updateStats(){
+  const count = parseInt(localStorage.getItem('ay_search_count')||'0');
+  const el = document.getElementById('stat-searches');
+  if(el) el.textContent = count;
+}
+
+// Show top searches
+updateStats();
+</script>
+</body>
+</html>
