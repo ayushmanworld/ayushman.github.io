@@ -1,0 +1,42 @@
+{
+  "$schema": "https://unpkg.com/release-it/schema/release-it.json",
+  "git": {
+    "commitMessage": "chore: release v${version}",
+    "tagName": "v${version}",
+    "tagAnnotation": "Ayushman Platform v${version}",
+    "requireBranch": "main",
+    "requireCleanWorkingDir": true,
+    "requireUpstream": true
+  },
+  "github": {
+    "release": true,
+    "releaseName": "v${version}",
+    "tokenRef": "GITHUB_TOKEN"
+  },
+  "npm": {
+    "publish": false
+  },
+  "plugins": {
+    "@release-it/conventional-changelog": {
+      "preset": {
+        "name": "conventionalcommits",
+        "types": [
+          { "type": "feat", "section": "🚀 Features" },
+          { "type": "fix", "section": "🐛 Bug Fixes" },
+          { "type": "security", "section": "🔐 Security" },
+          { "type": "perf", "section": "⚡ Performance" },
+          { "type": "deps", "section": "📦 Dependencies" },
+          { "type": "docs", "section": "📚 Documentation" },
+          { "type": "a11y", "section": "♿ Accessibility" },
+          { "type": "i18n", "section": "🌐 Internationalisation" }
+        ]
+      },
+      "infile": "CHANGELOG.md",
+      "header": "# Changelog\n\nAll notable changes to the Ayushman Platform are documented in this file.\n"
+    }
+  },
+  "hooks": {
+    "before:init": ["pnpm lint", "pnpm type-check", "pnpm test"],
+    "after:release": "echo Successfully released ${name} v${version}"
+  }
+}

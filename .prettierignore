@@ -1,0 +1,40 @@
+# Build outputs
+.next
+dist
+build
+out
+coverage
+
+# Dependencies
+node_modules
+.pnpm-store
+
+# Generated
+*.lock
+pnpm-lock.yaml
+*.generated.ts
+*.generated.js
+
+# Database
+database/migrations
+
+# Infrastructure
+infrastructure/terraform/.terraform
+infrastructure/terraform/*.tfstate
+infrastructure/terraform/*.tfstate.backup
+
+# Auto-generated docs
+docs/api
+
+# IDE
+.vscode
+.idea
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Certificates
+*.pem
+*.key
+*.cert
