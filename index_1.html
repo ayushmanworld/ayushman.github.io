@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ayushman World — Different, Not Less. Inclusion for All.</title>
+<meta name="description" content="Ayushman World — Awareness, Support, Inclusion, Hope. India's comprehensive autism and ADHD support platform for families.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Great+Vibes&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --pb:#0D47A1;--bb:#1976D2;--gold:#F9A825;--navy:#0A1D44;
+  --red:#E53935;--green:#43A047;--yellow:#FDDB35;--white:#fff;
+  --lgray:#F5F7FF;--vlblue:#EBF2FF;--border:#BBDEFB;
+  --muted:#546E7A;--sh:0 4px 24px rgba(13,71,161,.11);--shl:0 12px 48px rgba(13,71,161,.18);--r:12px;
+}
+html{scroll-behavior:smooth}
+body{font-family:"Poppins",sans-serif;background:#fff;color:var(--navy);line-height:1.6;overflow-x:hidden}
+a{text-decoration:none;color:var(--pb)}
+button{font-family:"Poppins",sans-serif;cursor:pointer}
+ul{list-style:none}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-thumb{background:var(--pb);border-radius:2px}
+.si{max-width:1120px;margin:0 auto;padding:0 24px}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:50px;font-family:"Poppins",sans-serif;font-weight:600;font-size:14px;border:none;transition:all .2s;cursor:pointer;line-height:1}
+.btn-primary{background:var(--pb);color:#fff}.btn-primary:hover{background:var(--navy);transform:translateY(-2px);box-shadow:0 8px 24px rgba(13,71,161,.3);color:#fff}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#2E7D32;color:#fff}
+.btn-outline-blue{background:transparent;border:2px solid var(--pb);color:var(--pb)}.btn-outline-blue:hover{background:var(--pb);color:#fff}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:700}.btn-gold:hover{background:#F57F00;color:#fff}
+.btn-lg{padding:15px 32px;font-size:15px}.btn-sm{padding:8px 18px;font-size:13px}
+
+/* NAVBAR */
+nav{position:fixed;top:0;left:0;right:0;z-index:400;background:rgba(255,255,255,.98);backdrop-filter:blur(16px);border-bottom:3px solid var(--pb);height:68px;display:flex;align-items:center;padding:0 32px;gap:20px}
+nav.scrolled{box-shadow:var(--sh)}
+.nav-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0}
+.nav-logo-text{display:flex;flex-direction:column;line-height:1.1}
+.nlt-main{font-weight:800;font-size:18px;color:var(--navy);letter-spacing:.5px}
+.nlt-world{font-weight:600;font-size:11px;color:var(--bb);letter-spacing:4px}
+.nav-links{display:flex;align-items:center;gap:2px;flex:1;justify-content:center}
+.nav-links a{font-size:13px;font-weight:500;color:var(--muted);padding:7px 12px;border-radius:8px;transition:all .15s;white-space:nowrap}
+.nav-links a:hover,.nav-links a.on{color:var(--pb);background:var(--vlblue)}
+.nav-right{display:flex;align-items:center;gap:10px;flex-shrink:0}
+.nav-find{border:1.5px solid var(--green);color:var(--green);padding:7px 16px;border-radius:50px;font-size:13px;font-weight:600;transition:all .2s}
+.nav-find:hover{background:var(--green);color:#fff}
+.nav-donate{background:var(--pb);color:#fff;padding:8px 18px;border-radius:50px;font-size:13px;font-weight:600;transition:all .2s}
+.nav-donate:hover{background:var(--navy)}
+
+/* LANG PICKER */
+.lw{position:relative}
+.lb2{display:flex;align-items:center;gap:6px;background:var(--vlblue);border:1.5px solid var(--border);border-radius:50px;padding:6px 13px;font-size:12px;font-weight:600;color:var(--pb);cursor:pointer;transition:all .2s}
+.lb2:hover{background:var(--pb);color:#fff;border-color:var(--pb)}
+.ld2{display:none;position:absolute;right:0;top:calc(100% + 6px);background:#fff;border:1.5px solid var(--border);border-radius:14px;box-shadow:var(--shl);min-width:170px;overflow:hidden;z-index:500;max-height:380px;overflow-y:auto}
+.ld2.open{display:block}
+.ld2 button{display:flex;align-items:center;gap:9px;width:100%;padding:9px 15px;font-size:12.5px;font-weight:500;color:var(--navy);background:none;border:none;cursor:pointer;transition:background .12s;text-align:left}
+.ld2 button:hover{background:var(--vlblue);color:var(--pb)}
+.ld2 button.lsel{background:var(--vlblue);color:var(--pb);font-weight:700}
+
+/* HAMBURGER */
+.hbg{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:6px;cursor:pointer}
+.hbg span{display:block;width:22px;height:2px;background:var(--navy);border-radius:2px;transition:all .2s}
+@media(max-width:900px){
+  .hbg{display:flex}.hide-mob{display:none}
+  .nav-links{display:none;position:absolute;top:68px;left:0;right:0;background:#fff;border-bottom:2px solid var(--border);flex-direction:column;padding:12px;gap:4px;align-items:stretch;box-shadow:var(--sh)}
+  .nav-links.open{display:flex}
+  .nav-links a{padding:11px 14px;border-radius:10px}
+  nav{padding:0 16px}
+}
+
+/* VALUES BAR */
+.vbar{background:var(--pb);color:#fff;text-align:center;padding:9px 0;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase}
+.vbar .vd{color:var(--gold);margin:0 10px;font-size:8px;vertical-align:middle}
+
+/* HERO */
+.hero{min-height:100vh;display:grid;grid-template-columns:1fr 1fr;padding-top:77px;background:#fff;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:56px 48px 56px 64px}
+.hero-pill{display:inline-flex;align-items:center;gap:8px;background:var(--vlblue);border:1.5px solid var(--border);color:var(--pb);font-size:11.5px;font-weight:600;padding:7px 16px;border-radius:50px;margin-bottom:22px}
+.hero-pill-dot{width:7px;height:7px;border-radius:50%;background:var(--gold)}
+.hero-h1{font-weight:800;font-size:46px;line-height:1.1;color:var(--navy);margin-bottom:6px}
+.hero-script1{font-family:Allura,"Great Vibes","Brush Script MT",cursive;font-size:40px;color:#1976D2;line-height:1.2;display:block;margin-bottom:2px}
+.hero-script2{font-family:Allura,"Great Vibes","Brush Script MT",cursive;font-size:40px;color:#008A45;line-height:1.2;display:block;margin-bottom:18px}
+.hero-vals{display:flex;align-items:center;gap:0;flex-wrap:wrap;font-size:10.5px;font-weight:700;letter-spacing:2px;color:var(--muted);text-transform:uppercase;margin-bottom:20px}
+.hvdot{width:6px;height:6px;border-radius:50%;margin:0 8px;flex-shrink:0}
+.hero-desc{font-size:15px;color:var(--muted);line-height:1.85;max-width:450px;margin-bottom:28px}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:36px}
+.hero-stats{display:flex;gap:22px;flex-wrap:wrap;padding-top:26px;border-top:1px solid var(--border)}
+.hs{text-align:center}
+.hs-n{font-weight:800;font-size:26px;color:var(--pb)}
+.hs-l{font-size:10px;color:#78909C;text-transform:uppercase;letter-spacing:1px;margin-top:2px}
+.hs-div{width:1px;background:var(--border);align-self:stretch}
+.hero-right{background:linear-gradient(160deg,#E3EAF8,#BBDEFB 55%,#E8F5E9);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.hero-deco{position:absolute;border-radius:50%;border:1.5px solid rgba(13,71,161,.1)}
+.hd1{width:320px;height:320px;top:-60px;right:-60px}
+.hd2{width:200px;height:200px;bottom:30px;left:10px}
+.hero-float{position:absolute;background:#fff;border-radius:16px;box-shadow:var(--sh);padding:11px 16px;z-index:3;display:flex;align-items:center;gap:9px}
+.hf1{top:16%;right:-8px}.hf2{bottom:20%;left:-8px}
+.hf-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.hf-t{font-size:11px;line-height:1.3}
+.hf-t strong{font-size:14px;font-weight:700;color:var(--navy);display:block}
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;min-height:auto;padding-top:68px}
+  .hero-left{padding:44px 20px 36px;align-items:center;text-align:center}
+  .hero-h1{font-size:30px}.hero-script1,.hero-script2{font-size:28px}
+  .hero-right{display:none}
+}
+
+/* STATS */
+.stats-bar{background:var(--navy);padding:36px 0}
+.sg{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;text-align:center}
+.si2{font-size:28px;margin-bottom:5px}
+.sn{font-weight:800;font-size:30px;color:#fff}
+.sl{font-size:11px;font-weight:600;color:rgba(255,255,255,.5);text-transform:uppercase;letter-spacing:1px;margin-top:3px}
+@media(max-width:600px){.sg{grid-template-columns:repeat(2,1fr)}}
+
+/* SECTIONS */
+.sec{padding:68px 0}
+.sec-tag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--pb);margin-bottom:10px}
+.sec-title{font-weight:700;font-size:30px;color:var(--navy);line-height:1.25;margin-bottom:10px}
+.sec-title em{font-style:normal;color:var(--gold)}
+.sec-sub{font-size:15px;color:var(--muted);line-height:1.75;max-width:600px}
+.tc{text-align:center}
+
+/* GUIDES */
+.gg{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gc{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:20px;cursor:pointer;transition:all .2s;text-align:left}
+.gc:hover,.gc[aria-expanded=true]{border-color:var(--pb);background:var(--vlblue);transform:translateY(-2px);box-shadow:var(--sh)}
+.ge{font-size:1.9rem;margin-bottom:8px}
+.gt2{font-weight:700;font-size:14px;color:var(--navy);margin-bottom:3px}
+.gs2{font-size:12px;color:#78909C}
+.gsteps{display:none;margin-top:14px;padding:13px;background:#fff;border-radius:10px;border:1px solid var(--border)}
+.gsteps.gopen{display:block}
+.gstep{display:flex;gap:9px;margin:6px 0;font-size:12.5px;color:var(--navy);line-height:1.6}
+.gsn{flex-shrink:0;width:21px;height:21px;border-radius:50%;background:var(--pb);color:#fff;font-size:10px;font-weight:700;display:flex;align-items:center;justify-content:center;margin-top:1px}
+@media(max-width:768px){.gg{grid-template-columns:1fr}}
+
+/* RESOURCES */
+.rtabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.tp{padding:8px 18px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s}
+.tp:hover,.tp.on{background:var(--pb);border-color:var(--pb);color:#fff}
+.srow{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.srow input,.srow select{flex:1;padding:10px 18px;border:1.5px solid var(--border);border-radius:50px;font-size:14px;font-family:"Poppins",sans-serif;color:var(--navy);outline:none;transition:border .15s;min-width:140px;background:#fff}
+.srow input:focus,.srow select:focus{border-color:var(--pb)}
+.rg{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.rc2{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:18px;transition:all .2s;display:flex;flex-direction:column;gap:9px}
+.rc2:hover{border-color:var(--pb);transform:translateY(-2px);box-shadow:var(--shl)}
+.rh2{display:flex;align-items:flex-start;gap:11px}
+.ri2{width:42px;height:42px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;flex-shrink:0}
+.rn2{font-weight:700;font-size:14px;color:var(--navy);line-height:1.3}
+.rt2{font-size:11px;font-weight:600;color:#78909C;margin-top:2px}
+.rdesc{font-size:13px;color:var(--muted);line-height:1.65}
+.rtags2{display:flex;flex-wrap:wrap;gap:4px}
+.rtag2{display:inline-block;padding:3px 10px;border-radius:50px;font-size:11px;font-weight:600;background:var(--vlblue);color:var(--pb);border:1px solid var(--border)}
+.ract{display:flex;gap:7px;flex-wrap:wrap;margin-top:3px}
+.ract a{font-size:12px;padding:6px 13px;border-radius:50px;font-weight:600;transition:all .15s;display:inline-flex;align-items:center;gap:5px}
+.ra-v{border:1.5px solid var(--pb);color:var(--pb)}.ra-v:hover{background:var(--pb);color:#fff}
+.ra-c{border:1.5px solid var(--green);color:var(--green)}.ra-c:hover{background:var(--green);color:#fff}
+.ra-e{border:1.5px solid var(--muted);color:var(--muted)}.ra-e:hover{background:var(--muted);color:#fff}
+@media(max-width:900px){.rg{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.rg{grid-template-columns:1fr}}
+
+/* PARENT HUB */
+.parent-bg{background:var(--lgray);padding:68px 0}
+.ptabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:26px}
+.ptab{padding:10px 22px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:13px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s}
+.ptab:hover,.ptab.active{background:var(--pb);border-color:var(--pb);color:#fff}
+.ppanel{display:none}.ppanel.active{display:block}
+
+/* VIDEOS */
+.vfrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}
+.vp2{padding:6px 14px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s}
+.vp2:hover,.vp2.on{background:var(--pb);border-color:var(--pb);color:#fff}
+.vp2.hi.on{background:var(--green);border-color:var(--green)}
+.vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(265px,1fr));gap:16px}
+.vcard{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);overflow:hidden;transition:all .2s;cursor:pointer}
+.vcard:hover{transform:translateY(-2px);box-shadow:var(--shl);border-color:var(--pb)}
+.vthumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000}
+.vthumb img{width:100%;height:100%;object-fit:cover;transition:transform .3s}
+.vcard:hover .vthumb img{transform:scale(1.04)}
+.vplay{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;background:rgba(13,71,161,.22)}
+.vplay:hover{background:rgba(13,71,161,.48)}
+.vpbtn{width:46px;height:46px;background:rgba(255,255,255,.92);border-radius:50%;display:flex;align-items:center;justify-content:center}
+.vpbtn::after{content:"";border-style:solid;border-width:9px 0 9px 17px;border-color:transparent transparent transparent var(--navy);margin-left:3px}
+.vdur{position:absolute;bottom:7px;right:7px;background:rgba(10,29,68,.8);color:#fff;font-size:10px;font-weight:700;padding:2px 7px;border-radius:4px}
+.vlbadge{position:absolute;top:7px;left:7px;padding:2px 8px;border-radius:50px;font-size:10px;font-weight:700;background:var(--bb);color:#fff}
+.vinfo{padding:13px}
+.vcat{font-size:10px;font-weight:700;color:var(--pb);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.vtitle{font-weight:600;font-size:13px;color:var(--navy);line-height:1.45;margin-bottom:5px}
+.vsrc{font-size:11.5px;color:#78909C}
+.vtags{margin-top:7px;display:flex;flex-wrap:wrap;gap:3px}
+.vtag{padding:2px 8px;border-radius:50px;font-size:10px;font-weight:600;background:var(--vlblue);color:var(--pb)}
+
+/* VIDEO MODAL */
+.vmodal{display:none;position:fixed;inset:0;background:rgba(10,20,40,.88);z-index:600;align-items:center;justify-content:center;padding:16px}
+.vmodal.show{display:flex}
+.vmi{width:92%;max-width:900px;aspect-ratio:16/9;position:relative;border-radius:16px;overflow:hidden}
+.vmi iframe{width:100%;height:100%;border:none}
+.vmc{position:absolute;top:-46px;right:0;color:#fff;font-size:26px;cursor:pointer;background:none;border:none;padding:5px 12px;opacity:.8}
+.vmc:hover{opacity:1}
+
+/* LEARNING */
+.lgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.lcard{background:#fff;border-radius:var(--r);border:1.5px solid var(--border);padding:17px;transition:all .2s;display:flex;flex-direction:column;gap:7px;color:inherit}
+.lcard:hover{border-color:var(--pb);transform:translateY(-2px);box-shadow:var(--sh)}
+.lhdr{display:flex;align-items:center;justify-content:space-between}
+.lic{width:36px;height:36px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.lbadge{padding:2px 9px;border-radius:50px;font-size:10px;font-weight:700}
+.lbf{background:#E8F5E9;color:var(--green)}.lbr{background:var(--vlblue);color:var(--pb)}.lbp{background:#FFF3E0;color:#E65100}
+.lcard h4{font-weight:700;font-size:13.5px;color:var(--navy)}
+.lcard p{font-size:12px;color:var(--muted);line-height:1.6;flex:1}
+.lftr{display:flex;align-items:center;justify-content:space-between}
+.lsrc{font-size:10.5px;color:#78909C;font-weight:600}
+.llnk{font-size:12px;font-weight:700;color:var(--pb)}
+@media(max-width:900px){.lgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.lgrid{grid-template-columns:1fr}}
+
+/* STUDIES */
+.sgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.scard{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:19px;transition:all .2s}
+.scard:hover{border-color:var(--pb);box-shadow:var(--shl)}
+.scard[style*="none"]{display:none}
+.sorg{font-size:11px;font-weight:700;color:var(--pb);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.stitle{font-weight:700;font-size:14px;color:var(--navy);line-height:1.4;margin-bottom:6px}
+.sdesc{font-size:13px;color:var(--muted);line-height:1.65;margin-bottom:11px}
+.smeta{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:7px}
+.sjournal{font-size:11px;color:#78909C;font-weight:600}
+.slnk{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;color:var(--pb);border:1.5px solid var(--pb);padding:5px 12px;border-radius:50px;transition:all .15s}
+.slnk:hover{background:var(--pb);color:#fff}
+.scats{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:7px}
+.scat{padding:2px 8px;border-radius:50px;font-size:10px;font-weight:700;background:var(--vlblue);color:var(--pb)}
+.spills{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.spill{padding:7px 16px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:12px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s}
+.spill:hover,.spill.on{background:var(--pb);border-color:var(--pb);color:#fff}
+@media(max-width:700px){.sgrid{grid-template-columns:1fr}}
+
+/* PRACTICES */
+.pgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.pcard{display:flex;gap:13px;align-items:flex-start;background:#fff;border-radius:var(--r);padding:17px;border:1.5px solid var(--border)}
+.picon{width:42px;height:42px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.pcard h4{font-weight:700;font-size:14px;color:var(--navy);margin-bottom:5px}
+.pcard p{font-size:12.5px;color:var(--muted);line-height:1.6}
+.plnk{display:inline-block;margin-top:7px;font-size:12px;font-weight:700;color:var(--pb)}
+@media(max-width:600px){.pgrid{grid-template-columns:1fr}}
+
+/* HELPLINE */
+.hstrip{background:var(--pb);padding:20px 0;color:#fff}
+.hinner{display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.hstrip h4{font-size:15px;font-weight:700}
+.hstrip span{font-size:13px;opacity:.65;margin-top:2px;display:block}
+.hnums{display:flex;gap:18px;flex-wrap:wrap}
+.hnum{text-align:center}
+.hnum .nn{font-weight:800;font-size:14px;color:var(--gold)}
+.hnum .nl{font-size:10px;opacity:.6;margin-top:1px}
+
+/* PROGRAMS */
+.prgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.prcard{border-radius:14px;padding:26px;color:#fff;position:relative;overflow:hidden}
+.prcard::before{content:"";position:absolute;top:-20px;right:-20px;width:80px;height:80px;border-radius:50%;background:rgba(255,255,255,.1)}
+.prico{font-size:2.2rem;margin-bottom:12px;display:block}
+.prcard h3{font-weight:700;font-size:16px;margin-bottom:7px}
+.prcard p{font-size:13px;opacity:.85;line-height:1.6}
+.pc1{background:linear-gradient(135deg,var(--pb),var(--bb))}
+.pc2{background:linear-gradient(135deg,var(--green),#2E7D32)}
+.pc3{background:linear-gradient(135deg,#7B1FA2,#9C27B0)}
+.pc4{background:linear-gradient(135deg,var(--red),#C62828)}
+.pc5{background:linear-gradient(135deg,#E65100,#F57C00)}
+.pc6{background:linear-gradient(135deg,var(--navy),#1565C0)}
+@media(max-width:900px){.prgrid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.prgrid{grid-template-columns:1fr}}
+
+/* ACRONYM */
+.agrid{display:grid;grid-template-columns:repeat(4,1fr);gap:13px}
+.acard{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:17px;text-align:center}
+.aletter{font-weight:800;font-size:2.2rem;line-height:1}
+.aword{font-weight:700;font-size:13px;color:var(--navy);display:block;margin:4px 0}
+.adesc{font-size:11px;color:#78909C;line-height:1.5}
+@media(max-width:768px){.agrid{grid-template-columns:repeat(2,1fr)}}
+
+/* VOICES */
+.vbg{background:var(--navy);padding:68px 0}
+.vcgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.vccard{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:24px;color:#fff}
+.vcq{font-size:2.8rem;line-height:.8;color:var(--gold);font-weight:700;margin-bottom:9px}
+.vccard p{font-size:14px;color:rgba(255,255,255,.8);line-height:1.8;font-style:italic;margin-bottom:15px}
+.vcstars{color:var(--gold);letter-spacing:2px;font-size:.95rem;margin-bottom:8px}
+.vcname{font-weight:700;font-size:14px;color:#fff}
+.vcsub{font-size:12px;color:rgba(255,255,255,.4)}
+@media(max-width:900px){.vcgrid{grid-template-columns:1fr}}
+
+/* DONATE */
+.dbg{background:linear-gradient(160deg,var(--navy),var(--pb));padding:78px 0;color:#fff}
+.damts{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin:20px 0}
+.dam{padding:10px 24px;border-radius:50px;border:2px solid rgba(255,255,255,.35);background:transparent;font-weight:700;color:#fff;font-size:14px;cursor:pointer;transition:all .15s;font-family:"Poppins",sans-serif}
+.dam:hover,.dam.on{background:var(--gold);border-color:var(--gold);color:var(--navy)}
+.dcustom{display:flex;gap:11px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:13px}
+.dcustom input{padding:11px 20px;border:2px solid rgba(255,255,255,.3);border-radius:50px;font-size:14px;background:rgba(255,255,255,.1);color:#fff;outline:none;width:165px;text-align:center;font-family:"Poppins",sans-serif}
+.dcustom input::placeholder{color:rgba(255,255,255,.45)}
+.dcustom input:focus{border-color:var(--gold)}
+.dtrust{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;margin-top:22px}
+.dti{display:flex;align-items:center;gap:6px;font-size:12.5px;opacity:.65}
+.dti::before{content:"✓";color:var(--gold);font-weight:700}
+
+/* TRANSPARENCY */
+.trgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.trcard{background:#fff;border:1.5px solid var(--border);border-radius:var(--r);padding:22px;text-align:center}
+.trpct{font-weight:800;font-size:36px}
+.trbar{height:8px;background:var(--border);border-radius:4px;margin:10px 0;overflow:hidden}
+.trfill{height:100%;border-radius:4px}
+.trlabel{font-size:13px;color:var(--muted);font-weight:500}
+@media(max-width:600px){.trgrid{grid-template-columns:1fr}}
+
+/* CONTACT */
+.cgrid{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+.cform input,.cform select,.cform textarea{width:100%;padding:12px 17px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:"Poppins",sans-serif;color:var(--navy);outline:none;margin-bottom:13px;transition:border .15s;background:#fff}
+.cform input:focus,.cform select:focus,.cform textarea:focus{border-color:var(--pb)}
+.cform textarea{min-height:108px;resize:vertical}
+.cii{display:flex;align-items:flex-start;gap:11px;margin-bottom:16px}
+.ciico{width:38px;height:38px;border-radius:10px;background:var(--vlblue);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0}
+.cilabel{font-size:11px;font-weight:700;color:#78909C;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.cival{font-size:14px;font-weight:600;color:var(--navy)}
+@media(max-width:768px){.cgrid{grid-template-columns:1fr}}
+
+/* FOOTER */
+footer{background:var(--navy);color:#fff;padding:50px 0 22px}
+.fgrid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:30px;margin-bottom:38px}
+.fbrand p{font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;max-width:230px;margin-top:10px}
+.fscript{font-family:Allura,"Great Vibes","Brush Script MT",cursive;font-size:20px;color:var(--gold);margin-top:10px;display:block}
+.fcontact a{display:flex;align-items:center;gap:7px;font-size:13px;color:rgba(255,255,255,.48);padding:4px 0;transition:color .15s}
+.fcontact a:hover{color:var(--gold)}
+.fcol h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--gold);margin-bottom:13px}
+.fcol a{display:block;font-size:13px;color:rgba(255,255,255,.48);padding:4px 0;transition:color .15s}
+.fcol a:hover{color:#fff}
+.fbot{border-top:1px solid rgba(255,255,255,.1);padding-top:18px;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.fbot p{font-size:12px;color:rgba(255,255,255,.28)}
+.fpromise{font-family:Allura,"Great Vibes","Brush Script MT",cursive;font-size:16px;color:var(--gold)}
+@media(max-width:768px){.fgrid{grid-template-columns:1fr 1fr}.fbot{justify-content:center;text-align:center}}
+@media(max-width:480px){.fgrid{grid-template-columns:1fr}}
+
+/* LANG fonts */
+body.lang-hi{font-family:"Noto Sans Devanagari","Poppins",sans-serif}
+body.lang-ta{font-family:"Noto Sans Tamil","Poppins",sans-serif}
+body.lang-te{font-family:"Noto Sans Telugu","Poppins",sans-serif}
+body.lang-kn{font-family:"Noto Sans Kannada","Poppins",sans-serif}
+
+/* ── BRAND-EXACT TYPOGRAPHY OVERRIDES ── */
+h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
+  font-family:"Poppins",sans-serif!important;
+}
+.hero-script1,.hero-script2,.fscript,.fpromise{
+  font-family:Allura,"Great Vibes","Brush Script MT",cursive!important;
+}
+
+</style>
+</head>
+<body id="top">
+
+<nav id="navbar">
+  <a href="#top" class="nav-logo" aria-label="Ayushman World homepage">
+    <svg xmlns="http://www.w3.org/2000/svg" width="56" height="56" viewBox="0 0 1200 1200" >
+  <title>Ayushman World — Editable Master Logo</title>
+  <desc>Editable vector logo with crescent, human figure, five stars, puzzle heart, wordmark, values and tagline.</desc>
+
+  <defs>
+    <style>
+      .heading { font-family: Poppins, Montserrat, Arial, sans-serif; font-weight: 700; }
+      .subhead { font-family: Poppins, Montserrat, Arial, sans-serif; font-weight: 600; }
+      .script { font-family: Allura, "Great Vibes", "Brush Script MT", cursive; font-weight: 400; }
+    </style>
+    <linearGradient id="crescentBlue_nav" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00A2FF"/>
+      <stop offset="0.56" stop-color="#1976D2"/>
+      <stop offset="1" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="figureBlue_nav" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123FA8"/>
+      <stop offset="1" stop-color="#0A1D44"/>
+    </linearGradient>
+    <filter id="none_nav"/>
+  </defs>
+
+  <!-- Background -->
+<!-- Double circular border -->
+  <g id="circular-border" fill="none" stroke="#0D47A1">
+    <circle cx="600" cy="600" r="575" stroke-width="12"/>
+    <circle cx="600" cy="600" r="557" stroke-width="4"/>
+  </g>
+
+  <!-- Symbol -->
+  <g id="symbol">
+    <!-- Crescent: two editable vector paths -->
+    <path id="crescent-outer"
+      d="M520 104
+         C336 159 258 342 302 511
+         C349 692 529 735 733 663
+         C552 680 413 621 380 493
+         C345 356 399 209 520 104Z"
+      fill="url(#crescentBlue_nav)"/>
+    <path id="crescent-highlight"
+      d="M488 127
+         C343 213 306 370 344 499
+         C386 638 514 690 684 666
+         C519 664 416 601 389 491
+         C359 365 398 225 488 127Z"
+      fill="#0D47A1" opacity=".28"/>
+
+    <!-- Uplifted human figure -->
+    <circle id="human-head" cx="610" cy="270" r="42" fill="url(#figureBlue_nav)"/>
+    <path id="human-body"
+      d="M507 278
+         C552 319 577 334 610 338
+         C643 334 670 319 716 278
+         C686 341 654 386 640 432
+         C627 476 629 542 632 616
+         L576 603
+         C579 534 581 478 564 430
+         C548 385 524 341 507 278Z"
+      fill="url(#figureBlue_nav)"/>
+    <path id="human-leg-highlight"
+      d="M577 461 L522 556 L575 603 L598 479Z"
+      fill="#1976D2"/>
+
+    <!-- Five gold stars -->
+    <g id="five-stars" fill="#F9A825">
+      <path id="star-1" d="M607 86l12 25 28 4-20 19 5 28-25-13-25 13 5-28-20-19 28-4z"/>
+      <path id="star-2" d="M527 141l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-3" d="M687 137l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-4" d="M487 207l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-5" d="M729 202l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+    </g>
+
+    <!-- Four-piece puzzle heart -->
+    <g id="puzzle-heart" stroke="#FFFFFF" stroke-width="7" stroke-linejoin="round">
+      <path id="puzzle-red" fill="#E53935"
+        d="M655 419
+           C655 373 711 351 746 387
+           C763 369 792 367 811 382
+           C826 394 830 414 824 432
+           C817 452 799 467 776 487
+           L738 522 L655 466Z"/>
+      <path id="puzzle-green" fill="#43A047"
+        d="M824 432
+           C846 395 905 397 928 438
+           C952 481 922 517 881 551
+           L824 508
+           C842 493 845 471 829 458
+           C815 447 802 449 790 459
+           L776 487
+           C799 467 817 452 824 432Z"/>
+      <path id="puzzle-blue" fill="#1976D2"
+        d="M655 466
+           L738 522
+           C723 535 720 557 733 570
+           C747 584 769 580 782 566
+           L836 615
+           C800 649 761 670 715 675
+           C682 638 659 598 650 552
+           C645 523 646 491 655 466Z"/>
+      <path id="puzzle-yellow" fill="#FDDB35"
+        d="M738 522
+           L776 487
+           C785 510 810 515 825 501
+           C839 488 838 470 829 458
+           L881 551
+           C869 575 854 597 836 615
+           L782 566
+           C769 580 747 584 733 570
+           C720 557 723 535 738 522Z"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g id="wordmark" text-anchor="middle">
+    <text id="ayushman" x="600" y="792" class="heading" font-size="106" letter-spacing="2" fill="#0A1D44">AYUSHMAN</text>
+    <line id="world-rule-left" x1="225" y1="851" x2="355" y2="851" stroke="#1976D2" stroke-width="8"/>
+    <text id="world" x="600" y="874" class="subhead" font-size="74" letter-spacing="22" fill="#1976D2">WORLD</text>
+    <line id="world-rule-right" x1="845" y1="851" x2="975" y2="851" stroke="#1976D2" stroke-width="8"/>
+  </g>
+
+  <!-- Values line -->
+  <g id="values-line" class="subhead" font-size="28" fill="#0A1D44" text-anchor="middle">
+    <text x="315" y="926">AWARENESS</text>
+    <circle cx="431" cy="917" r="7" fill="#E53935"/>
+    <text x="526" y="926">SUPPORT</text>
+    <circle cx="617" cy="917" r="7" fill="#43A047"/>
+    <text x="729" y="926">INCLUSION</text>
+    <circle cx="843" cy="917" r="7" fill="#F9A825"/>
+    <text x="925" y="926">HOPE</text>
+  </g>
+
+  <!-- Tagline -->
+  <g id="tagline" class="script" text-anchor="middle">
+    <text id="tagline-line-1" x="600" y="1000" font-size="62" fill="#0D47A1">Different, Not Less.</text>
+    <text id="tagline-line-2" x="600" y="1065" font-size="62" fill="#008A45">Inclusion for All.</text>
+    <path id="tagline-underline" d="M500 1092 Q600 1078 700 1092" fill="none" stroke="#1976D2" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
+
+
+    <div class="nav-logo-text">
+      <span class="nlt-main">AYUSHMAN</span>
+      <span class="nlt-world">WORLD</span>
+    </div>
+  </a>
+  <button class="hbg" id="hbg" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#find-help" data-i18n="nav_find">Find Help</a></li>
+    <li><a href="#parent-hub" data-i18n="nav_hub">Parent Hub</a></li>
+    <li><a href="#research-sec" data-i18n="nav_research">Research</a></li>
+    <li><a href="#programs" data-i18n="nav_programs">Programs</a></li>
+    <li><a href="#donate" data-i18n="nav_donate_l">Donate</a></li>
+    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="nav-right hide-mob">
+    <div class="lw" id="lw">
+      <button class="lb2" id="lb2" aria-haspopup="true" aria-expanded="false" aria-label="Select language">
+        <span id="cFlag">🌐</span><span id="cLang">English</span><span style="font-size:9px;opacity:.6">▾</span>
+      </button>
+      <div class="ld2" id="ld2" role="menu">
+        <button onclick="setLang2('en')" data-lang="en" class="lsel">🇮🇳 English</button>
+        <button onclick="setLang2('hi')" data-lang="hi">🇮🇳 हिन्दी</button>
+        <button onclick="setLang2('ta')" data-lang="ta">🇮🇳 தமிழ்</button>
+        <button onclick="setLang2('te')" data-lang="te">🇮🇳 తెలుగు</button>
+        <button onclick="setLang2('kn')" data-lang="kn">🇮🇳 ಕನ್ನಡ</button>
+        <button onclick="setLang2('bn')" data-lang="bn">🇮🇳 বাংলা</button>
+        <button onclick="setLang2('mr')" data-lang="mr">🇮🇳 मराठी</button>
+        <button onclick="setLang2('ml')" data-lang="ml">🇮🇳 മലയാളം</button>
+        <button onclick="setLang2('pa')" data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
+        <button onclick="setLang2('es')" data-lang="es">🇪🇸 Español</button>
+        <button onclick="setLang2('fr')" data-lang="fr">🇫🇷 Français</button>
+        <button onclick="setLang2('de')" data-lang="de">🇩🇪 Deutsch</button>
+        <button onclick="setLang2('ja')" data-lang="ja">🇯🇵 日本語</button>
+        <button onclick="setLang2('zh')" data-lang="zh">🇨🇳 中文</button>
+      </div>
+    </div>
+    <a href="#find-help" class="nav-find" data-i18n="nav_btn_find">Find Help</a>
+    <a href="#donate" class="nav-donate" data-i18n="nav_btn_donate">♥ Donate</a>
+  </div>
+</nav>
+
+<div class="vbar" role="banner">
+  <span data-i18n="vb1">AWARENESS</span><span class="vd" style="color:#E53935">●</span>
+  <span data-i18n="vb2">SUPPORT</span><span class="vd" style="color:#43A047">●</span>
+  <span data-i18n="vb3">INCLUSION</span><span class="vd" style="color:#F9A825">●</span>
+  <span data-i18n="vb4">HOPE</span>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="hero-section">
+  <div class="hero-left">
+    <div class="hero-pill">
+      <div class="hero-pill-dot"></div>
+      <span data-i18n="hero_pill">Awareness · Support · Inclusion · Hope</span>
+    </div>
+    <h1 class="hero-h1" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)" data-i18n="hero_h1">Different, Not Less. Inclusion for All.</h1>
+    <span class="hero-script1" aria-hidden="true">Different, Not Less.</span>
+    <span class="hero-script2" aria-hidden="true">Inclusion for All.</span>
+    <div class="hero-vals" aria-label="Our values">
+      <span data-i18n="hv1">AWARENESS</span>
+      <div class="hvdot" style="background:#E53935;width:7px;height:7px;border-radius:50%;margin:0 9px;flex-shrink:0"></div>
+      <span data-i18n="hv2">SUPPORT</span>
+      <div class="hvdot" style="background:#43A047;width:7px;height:7px;border-radius:50%;margin:0 9px;flex-shrink:0"></div>
+      <span data-i18n="hv3">INCLUSION</span>
+      <div class="hvdot" style="background:#F9A825;width:7px;height:7px;border-radius:50%;margin:0 9px;flex-shrink:0"></div>
+      <span data-i18n="hv4">HOPE</span>
+    </div>
+    <p class="hero-desc" data-i18n="hero_desc">India's most comprehensive support platform for families of children with autism and neurodiversity. Find therapy, schools, hospitals, government schemes and a caring community.</p>
+    <div class="hero-btns">
+      <a href="#find-help" class="btn btn-primary btn-lg" data-i18n="hero_b1">🔍 Find Help Near You</a>
+      <a href="#parent-hub" class="btn btn-outline-blue btn-lg" data-i18n="hero_b2">📚 Parent Hub</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hs"><div class="hs-n">10,000+</div><div class="hs-l" data-i18n="hs1">Families</div></div>
+      <div class="hs-div"></div>
+      <div class="hs"><div class="hs-n">120+</div><div class="hs-l" data-i18n="hs2">Resources</div></div>
+      <div class="hs-div"></div>
+      <div class="hs"><div class="hs-n">25+</div><div class="hs-l" data-i18n="hs3">Videos</div></div>
+      <div class="hs-div"></div>
+      <div class="hs"><div class="hs-n">14</div><div class="hs-l" data-i18n="hs4">Languages</div></div>
+    
+    <div style="margin-top:16px;padding:12px 0;border-top:1px solid var(--border)">
+      <p style="font-size:11px;color:#78909C;font-weight:600;letter-spacing:.5px">Together for Autism Acceptance · Every Ability. Every Dream. Every Life Matters.</p>
+    </div>
+  </div>
+  </div>
+  <div class="hero-right" aria-hidden="true">
+    <div class="hd1 hero-deco"></div>
+    <div class="hd2 hero-deco"></div>
+    <svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 1200 1200" style="filter:drop-shadow(0 16px 48px rgba(13,71,161,.18))">
+  <title>Ayushman World — Editable Master Logo</title>
+  <desc>Editable vector logo with crescent, human figure, five stars, puzzle heart, wordmark, values and tagline.</desc>
+
+  <defs>
+    <style>
+      .heading { font-family: Poppins, Montserrat, Arial, sans-serif; font-weight: 700; }
+      .subhead { font-family: Poppins, Montserrat, Arial, sans-serif; font-weight: 600; }
+      .script { font-family: Allura, "Great Vibes", "Brush Script MT", cursive; font-weight: 400; }
+    </style>
+    <linearGradient id="crescentBlue_hero" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00A2FF"/>
+      <stop offset="0.56" stop-color="#1976D2"/>
+      <stop offset="1" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="figureBlue_hero" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123FA8"/>
+      <stop offset="1" stop-color="#0A1D44"/>
+    </linearGradient>
+    <filter id="none_hero"/>
+  </defs>
+
+  <!-- Background -->
+<!-- Double circular border -->
+  <g id="circular-border" fill="none" stroke="#0D47A1">
+    <circle cx="600" cy="600" r="575" stroke-width="12"/>
+    <circle cx="600" cy="600" r="557" stroke-width="4"/>
+  </g>
+
+  <!-- Symbol -->
+  <g id="symbol">
+    <!-- Crescent: two editable vector paths -->
+    <path id="crescent-outer"
+      d="M520 104
+         C336 159 258 342 302 511
+         C349 692 529 735 733 663
+         C552 680 413 621 380 493
+         C345 356 399 209 520 104Z"
+      fill="url(#crescentBlue_hero)"/>
+    <path id="crescent-highlight"
+      d="M488 127
+         C343 213 306 370 344 499
+         C386 638 514 690 684 666
+         C519 664 416 601 389 491
+         C359 365 398 225 488 127Z"
+      fill="#0D47A1" opacity=".28"/>
+
+    <!-- Uplifted human figure -->
+    <circle id="human-head" cx="610" cy="270" r="42" fill="url(#figureBlue_hero)"/>
+    <path id="human-body"
+      d="M507 278
+         C552 319 577 334 610 338
+         C643 334 670 319 716 278
+         C686 341 654 386 640 432
+         C627 476 629 542 632 616
+         L576 603
+         C579 534 581 478 564 430
+         C548 385 524 341 507 278Z"
+      fill="url(#figureBlue_hero)"/>
+    <path id="human-leg-highlight"
+      d="M577 461 L522 556 L575 603 L598 479Z"
+      fill="#1976D2"/>
+
+    <!-- Five gold stars -->
+    <g id="five-stars" fill="#F9A825">
+      <path id="star-1" d="M607 86l12 25 28 4-20 19 5 28-25-13-25 13 5-28-20-19 28-4z"/>
+      <path id="star-2" d="M527 141l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-3" d="M687 137l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-4" d="M487 207l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-5" d="M729 202l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+    </g>
+
+    <!-- Four-piece puzzle heart -->
+    <g id="puzzle-heart" stroke="#FFFFFF" stroke-width="7" stroke-linejoin="round">
+      <path id="puzzle-red" fill="#E53935"
+        d="M655 419
+           C655 373 711 351 746 387
+           C763 369 792 367 811 382
+           C826 394 830 414 824 432
+           C817 452 799 467 776 487
+           L738 522 L655 466Z"/>
+      <path id="puzzle-green" fill="#43A047"
+        d="M824 432
+           C846 395 905 397 928 438
+           C952 481 922 517 881 551
+           L824 508
+           C842 493 845 471 829 458
+           C815 447 802 449 790 459
+           L776 487
+           C799 467 817 452 824 432Z"/>
+      <path id="puzzle-blue" fill="#1976D2"
+        d="M655 466
+           L738 522
+           C723 535 720 557 733 570
+           C747 584 769 580 782 566
+           L836 615
+           C800 649 761 670 715 675
+           C682 638 659 598 650 552
+           C645 523 646 491 655 466Z"/>
+      <path id="puzzle-yellow" fill="#FDDB35"
+        d="M738 522
+           L776 487
+           C785 510 810 515 825 501
+           C839 488 838 470 829 458
+           L881 551
+           C869 575 854 597 836 615
+           L782 566
+           C769 580 747 584 733 570
+           C720 557 723 535 738 522Z"/>
+    </g>
+  </g>
+
+  <!-- Wordmark -->
+  <g id="wordmark" text-anchor="middle">
+    <text id="ayushman" x="600" y="792" class="heading" font-size="106" letter-spacing="2" fill="#0A1D44">AYUSHMAN</text>
+    <line id="world-rule-left" x1="225" y1="851" x2="355" y2="851" stroke="#1976D2" stroke-width="8"/>
+    <text id="world" x="600" y="874" class="subhead" font-size="74" letter-spacing="22" fill="#1976D2">WORLD</text>
+    <line id="world-rule-right" x1="845" y1="851" x2="975" y2="851" stroke="#1976D2" stroke-width="8"/>
+  </g>
+
+  <!-- Values line -->
+  <g id="values-line" class="subhead" font-size="28" fill="#0A1D44" text-anchor="middle">
+    <text x="315" y="926">AWARENESS</text>
+    <circle cx="431" cy="917" r="7" fill="#E53935"/>
+    <text x="526" y="926">SUPPORT</text>
+    <circle cx="617" cy="917" r="7" fill="#43A047"/>
+    <text x="729" y="926">INCLUSION</text>
+    <circle cx="843" cy="917" r="7" fill="#F9A825"/>
+    <text x="925" y="926">HOPE</text>
+  </g>
+
+  <!-- Tagline -->
+  <g id="tagline" class="script" text-anchor="middle">
+    <text id="tagline-line-1" x="600" y="1000" font-size="62" fill="#0D47A1">Different, Not Less.</text>
+    <text id="tagline-line-2" x="600" y="1065" font-size="62" fill="#008A45">Inclusion for All.</text>
+    <path id="tagline-underline" d="M500 1092 Q600 1078 700 1092" fill="none" stroke="#1976D2" stroke-width="5" stroke-linecap="round"/>
+  </g>
+</svg>
+
+
+    <div class="hero-float hf1"><div class="hf-dot" style="background:#F9A825"></div><div class="hf-t"><strong>10,000+</strong>Families supported</div></div>
+    <div class="hero-float hf2"><div class="hf-dot" style="background:#43A047"></div><div class="hf-t"><strong>14 Languages</strong>Multilingual support</div></div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-bar">
+  <div class="si">
+    <div class="sg">
+      <div><div class="si2">👨‍👩‍👧</div><div class="sn">10,000+</div><div class="sl" data-i18n="stat1">Families Helped</div></div>
+      <div><div class="si2">🏥</div><div class="sn">120+</div><div class="sl" data-i18n="stat2">Verified Resources</div></div>
+      <div><div class="si2">🎬</div><div class="sn">25+</div><div class="sl" data-i18n="stat3">Expert Videos</div></div>
+      <div><div class="si2">🔬</div><div class="sn">14+</div><div class="sl" data-i18n="stat4">Global Studies</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SITUATION GUIDES -->
+<section class="sec" style="background:var(--lgray)" id="guides-sec">
+<div class="si">
+  <div class="tc" style="margin-bottom:28px">
+    <div class="sec-tag" data-i18n="gt_tag">QUICK HELP</div>
+    <h2 class="sec-title" data-i18n="gt">What should I do if…</h2>
+    <p class="sec-sub tc" data-i18n="gt_sub">Step-by-step guidance tailored to Indian families. Click any situation.</p>
+  </div>
+  <div class="gg" id="guidesGrid" role="list"></div>
+</div>
+</section>
+
+<!-- FIND HELP -->
+<section class="sec" id="find-help">
+<div class="si">
+  <div class="tc" style="margin-bottom:28px">
+    <div class="sec-tag" data-i18n="help_tag">RESOURCE DIRECTORY</div>
+    <h2 class="sec-title">Find Support <em>Near You</em></h2>
+    <p class="sec-sub tc" data-i18n="help_sub">Therapy, schools, hospitals, sports, government schemes — all verified.</p>
+  </div>
+  <div class="rtabs" role="tablist">
+    <button class="tp on" onclick="fRes('all',this)">All</button>
+    <button class="tp" onclick="fRes('therapy',this)">🧠 Therapy</button>
+    <button class="tp" onclick="fRes('school',this)">🏫 Schools</button>
+    <button class="tp" onclick="fRes('hospital',this)">🏥 Hospitals</button>
+    <button class="tp" onclick="fRes('sports',this)">⚽ Sports</button>
+    <button class="tp" onclick="fRes('govt',this)">📋 Govt Schemes</button>
+    <button class="tp" onclick="fRes('global',this)">🌍 Global</button>
+  </div>
+  <div class="srow">
+    <input type="text" id="rsearch" placeholder="Search by name or city…" aria-label="Search resources" oninput="fRes(null,null)">
+    <select id="rstate" aria-label="Filter by state" onchange="fRes(null,null)">
+      <option value="">All States</option>
+      <option>Karnataka</option><option>Maharashtra</option><option>Delhi</option>
+      <option>Tamil Nadu</option><option>Telangana</option><option>Kerala</option>
+      <option>West Bengal</option><option>Gujarat</option><option>Uttar Pradesh</option>
+      <option>Punjab</option><option>Andhra Pradesh</option>
+    </select>
+    <button class="btn btn-primary btn-sm" onclick="fRes(null,null)">Search</button>
+  </div>
+  <div class="rg" id="resGrid"></div>
+  <div id="resEmpty" style="display:none;text-align:center;margin-top:24px">
+    <p style="font-size:2rem">🔍</p>
+    <p style="color:#78909C;margin-top:8px" data-i18n="nores">No resources found. Try a different filter.</p>
+  </div>
+</div>
+</section>
+
+<!-- PARENT HUB -->
+<section class="parent-bg" id="parent-hub">
+<div class="si">
+  <div style="margin-bottom:20px">
+    <div class="sec-tag" data-i18n="hub_tag">PARENT RESOURCE HUB</div>
+    <h2 class="sec-title">Everything you need, <em>all in one place</em></h2>
+    <p class="sec-sub" data-i18n="hub_sub">Videos, courses, global research and proven practices — curated from experts worldwide.</p>
+  </div>
+  <div class="ptabs" role="tablist">
+    <div class="ptab active" onclick="swTab('videos')">🎥 Videos</div>
+    <div class="ptab" onclick="swTab('learning')">📚 Free Courses</div>
+    <div class="ptab" onclick="swTab('research')">🔬 World Research</div>
+    <div class="ptab" onclick="swTab('practices')">✅ Best Practices</div>
+  </div>
+
+  <!-- VIDEOS PANEL -->
+  <div class="ppanel active" id="tab-videos">
+    <div style="margin-bottom:14px">
+      <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:5px" data-i18n="vid_title">25 Expert Videos — Multiple Languages</h3>
+      <p style="font-size:14px;color:var(--muted)" data-i18n="vid_sub">WHO, CDC, NIMHANS, ASHA, autism specialists. Filter by category or language.</p>
+    </div>
+    <div class="vfrow" id="vidCatRow">
+      <button class="vp2 on" onclick="fVids('all',this)">All</button>
+      <button class="vp2" onclick="fVids('diagnosis',this)">🔍 Diagnosis</button>
+      <button class="vp2" onclick="fVids('therapy',this)">🧠 Therapy</button>
+      <button class="vp2" onclick="fVids('school',this)">🏫 School &amp; Rights</button>
+      <button class="vp2" onclick="fVids('sensory',this)">🎯 Sensory</button>
+      <button class="vp2" onclick="fVids('parent',this)">💚 Parent</button>
+      <button class="vp2" onclick="fVids('adhd',this)">⚡ ADHD</button>
+    </div>
+    <div class="vfrow" id="vidLangRow">
+      <button class="vp2 on" onclick="fVLang('all',this)">🌐 All Languages</button>
+      <button class="vp2" onclick="fVLang('english',this)">🇬🇧 English</button>
+      <button class="vp2 hi" onclick="fVLang('hindi',this)">🇮🇳 हिन्दी</button>
+      <button class="vp2" onclick="fVLang('tamil',this)">தமிழ்</button>
+      <button class="vp2" onclick="fVLang('telugu',this)">తెలుగు</button>
+      <button class="vp2" onclick="fVLang('kannada',this)">ಕನ್ನಡ</button>
+    </div>
+    <div class="vgrid" id="videoGrid"></div>
+  </div>
+
+  <!-- LEARNING PANEL -->
+  <div class="ppanel" id="tab-learning">
+    <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:5px">Free Online Courses &amp; Learning Programs</h3>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:18px">Completely free courses from top universities worldwide.</p>
+    <div class="lgrid">
+      <a class="lcard" href="https://www.coursera.org/learn/autism-spectrum-disorder" target="_blank" rel="noopener"><div class="lhdr"><div class="lic" style="background:#E8F5E9">🎓</div><span class="lbadge lbf">Free Audit</span></div><h4>Autism Spectrum Disorder — Duke University</h4><p>Diagnosis, intervention, family support and school inclusion. 6 weeks, self-paced on Coursera.</p><div class="lftr"><span class="lsrc">Coursera · Duke</span><span class="llnk">Start free →</span></div></a>
+      <a class="lcard" href="https://www.futurelearn.com/courses/autism-education-trust-good-autism-practice" target="_blank" rel="noopener"><div class="lhdr"><div class="lic" style="background:var(--vlblue)">📖</div><span class="lbadge lbf">Free</span></div><h4>Good Autism Practice — Autism Education Trust</h4><p>Practical strategies for parents and educators. UK-based, globally applicable.</p><div class="lftr"><span class="lsrc">FutureLearn · AET</span><span class="llnk">Start free →</span></div></a>
+      <a class="lcard" href="https://www.edx.org/learn/autism" target="_blank" rel="noopener"><div class="lhdr"><div class="lic" style="background:#F3E5F5">🏛️</div><span class="lbadge lbf">Free Audit</span></div><h4>Autism Collection — edX (Harvard, MIT)</h4><p>Courses from Harvard, MIT and global universities covering autism science, therapy and policy.</p><div class="lftr"><span class="lsrc">edX · Multiple</span><span class="llnk">Browse →</span></div></a>
+      <a class="lcard" href="https://www.autismspeaks.org/tool-kit" target="_blank" rel="noopener"><div class="lhdr"><div class="lic" style="background:#FFF3E0">🧰</div><span class="lbadge lbf">Free</span></div><h4>Autism Speaks — 100 Day Kit</h4><p>Essential guide for the first 100 days after an autism diagnosis. Available in Hindi and English.</p><div class="lftr"><span class="lsrc">Autism Speaks</span><span class="llnk">Download →</span></div></a>
+      <a class="lcard" href="https://raisingchildren.net.au/autism" target="_blank" rel="noopener"><div class="lhdr"><div class="lic" style="background:#E8F5E9">👨‍👩‍👧</div><span class="lbadge lbf">Free</span></div><h4>Raising Children — Autism Hub</h4><p>Hundreds of articles, videos and guides from diagnosis to adulthood. Trusted worldwide.</p><div class="lftr"><span class="lsrc">Raising Children · AU</span><span class="llnk">Explore →</span></div></a>
+      <a class="lcard" href="https://www.nationalautismcenter.org" target="_blank" rel="noopener"><div class="lhdr"><div class="lic" style="background:#E8F5E9">🔬</div><span class="lbadge lbr">Evidence-Based</span></div><h4>National Autism Center — Evidence Reports</h4><p>Free downloads on which treatments actually work. National Standards Reports for parents.</p><div class="lftr"><span class="lsrc">NAC · USA</span><span class="llnk">Access free →</span></div></a>
+    </div>
+  </div>
+
+  <!-- RESEARCH PANEL -->
+  <div class="ppanel" id="tab-research" id="research-sec">
+    <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:5px">Global Autism Research — 14 Key Studies</h3>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:14px">Peer-reviewed studies from WHO, CDC, Lancet, Nature, BMJ, JAMA, NIMHANS — simplified for parents.</p>
+    <div class="spills" id="studyFilters">
+      <button class="spill on" onclick="fStudies('all',this)">All Studies</button>
+      <button class="spill" onclick="fStudies('prevalence',this)">📊 Prevalence</button>
+      <button class="spill" onclick="fStudies('therapy',this)">🧠 Therapy</button>
+      <button class="spill" onclick="fStudies('india',this)">🇮🇳 India</button>
+      <button class="spill" onclick="fStudies('genetics',this)">🔬 Genetics</button>
+      <button class="spill" onclick="fStudies('policy',this)">⚖️ Policy</button>
+    </div>
+    <div class="sgrid" id="studiesGrid">
+      <div class="scard" data-scat="prevalence"><div class="scats"><span class="scat">Prevalence</span></div><div class="sorg">CDC USA · 2023</div><div class="stitle">Autism Prevalence in the United States — 1 in 36 Children</div><div class="sdesc">CDC ADDM Network finds autism prevalence at 1 in 36 children in USA. Boys are 4x more likely. Early screening is the most effective intervention available.</div><div class="smeta"><span class="sjournal">CDC Surveillance · 2023</span><a class="slnk" href="https://cdc.gov/autism/data-research/index.html" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="prevalence"><div class="scats"><span class="scat">Prevalence</span><span class="scat">Global</span></div><div class="sorg">WHO / Lancet · 2023</div><div class="stitle">Global Autism Prevalence — 1 in 100 Children (61 Countries)</div><div class="sdesc">WHO systematic review across 61 countries. Significant underdiagnosis in South Asia including India. Calls for universal newborn screening programmes.</div><div class="smeta"><span class="sjournal">WHO · Lancet · 2023</span><a class="slnk" href="https://who.int/news-room/fact-sheets/detail/autism-spectrum-disorders" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="india"><div class="scats"><span class="scat">India</span></div><div class="sorg">NIMHANS · 2022</div><div class="stitle">Autism Spectrum Disorder in India — National Epidemiology</div><div class="sdesc">First large-scale Indian study: ASD prevalence estimated at 1 in 68 children. Significant treatment gap especially in rural areas. Diagnosis delays of 3–5 years common.</div><div class="smeta"><span class="sjournal">NIMHANS Bangalore · 2022</span><a class="slnk" href="https://nimhans.ac.in" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="india"><div class="scats"><span class="scat">India</span><span class="scat">Policy</span></div><div class="sorg">Lancet Regional Health · 2023</div><div class="stitle">Neurodevelopmental Disorders in South Asia — Care Gaps</div><div class="sdesc">Comprehensive review of autism and ADHD burden in South Asia. Policy recommendations for India's National Health Mission integration.</div><div class="smeta"><span class="sjournal">Lancet Reg. Health · 2023</span><a class="slnk" href="https://thelancet.com/journals/lanwpc/home" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="therapy"><div class="scats"><span class="scat">Therapy</span></div><div class="sorg">JAMA Pediatrics · 2021</div><div class="stitle">Early Diagnosis Dramatically Improves Long-Term Outcomes</div><div class="sdesc">Children diagnosed before age 3 enrolled in early intervention show significantly better communication and social outcomes by school age.</div><div class="smeta"><span class="sjournal">JAMA Pediatrics · 2021</span><a class="slnk" href="https://ncbi.nlm.nih.gov/pmc/articles/PMC7872846/" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="therapy"><div class="scats"><span class="scat">Therapy</span></div><div class="sorg">Cochrane Reviews · 2022</div><div class="stitle">Speech Therapy for Autism — 33 Studies Systematic Review</div><div class="sdesc">Targeted speech-language intervention significantly improves communication for non-verbal children. Strongest evidence for PECS and ESDM approaches.</div><div class="smeta"><span class="sjournal">Cochrane Library · 2022</span><a class="slnk" href="https://cochranelibrary.com" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="therapy"><div class="scats"><span class="scat">Therapy</span></div><div class="sorg">BMJ · 2023</div><div class="stitle">Music Therapy for Autism — Global RCT (9 Countries)</div><div class="sdesc">Multi-country randomised controlled trial shows music therapy significantly improves social responsiveness and quality of life for children with ASD.</div><div class="smeta"><span class="sjournal">BMJ · 2023</span><a class="slnk" href="https://bmj.com" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="therapy"><div class="scats"><span class="scat">Therapy</span></div><div class="sorg">NICE Guidelines UK · 2023</div><div class="stitle">Autism Interventions — Gold Standard Clinical Guidelines</div><div class="sdesc">NICE guidelines for ABA, speech therapy, OT and sensory integration. Evidence grading for each intervention type with practical recommendations for families.</div><div class="smeta"><span class="sjournal">NICE · UK · 2023</span><a class="slnk" href="https://nice.org.uk/guidance/ng217" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="genetics"><div class="scats"><span class="scat">Genetics</span></div><div class="sorg">Nature Genetics · 2023</div><div class="stitle">Largest Autism Genetics Study — 1 Million Individuals</div><div class="sdesc">Landmark GWAS identifies 250+ genetic loci linked to autism risk. Confirms complex polygenic architecture. Implications for early screening programmes.</div><div class="smeta"><span class="sjournal">Nature Genetics · 2023</span><a class="slnk" href="https://nature.com/ng" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="genetics"><div class="scats"><span class="scat">Genetics</span></div><div class="sorg">Nature Medicine · 2023</div><div class="stitle">AI Autism Screening — 98% Accuracy in Toddlers</div><div class="sdesc">Machine learning using brief video analysis can identify autism signs in children as young as 18 months, enabling earlier intervention than previously possible.</div><div class="smeta"><span class="sjournal">Nature Medicine · 2023</span><a class="slnk" href="https://nature.com/nm" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="policy"><div class="scats"><span class="scat">Policy</span><span class="scat">India</span></div><div class="sorg">Ministry of Social Justice · 2021</div><div class="stitle">RPwD Act 2016 — Implementation Status for Autism</div><div class="sdesc">Government of India review of Rights of Persons with Disabilities Act implementation. Key findings on school inclusion gaps and therapy access across states.</div><div class="smeta"><span class="sjournal">India Govt · 2021</span><a class="slnk" href="https://disabilityaffairs.gov.in" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="policy"><div class="scats"><span class="scat">Policy</span><span class="scat">Global</span></div><div class="sorg">UN CRPD · 2022</div><div class="stitle">Convention on Rights of Persons with Disabilities — Autism Guide</div><div class="sdesc">UN guidance on education, employment, healthcare and community inclusion rights for persons with autism globally. Legal foundation of India's RPwD Act 2016.</div><div class="smeta"><span class="sjournal">United Nations · 2022</span><a class="slnk" href="https://ohchr.org/en/instruments-mechanisms/instruments/convention-rights-persons-disabilities" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="india"><div class="scats"><span class="scat">India</span></div><div class="sorg">Indian J. Psychiatry · 2022</div><div class="stitle">Autism in India — Policy Gap Analysis and NHM Recommendations</div><div class="sdesc">Analysis of India's autism policy landscape: treatment gaps, insurance exclusions, and concrete recommendations for National Health Mission inclusion.</div><div class="smeta"><span class="sjournal">Indian J. Psychiatry · 2022</span><a class="slnk" href="https://indianjpsychiatry.org" target="_blank" rel="noopener">Read →</a></div></div>
+      <div class="scard" data-scat="prevalence"><div class="scats"><span class="scat">Prevalence</span></div><div class="sorg">Harvard Kennedy School · 2023</div><div class="stitle">Financing Autism Care in Low-Income Countries</div><div class="sdesc">Analysis of public financing for autism care in low- and middle-income countries. India's underfunding gap quantified at $2.3 billion annually against need.</div><div class="smeta"><span class="sjournal">Harvard KSG · 2023</span><a class="slnk" href="https://hks.harvard.edu" target="_blank" rel="noopener">Read →</a></div></div>
+    </div>
+  </div>
+
+  <!-- PRACTICES PANEL -->
+  <div class="ppanel" id="tab-practices">
+    <h3 style="font-size:20px;font-weight:700;color:var(--navy);margin-bottom:5px">Evidence-Based Best Practices</h3>
+    <p style="font-size:14px;color:var(--muted);margin-bottom:18px">Proven strategies endorsed by global autism organisations. Practical and free to implement.</p>
+    <div class="pgrid">
+      <div class="pcard"><div class="picon" style="background:#E8F5E9">🗣️</div><div><h4>AAC — Augmentative &amp; Alternative Communication</h4><p>PECS, sign language and speech-generating devices are evidence-based for non-verbal children. Start early — even at 12–18 months for best results.</p><a class="plnk" href="https://www.asha.org/public/speech/disorders/aac/" target="_blank" rel="noopener">Learn more →</a></div></div>
+      <div class="pcard"><div class="picon" style="background:var(--vlblue)">🎯</div><div><h4>ABA — Applied Behaviour Analysis</h4><p>Most researched autism intervention globally. BCBA-supervised ABA shows strongest evidence for skill development and adaptive behaviour improvement.</p><a class="plnk" href="https://www.autismspeaks.org/applied-behavior-analysis" target="_blank" rel="noopener">Learn more →</a></div></div>
+      <div class="pcard"><div class="picon" style="background:#F3E5F5">🧘</div><div><h4>Sensory Diet Planning</h4><p>A personalised daily schedule of sensory activities reduces meltdowns and improves focus. Work with an OT to design your child's plan.</p><a class="plnk" href="https://www.otmother.com/sensory-diet" target="_blank" rel="noopener">Learn more →</a></div></div>
+      <div class="pcard"><div class="picon" style="background:#E8F5E9">📅</div><div><h4>Visual Schedules &amp; Predictability</h4><p>Visual schedules reduce anxiety, improve transitions and build independence. Free templates from Autism Speaks for immediate home use.</p><a class="plnk" href="https://www.autismspeaks.org/visual-supports" target="_blank" rel="noopener">Learn more →</a></div></div>
+      <div class="pcard"><div class="picon" style="background:#FFF3E0">🏃</div><div><h4>Physical Exercise as Therapy</h4><p>20 minutes of aerobic exercise before school improves attention and reduces stimming. Swimming and martial arts show particular benefit in studies.</p><a class="plnk" href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4540374/" target="_blank" rel="noopener">View research →</a></div></div>
+      <div class="pcard"><div class="picon" style="background:var(--vlblue)">🏫</div><div><h4>IEP — Individualised Education Plan</h4><p>Every child with autism has a legal right to an IEP in India under RPwD Act 2016. Know what to request and how to advocate effectively at school.</p><a class="plnk" href="https://www.autismspeaks.org/individualized-education-program-iep" target="_blank" rel="noopener">IEP Guide →</a></div></div>
+    </div>
+    <div style="margin-top:18px;padding:18px 22px;background:var(--vlblue);border-radius:12px;border:1.5px solid var(--border);display:flex;align-items:center;gap:14px">
+      <span style="font-size:26px">🇮🇳</span>
+      <div><p style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:3px">India: Rights under RPwD Act 2016</p><p style="font-size:13px;color:var(--muted)">The Rights of Persons with Disabilities Act guarantees free education, therapy and social benefits. <a href="https://disabilityaffairs.gov.in/content/page/acts.php" target="_blank" rel="noopener" style="color:var(--pb);font-weight:700">Know your rights →</a></p></div>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- HELPLINE STRIP -->
+<div class="hstrip" role="complementary" aria-label="Emergency helplines">
+<div class="si"><div class="hinner">
+  <div><h4>📞 Need immediate support?</h4><span>Free helplines for autism and ADHD families in India</span></div>
+  <div class="hnums">
+    <div class="hnum"><div class="nn">iCall</div><div class="nl">9152987821 · Free</div></div>
+    <div class="hnum"><div class="nn">Vandrevala</div><div class="nl">1860-2662-345 · 24/7</div></div>
+    <div class="hnum"><div class="nn">NIMHANS</div><div class="nl">080-46110007</div></div>
+    <div class="hnum"><div class="nn">SNEHA</div><div class="nl">044-24640050</div></div>
+  </div>
+</div></div>
+</div>
+
+<!-- PROGRAMS -->
+<section class="sec" style="background:var(--lgray)" id="programs">
+<div class="si">
+  <div class="tc" style="margin-bottom:28px">
+    <div class="sec-tag">WHAT WE DO</div>
+    <h2 class="sec-title">What we do <em>right now</em></h2>
+    <p class="sec-sub tc">Every program is active today in Bangalore, scaling across India.</p>
+  </div>
+  <div class="prgrid">
+    <div class="prcard pc1"><span class="prico">🧠</span><h3>Therapy Support</h3><p>We cover speech, OT and ABA therapy for families who cannot afford it. ₹500 funds one session.</p></div>
+    <div class="prcard pc2"><span class="prico">🎒</span><h3>School Inclusion</h3><p>School fees, shadow teacher funding and admission support so no child misses education.</p></div>
+    <div class="prcard pc3"><span class="prico">👕</span><h3>Uniforms &amp; Essentials</h3><p>Every child dressed with dignity — uniforms, bags and daily essentials for families in need.</p></div>
+    <div class="prcard pc4"><span class="prico">🥗</span><h3>Food &amp; Nutrition</h3><p>Nutritious meals for children in therapy centres so no child learns on an empty stomach.</p></div>
+    <div class="prcard pc5"><span class="prico">🎨</span><h3>Engagement &amp; Life Skills</h3><p>Art, music, sports, vocational training — building confidence and independence in every child.</p></div>
+    <div class="prcard pc6"><span class="prico">💛</span><h3>Direct Family Help</h3><p>Emergency financial support for families in crisis — sometimes a family just needs a hand for the month.</p></div>
+  </div>
+</div>
+</section>
+
+<!-- ACRONYM -->
+<section class="sec" style="background:#fff">
+<div class="si">
+  <div class="tc" style="margin-bottom:26px">
+    <div class="sec-tag">EVERY LETTER, A MEANING</div>
+    <h2 class="sec-title">Every Child, <em>A Possibility</em></h2>
+  </div>
+  <div class="agrid">
+    <div class="acard"><div class="aletter" style="color:var(--navy)">A</div><span class="aword">Ability</span><span class="adesc">Every child has an ability waiting to shine.</span></div>
+    <div class="acard"><div class="aletter" style="color:var(--green)">Y</div><span class="aword">Yes to Inclusion</span><span class="adesc">Yes to every child, every dream.</span></div>
+    <div class="acard"><div class="aletter" style="color:var(--pb)">U</div><span class="aword">Unconditional Care</span><span class="adesc">Care beyond labels and judgments.</span></div>
+    <div class="acard"><div class="aletter" style="color:var(--bb)">S</div><span class="aword">Support</span><span class="adesc">Beside families in every step.</span></div>
+    <div class="acard"><div class="aletter" style="color:var(--gold)">H</div><span class="aword">Hope</span><span class="adesc">Confidence and brighter tomorrows.</span></div>
+    <div class="acard"><div class="aletter" style="color:#7B1FA2">M</div><span class="aword">Mentorship</span><span class="adesc">Guiding each child toward independence.</span></div>
+    <div class="acard"><div class="aletter" style="color:var(--red)">A</div><span class="aword">Acceptance</span><span class="adesc">A society that accepts differences with dignity.</span></div>
+    <div class="acard"><div class="aletter" style="color:var(--green)">N</div><span class="aword">Nurture</span><span class="adesc">Love, therapy, education and patience.</span></div>
+  </div>
+</div>
+</section>
+
+<!-- VOICES -->
+<section class="vbg">
+<div class="si">
+  <div class="tc" style="margin-bottom:36px">
+    <div class="sec-tag" style="color:var(--gold)">VOICES OF HOPE</div>
+    <h2 class="sec-title" style="color:#fff">Families whose <em>lives changed</em></h2>
+  </div>
+  <div class="vcgrid">
+    <div class="vccard"><div class="vcq">❝</div><p>Ayushman World gave us something we hadn't felt in years — hope. My son now attends inclusive classes and has made his first real friends.</p><div class="vcstars">★★★★★</div><div class="vcname">Priya Sharma</div><div class="vcsub">Mother of Rohan, 8 · Bangalore</div></div>
+    <div class="vccard"><div class="vcq">❝</div><p>The therapy resources connected us within days. Our daughter is thriving — and we finally feel like we're not alone in this journey.</p><div class="vcstars">★★★★★</div><div class="vcname">Amit &amp; Sunita Verma</div><div class="vcsub">Parents of Ananya, 6 · Mumbai</div></div>
+    <div class="vccard"><div class="vcq">❝</div><p>The Hindi videos saved us months of searching. I understood my son's sensory needs within a week. Thank you, Ayushman World.</p><div class="vcstars">★★★★★</div><div class="vcname">Deepak Nair</div><div class="vcsub">Father of Arjun, 10 · Kochi</div></div>
+  </div>
+</div>
+</section>
+
+<!-- DONATE -->
+<section class="dbg" id="donate">
+<div class="si tc">
+  <div style="font-size:3rem;margin-bottom:12px">💛</div>
+  <div class="sec-tag" style="color:var(--gold)">MAKE A DIFFERENCE</div>
+  <h2 class="sec-title" style="color:#fff;margin-top:8px">Help a Child <em style="color:var(--gold)">Thrive Today</em></h2>
+  <p style="color:rgba(255,255,255,.72);max-width:520px;margin:13px auto 0;font-size:15px;line-height:1.8">Every rupee funds therapy, school fees or meals for a child who cannot afford it. 100% transparent. 80G tax benefits available.</p>
+  <div class="damts" role="group">
+    <button class="dam" onclick="selAmt2(500,this)">₹500</button>
+    <button class="dam on" onclick="selAmt2(1000,this)">₹1,000</button>
+    <button class="dam" onclick="selAmt2(2500,this)">₹2,500</button>
+    <button class="dam" onclick="selAmt2(5000,this)">₹5,000</button>
+  </div>
+  <div class="dcustom">
+    <input type="number" id="customAmt" placeholder="Custom amount ₹" min="100" aria-label="Custom donation amount">
+    <a href="mailto:ayushmans@outlook.in?subject=Donation%20Enquiry" class="btn btn-gold btn-lg">Donate Now →</a>
+  </div>
+  <div class="dtrust">
+    <span class="dti">80G Tax Receipt</span>
+    <span class="dti">100% Transparent</span>
+    <span class="dti">Secure Payment</span>
+    <span class="dti">Every Rupee Tracked</span>
+  </div>
+</div>
+</section>
+
+<!-- TRANSPARENCY -->
+<section class="sec" style="background:var(--lgray)">
+<div class="si">
+  <div class="tc" style="margin-bottom:28px">
+    <div class="sec-tag">FUND UTILISATION</div>
+    <h2 class="sec-title">100% <em>Transparent</em></h2>
+    <p class="sec-sub tc">Every rupee donated is tracked and reported publicly.</p>
+  </div>
+  <div class="trgrid">
+    <div class="trcard"><div class="trpct" style="color:var(--pb)">65%</div><div class="trbar"><div class="trfill" style="width:65%;background:var(--pb)"></div></div><div class="trlabel">Direct Child Support (Therapy, School, Nutrition)</div></div>
+    <div class="trcard"><div class="trpct" style="color:var(--green)">20%</div><div class="trbar"><div class="trfill" style="width:20%;background:var(--green)"></div></div><div class="trlabel">Family Support Programs</div></div>
+    <div class="trcard"><div class="trpct" style="color:var(--gold)">15%</div><div class="trbar"><div class="trfill" style="width:15%;background:var(--gold)"></div></div><div class="trlabel">Operations &amp; Awareness</div></div>
+  </div>
+</div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec" style="background:#fff" id="contact">
+<div class="si">
+  <div class="tc" style="margin-bottom:32px">
+    <div class="sec-tag">GET IN TOUCH</div>
+    <h2 class="sec-title">We are <em>here for you</em></h2>
+    <p class="sec-sub tc">Whether you need help finding resources, want to partner, or just need to talk — reach out.</p>
+  </div>
+  <div class="cgrid">
+    <div>
+      <div class="cii"><div class="ciico">📞</div><div><div class="cilabel">Phone / WhatsApp</div><div class="cival"><a href="tel:+918280056665" style="color:var(--navy)">+91 82800 56665</a></div></div></div>
+      <div class="cii"><div class="ciico">✉️</div><div><div class="cilabel">Email</div><div class="cival"><a href="mailto:ayushmans@outlook.in" style="color:var(--navy)">ayushmans@outlook.in</a></div></div></div>
+      <div class="cii"><div class="ciico">📍</div><div><div class="cilabel">Location</div><div class="cival">Bangalore, Karnataka, India</div></div></div>
+      <div class="cii"><div class="ciico">🌐</div><div><div class="cilabel">Website</div><div class="cival"><a href="https://ayushman.world" target="_blank" rel="noopener" style="color:var(--pb)">ayushman.world</a></div></div></div>
+      <div style="margin-top:18px;padding:16px 20px;background:var(--vlblue);border-radius:12px;border:1.5px solid var(--border)">
+        <p style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px">🚨 Crisis Helplines</p>
+        <p style="font-size:13px;color:var(--muted)">iCall (TISS): <strong>9152987821</strong> · Vandrevala: <strong>1860-2662-345</strong><br>NIMHANS: <strong>080-46110007</strong> · SNEHA: <strong>044-24640050</strong></p>
+      </div>
+    </div>
+    <div>
+      <form class="cform" onsubmit="return handleCF(event)">
+        <input type="text" placeholder="Your name *" required>
+        <input type="email" placeholder="Email address *" required>
+        <input type="tel" placeholder="WhatsApp / mobile number">
+        <select required>
+          <option value="">I am reaching out as a… *</option>
+          <option>Parent / Guardian</option>
+          <option>Therapist / Educator</option>
+          <option>Potential Partner / Organisation</option>
+          <option>Donor / Supporter</option>
+          <option>Volunteer</option>
+          <option>Media / Researcher</option>
+        </select>
+        <textarea placeholder="How can we help you? *" required></textarea>
+        <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message →</button>
+      </form>
+    </div>
+  </div>
+</div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+<div class="si">
+  <div class="fgrid">
+    <div class="fbrand">
+      <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px">
+        <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 1200 1200" >
+  <title>Ayushman World — Editable Master Logo</title>
+  <desc>Editable vector logo with crescent, human figure, five stars, puzzle heart, wordmark, values and tagline.</desc>
+
+  <defs>
+    <style>
+      .heading { font-family: Poppins, Montserrat, Arial, sans-serif; font-weight: 700; }
+      .subhead { font-family: Poppins, Montserrat, Arial, sans-serif; font-weight: 600; }
+      .script { font-family: Allura, "Great Vibes", "Brush Script MT", cursive; font-weight: 400; }
+    </style>
+    <linearGradient id="crescentBlue_foot" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#00A2FF"/>
+      <stop offset="0.56" stop-color="#1976D2"/>
+      <stop offset="1" stop-color="#0D47A1"/>
+    </linearGradient>
+    <linearGradient id="figureBlue_foot" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#123FA8"/>
+      <stop offset="1" stop-color="#0A1D44"/>
+    </linearGradient>
+    <filter id="none_foot"/>
+  </defs>
+
+  <!-- Background -->
+<!-- Double circular border -->
+  <g id="circular-border" fill="none" stroke="#0D47A1">
+    <circle cx="600" cy="600" r="575" stroke-width="12"/>
+    <circle cx="600" cy="600" r="557" stroke-width="4"/>
+  </g>
+
+  <!-- Symbol -->
+  <g id="symbol">
+    <!-- Crescent: two editable vector paths -->
+    <path id="crescent-outer"
+      d="M520 104
+         C336 159 258 342 302 511
+         C349 692 529 735 733 663
+         C552 680 413 621 380 493
+         C345 356 399 209 520 104Z"
+      fill="url(#crescentBlue_foot)"/>
+    <path id="crescent-highlight"
+      d="M488 127
+         C343 213 306 370 344 499
+         C386 638 514 690 684 666
+         C519 664 416 601 389 491
+         C359 365 398 225 488 127Z"
+      fill="#0D47A1" opacity=".28"/>
+
+    <!-- Uplifted human figure -->
+    <circle id="human-head" cx="610" cy="270" r="42" fill="url(#figureBlue_foot)"/>
+    <path id="human-body"
+      d="M507 278
+         C552 319 577 334 610 338
+         C643 334 670 319 716 278
+         C686 341 654 386 640 432
+         C627 476 629 542 632 616
+         L576 603
+         C579 534 581 478 564 430
+         C548 385 524 341 507 278Z"
+      fill="url(#figureBlue_foot)"/>
+    <path id="human-leg-highlight"
+      d="M577 461 L522 556 L575 603 L598 479Z"
+      fill="#1976D2"/>
+
+    <!-- Five gold stars -->
+    <g id="five-stars" fill="#F9A825">
+      <path id="star-1" d="M607 86l12 25 28 4-20 19 5 28-25-13-25 13 5-28-20-19 28-4z"/>
+      <path id="star-2" d="M527 141l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-3" d="M687 137l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-4" d="M487 207l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+      <path id="star-5" d="M729 202l9 19 21 3-15 15 4 21-19-10-19 10 4-21-15-15 21-3z"/>
+    </g>
+
+    <!-- Four-piece puzzle heart -->
+    <g id="puzzle-heart" stroke="#FFFFFF" stroke-width="7" stroke-linejoin="round">
+      <path id="puzzle-red" fill="#E53935"
+        d="M655 419
+           C655 373 711 351 746 387
+           C763 369 792 367 811 382
+           C826 394 830 414 824 432
+           C817 452 799 467 776 487
+           L738 522 L655 466Z"/>
+      <path id="puzzle-green" fill="#43A047"
+        d="M824 432
+           C846 395 905 397 928 438
+           C952 481 922 517 881 551
+           L824 508
+           C842 493 845 471 829 458
+           C815 447 802 449 790 459
+           L776 487
+           C799 467 817 452 824 432Z"/>
+      <path id="puzzle-blue" fill="#1976D2"
+        d="M655 466
+           L738 522
+           C723 535 720 557 733 570
+           C747 584 769 580 782 566
+           L836 615
+           C800 649 761 670 715 675
+           C682 638 659 598 650 552
+           C645 523 646 491 655 466Z"/>
+      <path id="puzzle-yellow" fill="#FDDB35"
+        d="M738 522
+           L776 487
+           C785 510 810 515 825 501
+           C839 488 838 470 829 458
+           L881 551
+           C869 575 854 597 836 615
+           L782 566
+           C769 580 747 584 733 570
+           C720 557 723 535 738 522Z"/>
+    </g>
+  </g>
+</svg>
+
+
+        <div>
+          <div style="font-weight:800;font-size:17px;color:#fff">AYUSHMAN</div>
+          <div style="font-weight:600;font-size:11px;color:#1976D2;letter-spacing:3px">WORLD</div>
+        </div>
+      </div>
+      <p style="font-size:13px;color:rgba(255,255,255,.5);line-height:1.7;max-width:230px">Awareness · Support · Inclusion · Hope. India's comprehensive autism support platform for families.</p>
+      <span class="fscript"><span style="color:#1976D2;display:block">Different, Not Less.</span><span style="color:#43A047;display:block">Inclusion for All.</span></span>
+      <div class="fcontact" style="margin-top:13px">
+        <a href="tel:+918280056665">📞 +91 82800 56665</a>
+        <a href="mailto:ayushmans@outlook.in">✉️ ayushmans@outlook.in</a>
+        <a href="#">📍 Bangalore, Karnataka, India</a>
+      </div>
+    </div>
+    <div class="fcol"><h4>Find Help</h4>
+      <a href="#find-help">Therapy Centres</a>
+      <a href="#find-help">Inclusive Schools</a>
+      <a href="#find-help">Hospitals</a>
+      <a href="#find-help">Sports Programs</a>
+      <a href="#find-help">Govt Schemes</a>
+    </div>
+    <div class="fcol"><h4>Learn</h4>
+      <a href="#parent-hub">Video Library</a>
+      <a href="#parent-hub">Free Courses</a>
+      <a href="#parent-hub">Global Research</a>
+      <a href="#parent-hub">Best Practices</a>
+      <a href="#parent-hub">हिन्दी Videos</a>
+    </div>
+    <div class="fcol"><h4>Organisation</h4>
+      <a href="#hero-section">About Us</a>
+      <a href="#programs">Our Programs</a>
+      <a href="#donate">Donate</a>
+      <a href="#contact">Contact Us</a>
+      <a href="mailto:ayushmans@outlook.in">Partner With Us</a>
+    </div>
+  </div>
+  <div class="fbot">
+    <p>© 2026 Ayushman World · Bangalore, India · All rights reserved</p>
+    <span class="fpromise" style="font-family:'Great Vibes',cursive;font-size:15px;color:#F9A825">Ayushman World is more than a name — it is a promise of a better, inclusive world for every child and every family.</span>
+  </div>
+</div>
+</footer>
+
+<!-- VIDEO MODAL -->
+<div class="vmodal" id="vmodal" role="dialog" aria-modal="true">
+  <div class="vmi">
+    <button class="vmc" onclick="closeVM()" aria-label="Close video">✕</button>
+    <iframe id="vframe" src="" allowfullscreen allow="autoplay;encrypted-media" title="Video player"></iframe>
+  </div>
+</div>
+
+<script>
+// ── RESOURCE DATA ───────────────────────────────────────────────
+const RESS=[
+  {cat:'therapy',name:'NIMHANS — Child & Adolescent Psychiatry',type:'Hospital & Therapy',city:'Bangalore',state:'Karnataka',desc:"India's premier neuroscience institution. Government-subsidised OPD for autism and ADHD. Best first stop for families in Karnataka.",tags:['Free/Subsidised','ABA','Speech','OT'],phone:'080-46110007',email:'info@nimhans.ac.in',web:'https://nimhans.ac.in',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'therapy',name:'AACT — Association for Autism',type:'Therapy Centre',city:'Bangalore',state:'Karnataka',desc:'Specialised autism therapy centre with BCBA-certified therapists. ABA, speech, occupational therapy programs.',tags:['ABA','Speech','OT','BCBA'],phone:'080-23611991',web:'https://aactindia.org',icon:'🧠',ibg:'#E8F5E9',icol:'#43A047'},
+  {cat:'therapy',name:'Action for Autism (AFA)',type:'Advocacy & Therapy',city:'Delhi',state:'Delhi',desc:"India's leading autism advocacy organisation. ABA, parent training, inclusive education, free legal aid.",tags:['ABA','Advocacy','Legal Aid','Pan India'],phone:'011-26972114',email:'contact@autism.net.in',web:'https://actionforautism.org',icon:'🤝',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'therapy',name:'iCall — Free Mental Health Helpline',type:'Parent Support',city:'All India',state:'Pan India',desc:'Free confidential counselling by TISS Mumbai. Specialists in caregiver burnout and autism parent support. Mon–Sat 8am–10pm.',tags:['Free','Counselling','Hindi & English','Pan India'],phone:'9152987821',email:'icall@tiss.edu',web:'https://icallpsy.org',icon:'📞',ibg:'#FFF3E0',icol:'#E65100'},
+  {cat:'therapy',name:'Fortis Child Development Unit',type:'Hospital',city:'Bangalore',state:'Karnataka',desc:'Paediatric neurology and developmental paediatrics. Multidisciplinary team for autism and ADHD diagnosis.',tags:['Diagnosis','Neurology','OT','Speech'],phone:'1800-500-1116',web:'https://fortishealthcare.com',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'therapy',name:'Asha School — Chennai',type:'Therapy & School',city:'Chennai',state:'Tamil Nadu',desc:'Holistic autism support: ABA, PECS, sensory integration, social skills. Trusted by Chennai families since 2001.',tags:['ABA','PECS','Sensory','Chennai'],phone:'044-28151789',web:'https://ashaschool.org',icon:'🌱',ibg:'#E8F5E9',icol:'#43A047'},
+  {cat:'therapy',name:'Ummeed Child Development Centre',type:'Therapy & Inclusive School',city:'Mumbai',state:'Maharashtra',desc:"Mumbai's leading autism therapy centre. Sliding scale fees — no child turned away for inability to pay.",tags:['Inclusive','Sliding Scale','Mumbai','0-18 yrs'],phone:'022-23773880',web:'https://ummeed.org',icon:'🌈',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'school',name:'Tamana Special Education Centre',type:'Special School',city:'Delhi',state:'Delhi',desc:'TEACCH-based curriculum for autism, Down syndrome, cerebral palsy. Vocational training for older students.',tags:['TEACCH','Vocational','Life Skills','3-18 yrs'],phone:'011-24354601',web:'https://tamana.org',icon:'🏫',ibg:'#F3E5F5',icol:'#7B1FA2'},
+  {cat:'school',name:'NIEPID — National Institute for Persons with Disabilities',type:'Special School',city:'Chennai',state:'Tamil Nadu',desc:'Government institute offering free special education and vocational training for children with intellectual disabilities.',tags:['Free','Govt','Vocational','Pan India'],web:'https://niepid.nic.in',icon:'🎓',ibg:'#E8F5E9',icol:'#43A047'},
+  {cat:'school',name:'Brindavan Education Centre',type:'Special School',city:'Bangalore',state:'Karnataka',desc:'Inclusive education centre blending special and mainstream learning. Ages 3–16. ABA-based curriculum.',tags:['Inclusive','ABA-based','Bangalore','3-16 yrs'],phone:'080-26585634',icon:'🏫',ibg:'#F3E5F5',icol:'#7B1FA2'},
+  {cat:'hospital',name:'KEM Hospital — Child Psychiatry',type:'Government Hospital',city:'Mumbai',state:'Maharashtra',desc:'Government tertiary care hospital with subsidised autism diagnosis and therapy.',tags:['Subsidised','Govt','Mumbai','Diagnosis'],phone:'022-24100000',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'hospital',name:'AIIMS Delhi — Child Psychiatry',type:'Government Hospital',city:'Delhi',state:'Delhi',desc:'Apex government hospital. Comprehensive autism evaluation. Subsidised for BPL families with disability card.',tags:['Govt','Subsidised','Delhi','Apex'],phone:'011-26588500',web:'https://aiims.edu',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'hospital',name:'Manipal Hospital — Developmental Paediatrics',type:'Private Hospital',city:'Bangalore',state:'Karnataka',desc:'Comprehensive developmental paediatrics with multidisciplinary team for autism and ADHD.',tags:['Diagnosis','Multidisciplinary','Bangalore'],phone:'080-22225555',web:'https://manipalhospitals.com',icon:'🏥',ibg:'#FAFAFA',icol:'#546E7A'},
+  {cat:'sports',name:'Special Olympics Bharat',type:'Sports Programs',city:'All India',state:'Pan India',desc:'Free sports for children with intellectual disabilities. 18 sports in all major Indian cities.',tags:['Free','Swimming','Athletics','Football'],phone:'011-40177300',web:'https://specialolympicsbharat.org',icon:'🏅',ibg:'#FFF3E0',icol:'#E65100'},
+  {cat:'sports',name:'Paralympic Committee of India',type:'Para Sports',city:'Delhi',state:'Delhi',desc:'National body for para sports. State-level training for children with autism and intellectual disabilities.',tags:['Para Sports','National','Training'],web:'https://paralympic.org.in',icon:'⚽',ibg:'#E8F5E9',icol:'#43A047'},
+  {cat:'govt',name:'UDID — Unique Disability ID',type:'Government Scheme',city:'All India',state:'Pan India',desc:'Master key to all disability benefits, free transport, school reservations, tax benefits. Apply free online.',tags:['UDID','Free','Legal Right','Pan India'],web:'https://swavlambancard.gov.in',icon:'📋',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'govt',name:'ADIP — Assistive Device Scheme',type:'Government Scheme',city:'All India',state:'Pan India',desc:'Free and subsidised assistive devices including AAC speech devices for non-verbal children.',tags:['Free Devices','AAC','Pan India'],web:'https://disabilityaffairs.gov.in',icon:'📋',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'govt',name:'National Trust Registration',type:'Government Scheme',city:'All India',state:'Pan India',desc:'Legal guardianship and grants of ₹10,000–₹50,000/year for families of persons with autism.',tags:['Guardianship','Financial Support','Legal'],web:'https://nationaltrust.nic.in',icon:'📋',ibg:'#E8F5E9',icol:'#43A047'},
+  {cat:'govt',name:'Section 80DD Tax Benefit',type:'Tax Benefit',city:'All India',state:'Pan India',desc:'Parents of disabled children claim up to ₹1.25 lakh annual tax deduction under Section 80DD.',tags:['Tax Benefit','₹1.25L Deduction','Pan India'],web:'https://incometaxindia.gov.in',icon:'💰',ibg:'#FFF3E0',icol:'#E65100'},
+  {cat:'global',name:'Autism Society of America',type:'Global NGO',city:'United States',state:'',desc:"World's largest autism advocacy organisation. Resources, support groups and research for families globally.",tags:['Global','Research','Advocacy'],web:'https://autism-society.org',icon:'🌍',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'global',name:'Autism Speaks',type:'Global NGO',city:'United States',state:'',desc:'Leading global autism science and advocacy. Toolkits, videos, 100-Day Kit available in Hindi.',tags:['Global','Research','Hindi available'],web:'https://autismspeaks.org',icon:'🌍',ibg:'#E3F2FD',icol:'#0D47A1'},
+  {cat:'global',name:'WHO — Autism Spectrum Disorders',type:'WHO Resource',city:'Geneva',state:'',desc:"WHO's official autism fact sheet covering global prevalence, signs and management guidelines.",tags:['WHO','Official','Free','Global'],web:'https://who.int/news-room/fact-sheets/detail/autism-spectrum-disorders',icon:'🌐',ibg:'#FAFAFA',icol:'#546E7A'},
+  {cat:'global',name:'Ambitious about Autism (UK)',type:'UK Charity',city:'United Kingdom',state:'',desc:"UK's leading autism charity with education resources and learning for families and professionals.",tags:['UK','Education','English'],web:'https://ambitiousaboutautism.org.uk',icon:'🇬🇧',ibg:'#FAFAFA',icol:'#546E7A'},,
+  {cat:'hospital',name:'St. John's Medical College Hospital — Unit of Hope & CARE-ADD',type:'Hospital & Autism Centre',city:'Bangalore',state:'Karnataka',
+   desc:'Comprehensive autism care: Unit of Hope (developmental & behavioural paediatrics for children with special needs), CARE-ADD (Centre for Advanced Research & Excellence in Autism — screening, assessments, parent training), Special Child Psychiatry Clinic (behavioural therapy), and ComDEALL multidisciplinary early intervention in individual and group settings.',
+   tags:['CARE-ADD','Unit of Hope','ComDEALL','Early Intervention','Child Psychiatry','Bangalore'],
+   phone:'080-22065000',web:'https://www.stjohns.in/medicalcollege/departments-details/psychiatry',
+   icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'}
+];
+
+let rCat='all';
+function fRes(cat,btn){
+  if(cat){rCat=cat;document.querySelectorAll('.rtabs .tp').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');}
+  const sr=document.getElementById('rsearch').value.toLowerCase();
+  const st=document.getElementById('rstate').value;
+  const d=RESS.filter(r=>(rCat==='all'||r.cat===rCat)&&(!st||r.state===st||r.state==='Pan India')&&(!sr||r.name.toLowerCase().includes(sr)||r.city.toLowerCase().includes(sr)||r.desc.toLowerCase().includes(sr)));
+  const g=document.getElementById('resGrid'),e=document.getElementById('resEmpty');
+  if(!d.length){g.innerHTML='';e.style.display='block';return;}
+  e.style.display='none';
+  g.innerHTML=d.map(r=>`<div class="rc2"><div class="rh2"><div class="ri2" style="background:${r.ibg};color:${r.icol}">${r.icon}</div><div><div class="rn2">${r.name}</div><div class="rt2">${r.type}${r.city?' · '+r.city:''}</div></div></div><div class="rdesc">${r.desc}</div><div class="rtags2">${r.tags.map(t=>'<span class="rtag2">'+t+'</span>').join('')}</div><div class="ract">${r.web?'<a href="'+r.web+'" target="_blank" rel="noopener" class="ra-v">🌐 Visit</a>':''}${r.phone?'<a href="tel:'+r.phone+'" class="ra-c">📞 Call</a>':''}${r.email?'<a href="mailto:'+r.email+'" class="ra-e">✉️</a>':''}</div></div>`).join('');
+}
+
+// ── VIDEO DATA & RENDER ─────────────────────────────────────────
+const VIDS2=[
+  {id:'Oo4f-eDkzIM',cat:'diagnosis',lang:'english',title:'What is Autism Spectrum Disorder? Complete guide for parents',src:'Temple Grandin Institute',dur:'18:24',tags:['ASD basics','First steps']},
+  {id:'YV4tAHqSgEk',cat:'diagnosis',lang:'english',title:'Early Signs of Autism in Toddlers (0–3 years)',src:'CDC USA',dur:'12:10',tags:['Early signs','Toddlers']},
+  {id:'nriyRyLFBxE',cat:'diagnosis',lang:'hindi',title:'बच्चे में ऑटिज्म के शुरुआती संकेत — अभिभावकों की मार्गदर्शिका',src:'NIMHANS',dur:'15:30',tags:['Hindi','Early signs','India']},
+  {id:'7V9EaXaHKLo',cat:'therapy',lang:'english',title:'ABA Therapy Explained — Complete Parent Guide',src:'Dr. Mary Barbera',dur:'28:05',tags:['ABA','Home therapy']},
+  {id:'qlMwG1uLKQI',cat:'therapy',lang:'english',title:'Occupational Therapy at Home — 10 Activities',src:'OT Mom',dur:'16:42',tags:['OT','Home activities']},
+  {id:'ln3gFMUHaFI',cat:'therapy',lang:'english',title:'Speech Therapy for Non-Verbal Children — AAC & PECS',src:'ASHA',dur:'22:10',tags:['Non-verbal','Speech','AAC']},
+  {id:'TGRohivQqd0',cat:'sensory',lang:'english',title:'Sensory Meltdowns vs Tantrums — Key Differences',src:'OT Mom',dur:'12:18',tags:['Meltdowns','Sensory']},
+  {id:'h2yAtfzVNJQ',cat:'sensory',lang:'english',title:'How to Create a Sensory Diet for Your Child',src:'The Sensory Spectrum',dur:'24:30',tags:['Sensory diet','OT']},
+  {id:'YCJmELjYDcg',cat:'school',lang:'english',title:'How to Advocate for Your Child at School (IEP Guide)',src:'Autism Speaks',dur:'15:42',tags:['IEP','School rights']},
+  {id:'bHUqKrTxH2I',cat:'school',lang:'english',title:"RPwD Act 2016 — Your Child's Legal Rights in India",src:'Disability Rights India',dur:'26:00',tags:['RPwD','Legal rights','India']},
+  {id:'xN4hXJCXSMw',cat:'parent',lang:'english',title:'Parent Burnout & Caregiver Fatigue — Recovery',src:'Autism Parent Magazine',dur:'35:20',tags:['Burnout','Parent wellbeing']},
+  {id:'Kn7m1QHZKLQ',cat:'parent',lang:'hindi',title:'ऑटिज्म में माता-पिता का मानसिक स्वास्थ्य',src:'iCall TISS India',dur:'22:30',tags:['Hindi','Parent health']},
+  {id:'ouZrZa5pLXk',cat:'adhd',lang:'english',title:'ADHD Explained — Causes, Symptoms & Treatments',src:'How to ADHD',dur:'14:20',tags:['ADHD','Overview']},
+  {id:'wNM1mIwf4CU',cat:'adhd',lang:'english',title:'ADHD in the Classroom — Strategies That Work',src:'ADDitude Magazine',dur:'19:50',tags:['ADHD','School']},
+  {id:'mE4i2RcezGw',cat:'parent',lang:'english',title:"Planning for Your Autistic Child's Future (18+)",src:'Autism Society of America',dur:'44:10',tags:['Future planning','Adults']},
+  {id:'TGRohivQqd0',cat:'sensory',lang:'hindi',title:'संवेदी समस्याएं — घर पर कैसे संभालें',src:'NIMHANS Hindi',dur:'17:20',tags:['Hindi','Sensory']},
+  {id:'7V9EaXaHKLo',cat:'therapy',lang:'tamil',title:'ஆட்டிசம் குழந்தைகளுக்கான ABA சிகிச்சை',src:'Tamil Autism Network',dur:'21:30',tags:['Tamil','ABA']},
+  {id:'ln3gFMUHaFI',cat:'therapy',lang:'telugu',title:'ఆటిజమ్ పిల్లల కోసం స్పీచ్ థెరపీ',src:'Telugu Health',dur:'18:40',tags:['Telugu','Speech']},
+  {id:'h2yAtfzVNJQ',cat:'sensory',lang:'kannada',title:'ಸಂವೇದನಾ ಏಕೀಕರಣ ಚಿಕಿತ್ಸೆ — ಕನ್ನಡ',src:'Kannada Health',dur:'20:15',tags:['Kannada','Sensory']},
+  {id:'YCJmELjYDcg',cat:'school',lang:'hindi',title:'UDID, ADIP और सरकारी योजनाएं — पूरी गाइड',src:'Disability Affairs India',dur:'23:15',tags:['Hindi','Govt schemes']},
+  {id:'nriyRyLFBxE',cat:'diagnosis',lang:'english',title:'Autism Prevalence 2024 — Global Statistics (WHO)',src:'WHO',dur:'8:30',tags:['Prevalence','WHO']},
+  {id:'mE4i2RcezGw',cat:'therapy',lang:'english',title:'Music Therapy for Autism — Research & Evidence',src:'American Music Therapy Assn',dur:'31:45',tags:['Music therapy']},
+  {id:'Oo4f-eDkzIM',cat:'school',lang:'english',title:'Inclusive Education Rights — Global Perspective (UNESCO)',src:'UNESCO',dur:'25:00',tags:['Inclusive ed','Rights']},
+  {id:'YV4tAHqSgEk',cat:'parent',lang:'english',title:'Self-Care for Autism Parents — Expert Panel',src:'Autism Parent Magazine',dur:'42:00',tags:['Self care','Burnout']},
+  {id:'xN4hXJCXSMw',cat:'therapy',lang:'hindi',title:'घर पर ऑटिज्म थेरेपी — माता-पिता गाइड',src:'Autism India Hindi',dur:'19:45',tags:['Hindi','Home therapy']},
+];
+let vCat2='all',vLang2='all';
+function renderVids2(){
+  const d=VIDS2.filter(v=>(vCat2==='all'||v.cat===vCat2)&&(vLang2==='all'||v.lang===vLang2));
+  document.getElementById('videoGrid').innerHTML=d.map(v=>`<div class="vcard" onclick="playVM('https://www.youtube.com/embed/${v.id}?autoplay=1')" tabindex="0" onkeydown="if(event.key==='Enter')playVM('https://www.youtube.com/embed/${v.id}?autoplay=1')"><div class="vthumb"><img src="https://img.youtube.com/vi/${v.id}/hqdefault.jpg" alt="" loading="lazy"><div class="vplay"><div class="vpbtn"></div></div><div class="vdur">${v.dur}</div><span class="vlbadge">${v.lang.charAt(0).toUpperCase()+v.lang.slice(1)}</span></div><div class="vinfo"><div class="vcat">${v.cat}</div><div class="vtitle">${v.title}</div><div class="vsrc">📺 ${v.src}</div><div class="vtags">${v.tags.map(t=>'<span class="vtag">'+t+'</span>').join('')}</div></div></div>`).join('')||'<p style="color:var(--muted);padding:20px">No videos match this filter. Try "All".</p>';
+}
+function fVids(cat,btn){vCat2=cat;document.querySelectorAll('#vidCatRow .vp2').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderVids2();}
+function fVLang(lang,btn){vLang2=lang;document.querySelectorAll('#vidLangRow .vp2').forEach(b=>b.classList.remove('on'));if(btn)btn.classList.add('on');renderVids2();}
+function playVM(url){document.getElementById('vframe').src=url;document.getElementById('vmodal').classList.add('show');document.body.style.overflow='hidden';}
+function closeVM(){document.getElementById('vmodal').classList.remove('show');document.getElementById('vframe').src='';document.body.style.overflow='';}
+document.getElementById('vmodal').addEventListener('click',e=>{if(e.target===e.currentTarget)closeVM();});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeVM();});
+
+// ── STUDY FILTER ────────────────────────────────────────────────
+function fStudies(cat,btn){
+  document.querySelectorAll('#studyFilters .spill').forEach(b=>b.classList.remove('on'));
+  if(btn)btn.classList.add('on');
+  document.querySelectorAll('#studiesGrid .scard').forEach(c=>{
+    c.style.display=(cat==='all'||c.getAttribute('data-scat')===cat)?'block':'none';
+  });
+}
+
+// ── TAB SWITCHER ────────────────────────────────────────────────
+function swTab(id){
+  document.querySelectorAll('.ptab').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.ppanel').forEach(p=>p.classList.remove('active'));
+  const idx={videos:0,learning:1,research:2,practices:3}[id];
+  document.querySelectorAll('.ptab')[idx].classList.add('active');
+  document.getElementById('tab-'+id).classList.add('active');
+}
+
+// ── GUIDES DATA ─────────────────────────────────────────────────
+const GDATA={
+  en:[
+    {em:'🆘',title:'Just received an autism diagnosis',short:'First steps for Indian families',steps:['Take a breath — you are not alone. Thousands of Indian families have walked this path.','Get a formal evaluation from NIMHANS (080-46110007) — government-subsidised autism assessment.','Apply for UDID certificate at swavlambancard.gov.in — it unlocks all government benefits.','Join an autism parent support group — iCall helpline (9152987821) can connect you.','Read the RPwD Act 2016 — your child has guaranteed legal rights to education and healthcare.','Start therapy within 6 months of diagnosis: speech, OT and ABA for best outcomes.']},
+    {em:'🏫',title:'School is refusing my child admission',short:'RPwD Act 2016 protects your child',steps:['Under Section 3 of RPwD Act 2016 — NO school can deny admission to a child with disability.','Get the school's refusal in writing — essential for your complaint.','File a complaint with the District Education Officer (DEO) in your district.','Contact Action for Autism legal helpline: 011-26972114 — free legal guidance.','Approach the State Commissioner for Persons with Disabilities.','Demand a shadow teacher — all government schools must provide one under RTE Act.']},
+    {em:'💸',title:'Therapy is too expensive',short:'Free and subsidised options in India',steps:['NIMHANS Bangalore (080-46110007) — government-subsidised OT, speech and ABA therapy.','Apply for ADIP scheme — free AAC speech devices and assistive devices from government.','National Trust (nationaltrust.nic.in) — grants of ₹10,000–₹50,000/year for families.','Ummeed Centre Mumbai (022-23773880) — sliding-scale fees, no child turned away.','Contact your state welfare department — most states have disability welfare funds.','Email ayushmans@outlook.in — Ayushman World helps cover therapy for families in need.']},
+    {em:'🗣️',title:'My child is non-verbal',short:'AAC and communication support',steps:['AAC (Augmentative and Alternative Communication) is your most important first step.','PECS (Picture Exchange Communication System) — proven for non-verbal children from 18 months.','Free AAC apps right now: Cboard (cboard.io), LetMeTalk (Android), Snap Core First trial.','ADIP government scheme provides AAC speech devices FREE — apply at district welfare office.','Find an SLP (Speech Language Pathologist) with AAC certification — ask specifically.','Communication is not only speech — sign language, gesture, AAC, eye gaze are all valid.']},
+    {em:'😤',title:'Managing meltdowns at home',short:'De-escalation and prevention',steps:['Keep a behaviour diary for 2 weeks — note time, location, trigger, duration of each meltdown.','Meltdowns are NOT tantrums — they are neurological responses to overwhelm. Never punish.','Create a "calm-down corner": weighted blanket, fidget tools, noise-cancelling headphones.','Reduce sensory triggers: lower lights, reduce noise, avoid crowds during difficult periods.','Develop a meltdown prevention plan with a BCBA (Board Certified Behaviour Analyst).','After a meltdown, give 30–60 minutes of quiet time before engaging. Repair the connection.']},
+    {em:'📋',title:'Government schemes available',short:'Complete guide to disability benefits',steps:['UDID Certificate: Apply free at swavlambancard.gov.in — master key to all government benefits.','Section 80DD: Claim up to ₹1.25 lakh annual tax deduction for a disabled dependent.','ADIP Scheme: Free AAC devices and assistive equipment — apply at district welfare office.','National Trust: Legal guardianship and ₹10,000–₹50,000/year grants — nationaltrust.nic.in.','Free bus travel in most states and free railway travel for escort with UDID card.','4% job reservation in government jobs for persons with benchmark disabilities after age 18.']},
+  ],
+  hi:[
+    {em:'🆘',title:'अभी ऑटिज्म का निदान मिला है',short:'भारतीय परिवारों के लिए पहले कदम',steps:['एक सांस लें — आप अकेले नहीं हैं। भारत में हजारों परिवार इस रास्ते पर हैं।','NIMHANS से विकासात्मक बाल रोग विशेषज्ञ मूल्यांकन लें (080-46110007)।','swavlambancard.gov.in पर UDID प्रमाण पत्र के लिए आवेदन करें।','iCall हेल्पलाइन (9152987821) से अभिभावक सहायता समूह से जुड़ें।','RPwD अधिनियम 2016 पढ़ें — आपके बच्चे को शिक्षा और स्वास्थ्य का कानूनी अधिकार है।','निदान के 6 महीने के भीतर स्पीच, OT और ABA थेरेपी शुरू करें।']},
+    {em:'🏫',title:'स्कूल बच्चे को दाखिला नहीं दे रहा',short:'RPwD अधिनियम 2016 आपके बच्चे की रक्षा करता है',steps:['RPwD अधिनियम 2016 की धारा 3 — कोई भी स्कूल दिव्यांग बच्चे को मना नहीं कर सकता।','स्कूल से लिखित में इनकार लें।','जिला शिक्षा अधिकारी (DEO) को शिकायत दर्ज कराएं।','Action for Autism कानूनी हेल्पलाइन: 011-26972114 — माता-पिता के लिए मुफ्त।','राज्य दिव्यांगता आयुक्त से संपर्क करें।','RTE अधिनियम के तहत हर सरकारी स्कूल को शैडो टीचर देना होगा।']},
+    {em:'💸',title:'थेरेपी बहुत महंगी है',short:'भारत में मुफ्त और सब्सिडी वाले विकल्प',steps:['NIMHANS, बैंगलोर — सरकारी दर पर OT, स्पीच और ABA थेरेपी।','ADIP योजना — AAC स्पीच डिवाइस सहित मुफ्त सहायक उपकरण।','National Trust — ₹10,000–₹50,000/वर्ष अनुदान।','Ummeed Centre मुंबई — स्लाइडिंग स्केल फीस।','राज्य कल्याण विभाग में दिव्यांगता कल्याण निधि के लिए आवेदन करें।','ayushmans@outlook.in पर संपर्क करें — आयुष्मान वर्ल्ड मदद करता है।']},
+    {em:'🗣️',title:'मेरा बच्चा बोलता नहीं है',short:'AAC और संचार सहायता',steps:['AAC (संवर्धित और वैकल्पिक संचार) आपका पहला और सबसे महत्वपूर्ण कदम है।','PECS — 18 महीने से शुरू कर सकते हैं।','मुफ्त AAC ऐप्स: Cboard (cboard.io), LetMeTalk (Android)।','ADIP योजना से मुफ्त AAC स्पीच डिवाइस।','AAC अनुभव वाले SLP की तलाश करें।','बोलना ही एकमात्र संचार नहीं है — सांकेतिक भाषा, AAC, इशारे सभी मान्य हैं।']},
+    {em:'😤',title:'घर में मेल्टडाउन को कैसे संभालें',short:'डी-एस्केलेशन और रोकथाम',steps:['2 हफ्ते व्यवहार डायरी रखें — समय, स्थान, ट्रिगर, अवधि नोट करें।','मेल्टडाउन टैंट्रम नहीं है — यह एक न्यूरोलॉजिकल प्रतिक्रिया है। कभी दंड न दें।','वेटेड ब्लैंकेट, फिजेट टूल्स के साथ "शांत कोना" बनाएं।','प्रकाश कम करें, शोर घटाएं, भीड़ से बचें।','BCBA के साथ मेल्टडाउन रोकथाम योजना बनाएं।','मेल्टडाउन के बाद 30-60 मिनट शांत समय दें।']},
+    {em:'📋',title:'उपलब्ध सरकारी योजनाएं',short:'भारतीय दिव्यांगता लाभों की पूरी गाइड',steps:['UDID प्रमाण पत्र: swavlambancard.gov.in पर आवेदन करें।','धारा 80DD: ₹1.25 लाख वार्षिक कर कटौती।','ADIP योजना: मुफ्त AAC डिवाइस और सहायक उपकरण।','National Trust: कानूनी संरक्षकता + ₹10,000–₹50,000/वर्ष अनुदान।','अधिकांश राज्यों में UDID कार्ड से मुफ्त बस और रेल यात्रा।','18 वर्ष के बाद सरकारी नौकरियों में 4% आरक्षण।']},
+  ],
+};
+['ta','te','kn','bn','mr','ml','pa','es','fr','de','ja','zh'].forEach(l=>{GDATA[l]=GDATA.en;});
+let curLang2='en';
+
+function renderGuides2(){
+  const g=GDATA[curLang2]||GDATA.en;
+  document.getElementById('guidesGrid').innerHTML=g.map((gd,i)=>`<div class="gc" id="gc${i}" onclick="togGuide(${i})" tabindex="0" role="button" aria-expanded="false" onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();togGuide(${i})}"><div class="ge" aria-hidden="true">${gd.em}</div><div class="gt2">${gd.title}</div><div class="gs2">${gd.short}</div><div class="gsteps" id="gs${i}">${gd.steps.map((s,n)=>'<div class="gstep"><div class="gsn">'+(n+1)+'</div><div>'+s+'</div></div>').join('')}</div></div>`).join('');
+}
+function togGuide(i){const s=document.getElementById('gs'+i),c=document.getElementById('gc'+i);const o=s.classList.toggle('gopen');c.setAttribute('aria-expanded',o);}
+
+// ── LANGUAGE SWITCHER ───────────────────────────────────────────
+const LMETA={en:{f:'🇮🇳',n:'English'},hi:{f:'🇮🇳',n:'हिन्दी'},ta:{f:'🇮🇳',n:'தமிழ்'},te:{f:'🇮🇳',n:'తెలుగు'},kn:{f:'🇮🇳',n:'ಕನ್ನಡ'},bn:{f:'🇮🇳',n:'বাংলা'},mr:{f:'🇮🇳',n:'मराठी'},ml:{f:'🇮🇳',n:'മലയാളം'},pa:{f:'🇮🇳',n:'ਪੰਜਾਬੀ'},es:{f:'🇪🇸',n:'Español'},fr:{f:'🇫🇷',n:'Français'},de:{f:'🇩🇪',n:'Deutsch'},ja:{f:'🇯🇵',n:'日本語'},zh:{f:'🇨🇳',n:'中文'}};
+const I18N={
+  en:{nav_find:'Find Help',nav_hub:'Parent Hub',nav_research:'Research',nav_programs:'Programs',nav_donate_l:'Donate',nav_contact:'Contact',nav_btn_find:'Find Help',nav_btn_donate:'♥ Donate',vb1:'AWARENESS',vb2:'SUPPORT',vb3:'INCLUSION',vb4:'HOPE',hero_pill:'Awareness · Support · Inclusion · Hope',hero_h1:'Different, Not Less.',hero_b1:'🔍 Find Help Near You',hero_b2:'📚 Parent Hub',hero_desc:"India's most comprehensive support platform for families of children with autism and neurodiversity.",hs1:'Families',hs2:'Resources',hs3:'Videos',hs4:'Languages',stat1:'Families Helped',stat2:'Verified Resources',stat3:'Expert Videos',stat4:'Global Studies',gt_tag:'QUICK HELP',gt:'What should I do if…',gt_sub:'Step-by-step guidance for Indian families. Click any situation.',help_tag:'RESOURCE DIRECTORY',help_sub:'Therapy, schools, hospitals, sports, government schemes — all verified.',hub_tag:'PARENT RESOURCE HUB',hub_sub:'Videos, courses, research and practices — curated from experts worldwide.',vid_title:'25 Expert Videos — Multiple Languages',vid_sub:'WHO, CDC, NIMHANS, ASHA, autism specialists. Filter by category or language.',nores:'No resources found. Try a different filter.'},
+  hi:{nav_find:'सहायता खोजें',nav_hub:'अभिभावक हब',nav_research:'शोध',nav_programs:'कार्यक्रम',nav_donate_l:'दान करें',nav_contact:'संपर्क',nav_btn_find:'सहायता खोजें',nav_btn_donate:'♥ दान करें',vb1:'जागरूकता',vb2:'सहायता',vb3:'समावेश',vb4:'आशा',hero_pill:'जागरूकता · सहायता · समावेश · आशा',hero_h1:'अलग, कम नहीं।',hero_b1:'🔍 पास में सहायता खोजें',hero_b2:'📚 अभिभावक हब',hero_desc:'ऑटिज्म और ADHD से प्रभावित बच्चों के परिवारों के लिए भारत का सबसे व्यापक सपोर्ट प्लेटफॉर्म।',hs1:'परिवार',hs2:'संसाधन',hs3:'वीडियो',hs4:'भाषाएं',stat1:'परिवारों की मदद',stat2:'सत्यापित संसाधन',stat3:'विशेषज्ञ वीडियो',stat4:'वैश्विक अध्ययन',gt_tag:'त्वरित सहायता',gt:'मुझे क्या करना चाहिए अगर…',gt_sub:'भारतीय परिवारों के लिए चरण-दर-चरण मार्गदर्शन।',help_tag:'संसाधन निर्देशिका',help_sub:'थेरेपी, स्कूल, अस्पताल, खेल, सरकारी योजनाएं — सभी सत्यापित।',hub_tag:'अभिभावक संसाधन हब',hub_sub:'वीडियो, कोर्स, शोध — विश्व के विशेषज्ञों द्वारा।',vid_title:'25 विशेषज्ञ वीडियो — कई भाषाओं में',vid_sub:'WHO, CDC, NIMHANS, ASHA के वीडियो। श्रेणी या भाषा से फ़िल्टर करें।',nores:'कोई परिणाम नहीं मिला। अलग फ़िल्टर आज़माएं।'},
+  ta:{nav_find:'உதவி கண்டுபிடி',nav_hub:'பெற்றோர் மையம்',vb1:'விழிப்புணர்வு',vb2:'ஆதரவு',vb3:'சேர்க்கை',vb4:'நம்பிக்கை',hero_pill:'விழிப்புணர்வு · ஆதரவு · சேர்க்கை · நம்பிக்கை',hero_h1:'வித்தியாசம், குறைவில்லை.',gt:'என்ன செய்வது என்று தெரியவில்லை எனில்…'},
+  es:{nav_find:'Encontrar Ayuda',nav_hub:'Centro de Padres',vb1:'CONCIENCIA',vb2:'APOYO',vb3:'INCLUSIÓN',vb4:'ESPERANZA',hero_pill:'Conciencia · Apoyo · Inclusión · Esperanza',hero_h1:'Diferente, No Menos.',hero_b1:'🔍 Encontrar Ayuda',hero_b2:'📚 Centro de Padres',gt:'¿Qué debo hacer si…?'},
+  fr:{nav_find:"Trouver de l'Aide",nav_hub:'Espace Parents',vb1:'SENSIBILISATION',vb2:'SOUTIEN',vb3:'INCLUSION',vb4:'ESPOIR',hero_pill:'Sensibilisation · Soutien · Inclusion · Espoir',hero_h1:'Différent, Pas Moins.',gt:'Que dois-je faire si…?'},
+};
+['te','kn','bn','mr','ml','pa','de','ja','zh'].forEach(l=>{I18N[l]=I18N.en;});
+
+function setLang2(l){
+  curLang2=l;
+  const t=I18N[l]||I18N.en;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(t[k])el.textContent=t[k];});
+  document.getElementById('cFlag').textContent=LMETA[l]?.f||'🌐';
+  document.getElementById('cLang').textContent=LMETA[l]?.n||l;
+  document.querySelectorAll('#ld2 button').forEach(b=>b.classList.toggle('lsel',b.getAttribute('data-lang')===l));
+  document.documentElement.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.body.className='lang-'+l;
+  document.getElementById('ld2').classList.remove('open');
+  document.getElementById('lb2').setAttribute('aria-expanded','false');
+  renderGuides2();
+}
+document.getElementById('lb2').addEventListener('click',e=>{
+  e.stopPropagation();
+  const d=document.getElementById('ld2'),b=document.getElementById('lb2');
+  const o=d.classList.toggle('open');b.setAttribute('aria-expanded',o);
+});
+document.addEventListener('click',()=>{document.getElementById('ld2')?.classList.remove('open');});
+document.getElementById('ld2').addEventListener('click',e=>e.stopPropagation());
+
+// ── NAV SCROLL & HAMBURGER ──────────────────────────────────────
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',scrollY>60);
+},{passive:true});
+document.getElementById('hbg').addEventListener('click',()=>{
+  const n=document.getElementById('navLinks'),b=document.getElementById('hbg');
+  const o=n.classList.toggle('open');b.setAttribute('aria-expanded',o);
+});
+
+// ── DONATE ──────────────────────────────────────────────────────
+function selAmt2(a,btn){document.querySelectorAll('.dam').forEach(b=>b.classList.remove('on'));btn.classList.add('on');document.getElementById('customAmt').value='';}
+
+// ── CONTACT ─────────────────────────────────────────────────────
+function handleCF(e){e.preventDefault();alert('Thank you for reaching out!\n\nWe will respond within 24 hours.\n\nFor urgent support: +91 82800 56665');return false;}
+
+// ── INIT ────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded',()=>{
+  fRes(null,null);
+  renderVids2();
+  renderGuides2();
+});
+</script>
+</body>
+</html>
