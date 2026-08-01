@@ -1,0 +1,16 @@
+# ── RENDER.COM DEPLOYMENT (free tier available) ──────────────────
+services:
+  - type: web
+    name: ayushman-ai-proxy
+    runtime: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: ANTHROPIC_KEY
+        sync: false          # You set this in Render dashboard — never in code
+      - key: GEMINI_KEY
+        sync: false
+      - key: OPENAI_KEY
+        sync: false
+      - key: ALLOWED_ORIGIN
+        value: https://ayushman.world

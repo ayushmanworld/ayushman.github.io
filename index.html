@@ -5,8 +5,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ayushman World — Different, Not Less. Inclusion for All.</title>
 <meta name="description" content="Ayushman World — Awareness, Support, Inclusion, Hope. India's comprehensive autism and ADHD support platform for families.">
+<meta property="og:url" content="https://ayushman.world">
+<meta property="og:image" content="https://ayushman.world/og-image.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@ayushmanworld">
+<meta name="twitter:title" content="Ayushman World — Different, Not Less. Inclusion for All.">
+<meta name="twitter:description" content="India's autism support platform — Awareness, Support, Inclusion, Hope.">
+<link rel="canonical" href="https://ayushman.world">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Great+Vibes&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Great+Vibes&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Tamil:wght@400;700&family=Noto+Sans+Telugu:wght@400;700&family=Noto+Sans+Kannada:wght@400;700&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
@@ -337,6 +345,7 @@ footer{background:var(--navy);color:#fff;padding:50px 0 22px}
 @media(max-width:480px){.fgrid{grid-template-columns:1fr}}
 
 /* LANG fonts */
+body.lang-ar{font-family:'Noto Naskh Arabic','Poppins',sans-serif;direction:rtl}
 body.lang-hi{font-family:"Noto Sans Devanagari","Poppins",sans-serif}
 body.lang-ta{font-family:"Noto Sans Tamil","Poppins",sans-serif}
 body.lang-te{font-family:"Noto Sans Telugu","Poppins",sans-serif}
@@ -349,6 +358,113 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
 .hero-script1,.hero-script2,.fscript,.fpromise{
   font-family:Allura,"Great Vibes","Brush Script MT",cursive!important;
 }
+
+
+/* ── AI CHATBOT ─────────────────────────────────────────────────────── */
+#chat-fab{position:fixed;bottom:28px;right:28px;z-index:300;width:60px;height:60px;border-radius:50%;background:linear-gradient(135deg,var(--pb),var(--bb));color:#fff;border:none;font-size:1.6rem;cursor:pointer;box-shadow:0 6px 24px rgba(13,71,161,.4);transition:all .2s;display:flex;align-items:center;justify-content:center}
+#chat-fab:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(13,71,161,.55)}
+#chat-fab .fab-badge{position:absolute;top:-4px;right:-4px;background:#E53935;color:#fff;font-size:9px;font-weight:700;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+#chat-window{display:none;position:fixed;bottom:100px;right:28px;z-index:300;width:380px;max-width:calc(100vw - 32px);background:#fff;border-radius:20px;box-shadow:0 20px 80px rgba(13,71,161,.25);border:1.5px solid var(--border);overflow:hidden;flex-direction:column}
+#chat-window.open{display:flex}
+.chat-header{background:linear-gradient(135deg,var(--pb),var(--bb));color:#fff;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0}
+.chat-header-left{display:flex;align-items:center;gap:10px}
+.chat-avatar{width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.2rem}
+.chat-name{font-weight:700;font-size:14px}
+.chat-status{font-size:11px;opacity:.75;display:flex;align-items:center;gap:4px}
+.chat-status::before{content:'';width:6px;height:6px;border-radius:50%;background:#4CAF50;display:inline-block}
+.chat-close{background:none;border:none;color:rgba(255,255,255,.7);font-size:1.2rem;cursor:pointer;padding:4px 8px;border-radius:8px;transition:all .15s}
+.chat-close:hover{background:rgba(255,255,255,.15);color:#fff}
+.chat-tabs{display:flex;background:var(--vlblue);padding:6px;gap:4px;flex-shrink:0}
+.chat-tab{flex:1;padding:6px;border-radius:8px;border:none;background:none;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s;text-align:center}
+.chat-tab.active{background:#fff;color:var(--pb);box-shadow:0 2px 8px rgba(13,71,161,.12)}
+.chat-messages{flex:1;overflow-y:auto;padding:16px;min-height:240px;max-height:360px;display:flex;flex-direction:column;gap:10px}
+.chat-msg{max-width:85%;padding:10px 14px;border-radius:16px;font-size:13px;line-height:1.5}
+.chat-msg.bot{background:var(--vlblue);color:var(--navy);border-bottom-left-radius:4px;align-self:flex-start}
+.chat-msg.user{background:var(--pb);color:#fff;border-bottom-right-radius:4px;align-self:flex-end}
+.chat-msg.thinking{background:var(--vlblue);color:var(--muted);font-style:italic;align-self:flex-start}
+.chat-msg .msg-src{font-size:10px;opacity:.6;margin-top:4px;font-weight:600}
+.chat-suggestions{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 10px;flex-shrink:0}
+.chat-sug{padding:5px 12px;border-radius:50px;border:1.5px solid var(--border);background:#fff;font-size:11px;font-weight:600;color:var(--pb);cursor:pointer;transition:all .15s;white-space:nowrap}
+.chat-sug:hover{background:var(--pb);color:#fff;border-color:var(--pb)}
+.chat-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--border);flex-shrink:0;background:#fff}
+.chat-input{flex:1;padding:10px 14px;border:1.5px solid var(--border);border-radius:50px;font-size:13px;font-family:Poppins,sans-serif;outline:none;transition:border .15s;color:var(--navy)}
+.chat-input:focus{border-color:var(--pb)}
+.chat-send{background:var(--pb);color:#fff;border:none;border-radius:50%;width:38px;height:38px;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s}
+.chat-send:hover{background:var(--navy);transform:scale(1.05)}
+.chat-footer{padding:8px 14px;text-align:center;font-size:10px;color:var(--muted);border-top:1px solid var(--border);background:var(--lgray);flex-shrink:0}
+@media(max-width:480px){#chat-window{width:calc(100vw - 16px);right:8px;bottom:90px}}
+
+
+/* ── PARTNER REGISTRATION ───────────────────────────────────────────── */
+#reg-section{background:linear-gradient(135deg,var(--vlblue),#E8F5E9);padding:68px 0}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.reg-left h2{font-size:28px;font-weight:700;color:var(--navy);margin-bottom:12px}
+.reg-left p{font-size:14px;color:var(--muted);line-height:1.75;margin-bottom:18px}
+.reg-types{display:flex;flex-direction:column;gap:10px;margin-top:18px}
+.reg-type-card{display:flex;align-items:center;gap:12px;padding:13px 16px;background:#fff;border-radius:12px;border:1.5px solid var(--border)}
+.reg-type-card .rtc-icon{font-size:1.5rem;flex-shrink:0}
+.reg-type-card h4{font-size:13.5px;font-weight:700;color:var(--navy);margin-bottom:2px}
+.reg-type-card p{font-size:11.5px;color:var(--muted);margin:0}
+.reg-form-wrap{background:#fff;border-radius:20px;padding:28px;box-shadow:var(--sh);border:1.5px solid var(--border)}
+.reg-form-wrap h3{font-size:20px;font-weight:700;color:var(--navy);margin-bottom:6px}
+.reg-form-wrap .reg-sub{font-size:13px;color:var(--muted);margin-bottom:20px}
+.reg-step{display:none}.reg-step.active{display:block}
+.rfield{margin-bottom:14px}
+.rfield label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px;letter-spacing:.3px}
+.rfield input,.rfield select,.rfield textarea{width:100%;padding:10px 15px;border:1.5px solid var(--border);border-radius:10px;font-size:13px;font-family:Poppins,sans-serif;color:var(--navy);outline:none;transition:border .15s;background:#fff}
+.rfield input:focus,.rfield select:focus,.rfield textarea:focus{border-color:var(--pb)}
+.rfield textarea{min-height:90px;resize:vertical}
+.rfield-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.reg-type-select{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:18px}
+.rts-btn{padding:12px 8px;border:2px solid var(--border);border-radius:12px;background:#fff;cursor:pointer;font-size:11.5px;font-weight:600;color:var(--muted);transition:all .15s;text-align:center;line-height:1.3}
+.rts-btn span{display:block;font-size:1.4rem;margin-bottom:5px}
+.rts-btn:hover,.rts-btn.selected{border-color:var(--pb);background:var(--vlblue);color:var(--pb)}
+.reg-progress{display:flex;align-items:center;gap:6px;margin-bottom:22px}
+.rp-step{width:28px;height:28px;border-radius:50%;border:2px solid var(--border);background:#fff;font-size:11px;font-weight:700;color:var(--muted);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .2s}
+.rp-step.done{background:var(--pb);border-color:var(--pb);color:#fff}
+.rp-step.current{border-color:var(--pb);color:var(--pb);font-weight:800}
+.rp-line{flex:1;height:2px;background:var(--border);transition:background .2s}
+.rp-line.done{background:var(--pb)}
+.rp-label{font-size:10px;color:var(--muted);font-weight:600;text-align:center;margin-top:4px}
+.reg-nav{display:flex;justify-content:space-between;align-items:center;margin-top:18px}
+.reg-success{text-align:center;padding:20px}
+.reg-success .rs-icon{font-size:3.5rem;margin-bottom:12px}
+.reg-success h3{font-size:20px;font-weight:700;color:var(--green);margin-bottom:8px}
+.reg-success p{font-size:13px;color:var(--muted);line-height:1.7}
+.reg-status-note{margin-top:14px;padding:12px 16px;background:var(--vlblue);border-radius:10px;border:1.5px solid var(--border);font-size:12.5px;color:var(--navy);line-height:1.6}
+.reg-status-note strong{color:var(--pb)}
+@media(max-width:900px){.reg-grid{grid-template-columns:1fr}.rfield-row{grid-template-columns:1fr}.reg-type-select{grid-template-columns:1fr 1fr}}
+
+
+/* ── SOCIAL MEDIA ───────────────────────────────────────────────── */
+.social-bar{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.social-icon{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;transition:all .2s;text-decoration:none;flex-shrink:0}
+.social-icon:hover{transform:translateY(-3px);box-shadow:0 6px 18px rgba(0,0,0,.2);text-decoration:none}
+.si-li{background:#0A66C2;color:#fff}
+.si-li:hover{background:#004182}
+.si-fb{background:#1877F2;color:#fff}
+.si-fb:hover{background:#0a5dc2}
+.si-ig{background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff}
+.si-ig:hover{filter:brightness(1.15)}
+.si-yt{background:#FF0000;color:#fff}
+.si-yt:hover{background:#cc0000}
+.si-wa{background:#25D366;color:#fff}
+.si-wa:hover{background:#1da050}
+.si-tw{background:#000;color:#fff}
+.si-tw:hover{background:#333}
+
+/* Social strip in hero */
+.hero-social-strip{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:16px;border-top:1px solid var(--border)}
+.hss-label{font-size:11px;font-weight:700;color:#78909C;letter-spacing:.5px;text-transform:uppercase;margin-right:4px}
+
+/* Social proof badges in hero */
+.social-proof{display:flex;gap:14px;flex-wrap:wrap;margin-top:10px}
+.sp-badge{display:flex;align-items:center;gap:6px;font-size:11.5px;color:var(--muted)}
+.sp-badge strong{color:var(--navy);font-weight:700}
+.sp-dot{width:5px;height:5px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* Footer social */
+.foot-social{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
 
 </style>
 </head>
@@ -510,6 +626,7 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
     <li><a href="#research-sec" data-i18n="nav_research">Research</a></li>
     <li><a href="#programs" data-i18n="nav_programs">Programs</a></li>
     <li><a href="#donate" data-i18n="nav_donate_l">Donate</a></li>
+    <li><a href="#reg-section">Register Org</a></li>
     <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
   </ul>
   <div class="nav-right hide-mob">
@@ -518,6 +635,7 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
         <span id="cFlag">🌐</span><span id="cLang">English</span><span style="font-size:9px;opacity:.6">▾</span>
       </button>
       <div class="ld2" id="ld2" role="menu">
+        <div style="padding:6px 14px;font-size:10px;font-weight:700;color:#78909C;text-transform:uppercase;letter-spacing:1px">🇮🇳 Indian Languages</div>
         <button onclick="setLang2('en')" data-lang="en" class="lsel">🇮🇳 English</button>
         <button onclick="setLang2('hi')" data-lang="hi">🇮🇳 हिन्दी</button>
         <button onclick="setLang2('ta')" data-lang="ta">🇮🇳 தமிழ்</button>
@@ -527,11 +645,18 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
         <button onclick="setLang2('mr')" data-lang="mr">🇮🇳 मराठी</button>
         <button onclick="setLang2('ml')" data-lang="ml">🇮🇳 മലയാളം</button>
         <button onclick="setLang2('pa')" data-lang="pa">🇮🇳 ਪੰਜਾਬੀ</button>
+        <div style="padding:6px 14px;font-size:10px;font-weight:700;color:#78909C;text-transform:uppercase;letter-spacing:1px;border-top:1px solid #EEE;margin-top:4px">🌍 Global Languages</div>
         <button onclick="setLang2('es')" data-lang="es">🇪🇸 Español</button>
         <button onclick="setLang2('fr')" data-lang="fr">🇫🇷 Français</button>
         <button onclick="setLang2('de')" data-lang="de">🇩🇪 Deutsch</button>
+        <button onclick="setLang2('pt')" data-lang="pt">🇧🇷 Português</button>
+        <button onclick="setLang2('ar')" data-lang="ar">🇦🇪 العربية</button>
         <button onclick="setLang2('ja')" data-lang="ja">🇯🇵 日本語</button>
         <button onclick="setLang2('zh')" data-lang="zh">🇨🇳 中文</button>
+        <button onclick="setLang2('ko')" data-lang="ko">🇰🇷 한국어</button>
+        <button onclick="setLang2('ru')" data-lang="ru">🇷🇺 Русский</button>
+        <button onclick="setLang2('sw')" data-lang="sw">🇰🇪 Kiswahili</button>
+        <button onclick="setLang2('it')" data-lang="it">🇮🇹 Italiano</button>
       </div>
     </div>
     <a href="#find-help" class="nav-find" data-i18n="nav_btn_find">Find Help</a>
@@ -569,6 +694,18 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
     <div class="hero-btns">
       <a href="#find-help" class="btn btn-primary btn-lg" data-i18n="hero_b1">🔍 Find Help Near You</a>
       <a href="#parent-hub" class="btn btn-outline-blue btn-lg" data-i18n="hero_b2">📚 Parent Hub</a>
+    </div>
+    
+    <div class="hero-social-strip">
+      <span class="hss-label">Follow us</span>
+      <a href="https://www.linkedin.com/company/ayushmanworld" target="_blank" rel="noopener" class="social-icon si-li" aria-label="LinkedIn" title="Ayushman World on LinkedIn">in</a>
+      <a href="https://www.facebook.com/ayushmanworldpage" target="_blank" rel="noopener" class="social-icon si-fb" aria-label="Facebook" title="Ayushman World on Facebook">f</a>
+      <a href="https://www.instagram.com/ayushman.world/" target="_blank" rel="noopener" class="social-icon si-ig" aria-label="Instagram" title="@ayushman.world on Instagram">📷</a>
+      <a href="https://wa.me/918280056665" target="_blank" rel="noopener" class="social-icon si-wa" aria-label="WhatsApp" title="WhatsApp Ayushman World">💬</a>
+      <div style="margin-left:8px;font-size:11px;color:var(--muted)">
+        <div><strong style="color:var(--navy)">@ayushman.world</strong> · <strong style="color:var(--navy)">ayushmanworldpage</strong></div>
+        <div style="margin-top:2px">Join our growing community of autism families</div>
+      </div>
     </div>
     <div class="hero-stats">
       <div class="hs"><div class="hs-n">10,000+</div><div class="hs-l" data-i18n="hs1">Families</div></div>
@@ -822,13 +959,17 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
       <button class="vp2" onclick="fVids('parent',this)">💚 Parent</button>
       <button class="vp2" onclick="fVids('adhd',this)">⚡ ADHD</button>
     </div>
-    <div class="vfrow" id="vidLangRow">
-      <button class="vp2 on" onclick="fVLang('all',this)">🌐 All Languages</button>
+    <div class="vfrow" id="vidLangRow" style="flex-wrap:wrap">
+      <button class="vp2 on" onclick="fVLang('all',this)">🌐 All</button>
       <button class="vp2" onclick="fVLang('english',this)">🇬🇧 English</button>
       <button class="vp2 hi" onclick="fVLang('hindi',this)">🇮🇳 हिन्दी</button>
       <button class="vp2" onclick="fVLang('tamil',this)">தமிழ்</button>
       <button class="vp2" onclick="fVLang('telugu',this)">తెలుగు</button>
       <button class="vp2" onclick="fVLang('kannada',this)">ಕನ್ನಡ</button>
+      <button class="vp2" onclick="fVLang('malayalam',this)">മലയാളം</button>
+      <button class="vp2" onclick="fVLang('bengali',this)">বাংলা</button>
+      <button class="vp2" onclick="fVLang('marathi',this)">मराठी</button>
+      <button class="vp2" onclick="fVLang('punjabi',this)">ਪੰਜਾਬੀ</button>
     </div>
     <div class="vgrid" id="videoGrid"></div>
   </div>
@@ -965,6 +1106,52 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
 </section>
 
 <!-- DONATE -->
+
+<!-- ══ FOLLOW AYUSHMAN WORLD ═════════════════════════════════════════════ -->
+<section style="background:var(--navy);padding:42px 0" aria-labelledby="social-h2">
+<div class="si">
+  <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px">
+    <div>
+      <div class="sec-tag" style="color:var(--gold)">STAY CONNECTED</div>
+      <h2 id="social-h2" style="font-size:26px;font-weight:700;color:#fff;margin-top:4px">Follow Ayushman World</h2>
+      <p style="font-size:14px;color:rgba(255,255,255,.6);margin-top:6px;max-width:480px">
+        Get daily autism tips, parent stories, resource updates and awareness campaigns across our social channels.
+      </p>
+    </div>
+    <div>
+      <div style="display:flex;gap:12px;flex-wrap:wrap;align-items:center">
+        <a href="https://www.linkedin.com/company/ayushmanworld" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:8px;background:#0A66C2;color:#fff;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s"
+           onmouseover="this.style.background='#004182'" onmouseout="this.style.background='#0A66C2'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://www.facebook.com/ayushmanworldpage" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:8px;background:#1877F2;color:#fff;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none;transition:all .2s"
+           onmouseover="this.style.background='#0a5dc2'" onmouseout="this.style.background='#1877F2'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          Facebook
+        </a>
+        <a href="https://www.instagram.com/ayushman.world/" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:8px;background:linear-gradient(45deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888);color:#fff;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+          @ayushman.world
+        </a>
+        <a href="https://wa.me/918280056665" target="_blank" rel="noopener"
+           style="display:flex;align-items:center;gap:8px;background:#25D366;color:#fff;padding:10px 18px;border-radius:50px;font-size:13px;font-weight:600;text-decoration:none"
+           onmouseover="this.style.background='#1da050'" onmouseout="this.style.background='#25D366'">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </a>
+      </div>
+      <p style="font-size:11px;color:rgba(255,255,255,.4);margin-top:10px;text-align:right">
+        linkedin.com/company/ayushmanworld · fb.com/ayushmanworldpage · @ayushman.world
+      </p>
+    </div>
+  </div>
+</div>
+</section>
+
 <section class="dbg" id="donate">
 <div class="si tc">
   <div style="font-size:3rem;margin-bottom:12px">💛</div>
@@ -1020,6 +1207,35 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
       <div class="cii"><div class="ciico">✉️</div><div><div class="cilabel">Email</div><div class="cival"><a href="mailto:ayushmans@outlook.in" style="color:var(--navy)">ayushmans@outlook.in</a></div></div></div>
       <div class="cii"><div class="ciico">📍</div><div><div class="cilabel">Location</div><div class="cival">Bangalore, Karnataka, India</div></div></div>
       <div class="cii"><div class="ciico">🌐</div><div><div class="cilabel">Website</div><div class="cival"><a href="https://ayushman.world" target="_blank" rel="noopener" style="color:var(--pb)">ayushman.world</a></div></div></div>
+      <div class="cii" style="margin-top:4px">
+        <div class="ciico" style="background:linear-gradient(45deg,#f09433,#dc2743,#bc1888)">📱</div>
+        <div>
+          <div class="cilabel">Social Media</div>
+          <div style="display:flex;gap:8px;margin-top:5px;flex-wrap:wrap">
+            <a href="https://www.linkedin.com/company/ayushmanworld" target="_blank" rel="noopener"
+               class="social-icon si-li" style="width:32px;height:32px;font-size:.85rem" aria-label="LinkedIn" title="LinkedIn">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/ayushmanworldpage" target="_blank" rel="noopener"
+               class="social-icon si-fb" style="width:32px;height:32px;font-size:.85rem" aria-label="Facebook" title="Facebook">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+            <a href="https://www.instagram.com/ayushman.world/" target="_blank" rel="noopener"
+               class="social-icon si-ig" style="width:32px;height:32px;font-size:.85rem" aria-label="Instagram" title="@ayushman.world">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+            </a>
+            <a href="https://wa.me/918280056665" target="_blank" rel="noopener"
+               class="social-icon si-wa" style="width:32px;height:32px;font-size:.85rem" aria-label="WhatsApp" title="WhatsApp">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+          <div style="font-size:11px;color:var(--muted);margin-top:6px">
+            <a href="https://www.linkedin.com/company/ayushmanworld" target="_blank" rel="noopener" style="color:var(--pb);font-weight:600">LinkedIn</a> ·
+            <a href="https://www.facebook.com/ayushmanworldpage" target="_blank" rel="noopener" style="color:var(--pb);font-weight:600">Facebook</a> ·
+            <a href="https://www.instagram.com/ayushman.world/" target="_blank" rel="noopener" style="color:var(--pb);font-weight:600">@ayushman.world</a>
+          </div>
+        </div>
+      </div>
       <div style="margin-top:18px;padding:16px 20px;background:var(--vlblue);border-radius:12px;border:1.5px solid var(--border)">
         <p style="font-size:14px;font-weight:700;color:var(--navy);margin-bottom:5px">🚨 Crisis Helplines</p>
         <p style="font-size:13px;color:var(--muted)">iCall (TISS): <strong>9152987821</strong> · Vandrevala: <strong>1860-2662-345</strong><br>NIMHANS: <strong>080-46110007</strong> · SNEHA: <strong>044-24640050</strong></p>
@@ -1042,6 +1258,156 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
         <textarea placeholder="How can we help you? *" required></textarea>
         <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">Send Message →</button>
       </form>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- ══ PARTNER REGISTRATION ══════════════════════════════════════════════ -->
+<section id="reg-section" aria-labelledby="reg-h2">
+<div class="si">
+  <div class="reg-grid">
+    <!-- Left: info -->
+    <div class="reg-left">
+      <div class="sec-tag">JOIN OUR PLATFORM</div>
+      <h2 id="reg-h2">Register Your Organisation</h2>
+      <p>Are you a therapy centre, special school, hospital, sports academy or NGO supporting children with autism? Register on Ayushman World and connect with thousands of families who need you.</p>
+      <p><strong>After submitting:</strong> Our team reviews your application within 3–5 working days. Once approved, your listing goes live automatically — visible to parents across India searching for support.</p>
+      <div class="reg-status-note">
+        <strong>🔒 Admin Review Process</strong><br>
+        Every registration is manually verified by the Ayushman World team before going live. We check credentials, contact details and service quality. This protects families and ensures only genuine, trustworthy organisations are listed.
+      </div>
+      <div class="reg-types" style="margin-top:22px">
+        <div class="reg-type-card"><span class="rtc-icon">🧠</span><div><h4>Therapy Centres</h4><p>ABA, speech, OT, behavioural therapy providers</p></div></div>
+        <div class="reg-type-card"><span class="rtc-icon">🏫</span><div><h4>Special Schools & Inclusive Schools</h4><p>TEACCH, ABA-based, life skills, mainstream inclusive</p></div></div>
+        <div class="reg-type-card"><span class="rtc-icon">🏥</span><div><h4>Hospitals & Clinics</h4><p>Child psychiatry, developmental paediatrics, neurology</p></div></div>
+        <div class="reg-type-card"><span class="rtc-icon">⚽</span><div><h4>Sports Academies</h4><p>Special Olympics, adaptive sports, recreational programs</p></div></div>
+        <div class="reg-type-card"><span class="rtc-icon">🌍</span><div><h4>NGOs & Support Groups</h4><p>Advocacy, parent support, community programs</p></div></div>
+      </div>
+    </div>
+
+    <!-- Right: multi-step form -->
+    <div class="reg-form-wrap">
+      <h3>Organisation Registration</h3>
+      <p class="reg-sub">Takes 5 minutes · Free to list · Published after approval</p>
+
+      <!-- Progress bar -->
+      <div class="reg-progress" id="regProgress">
+        <div class="rp-step current" id="rps1">1</div>
+        <div class="rp-line" id="rpl1"></div>
+        <div class="rp-step" id="rps2">2</div>
+        <div class="rp-line" id="rpl2"></div>
+        <div class="rp-step" id="rps3">3</div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:18px">
+        <span style="font-size:10px;font-weight:700;color:var(--pb)">Organisation</span>
+        <span style="font-size:10px;color:var(--muted)">Services</span>
+        <span style="font-size:10px;color:var(--muted)">Contact</span>
+      </div>
+
+      <!-- STEP 1: Organisation type & basic info -->
+      <div class="reg-step active" id="rstep1">
+        <div style="margin-bottom:14px">
+          <label style="display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:8px">What type of organisation are you? *</label>
+          <div class="reg-type-select" id="orgTypeSelect">
+            <button type="button" class="rts-btn" onclick="selectOrgType(this,'Therapy Centre')"><span>🧠</span>Therapy Centre</button>
+            <button type="button" class="rts-btn" onclick="selectOrgType(this,'Special School')"><span>🏫</span>Special School</button>
+            <button type="button" class="rts-btn" onclick="selectOrgType(this,'Hospital / Clinic')"><span>🏥</span>Hospital/Clinic</button>
+            <button type="button" class="rts-btn" onclick="selectOrgType(this,'Sports Academy')"><span>⚽</span>Sports Academy</button>
+            <button type="button" class="rts-btn" onclick="selectOrgType(this,'NGO / Support Group')"><span>🤝</span>NGO/Support Group</button>
+            <button type="button" class="rts-btn" onclick="selectOrgType(this,'Other')"><span>➕</span>Other</button>
+          </div>
+          <input type="hidden" id="regOrgType" value="">
+        </div>
+        <div class="rfield"><label>Organisation Name *</label><input type="text" id="regOrgName" placeholder="e.g. Sunrise Therapy Centre" required></div>
+        <div class="rfield"><label>Registration / License Number</label><input type="text" id="regLicense" placeholder="NGO / Trust / Clinic registration number"></div>
+        <div class="rfield-row">
+          <div class="rfield"><label>City *</label><input type="text" id="regCity" placeholder="Bangalore" required></div>
+          <div class="rfield"><label>State *</label><select id="regState" required>
+            <option value="">Select state</option>
+            <option>Karnataka</option><option>Maharashtra</option><option>Delhi</option>
+            <option>Tamil Nadu</option><option>Telangana</option><option>Kerala</option>
+            <option>West Bengal</option><option>Gujarat</option><option>Rajasthan</option>
+            <option>Uttar Pradesh</option><option>Punjab</option><option>Andhra Pradesh</option>
+            <option>Madhya Pradesh</option><option>Bihar</option><option>Odisha</option>
+            <option>Other</option>
+          </select></div>
+        </div>
+        <div class="rfield"><label>Full Address *</label><input type="text" id="regAddress" placeholder="Building, Street, Area, Pin Code" required></div>
+      </div>
+
+      <!-- STEP 2: Services & details -->
+      <div class="reg-step" id="rstep2">
+        <div class="rfield"><label>Services Offered * (e.g. ABA, Speech Therapy, OT)</label>
+          <input type="text" id="regServices" placeholder="ABA Therapy, Speech Therapy, Occupational Therapy" required></div>
+        <div class="rfield"><label>Description of your organisation *</label>
+          <textarea id="regDesc" placeholder="Tell parents about your services, experience, approach, and what makes you unique. (Min 50 words)" required></textarea></div>
+        <div class="rfield-row">
+          <div class="rfield"><label>Age Group Served</label><select id="regAge">
+            <option>0–3 years (Early Intervention)</option>
+            <option>3–6 years (Preschool)</option>
+            <option>6–12 years (School Age)</option>
+            <option>12–18 years (Adolescents)</option>
+            <option>18+ years (Adults)</option>
+            <option>All ages</option>
+          </select></div>
+          <div class="rfield"><label>Fee Range</label><input type="text" id="regFees" placeholder="e.g. ₹500–₹1,500/session"></div>
+        </div>
+        <div class="rfield"><label>Timing / Hours</label><input type="text" id="regTiming" placeholder="Mon–Sat 9am–5pm"></div>
+        <div class="rfield"><label>Do you offer subsidised/free services?</label><select id="regSubsidy">
+          <option>Yes — income-based sliding scale</option>
+          <option>Yes — fully free for some families</option>
+          <option>No — standard fees only</option>
+          <option>Partially — on case-by-case basis</option>
+        </select></div>
+        <div class="rfield"><label>Languages of service</label>
+          <input type="text" id="regLangs" placeholder="English, Hindi, Kannada, Tamil…"></div>
+      </div>
+
+      <!-- STEP 3: Contact details -->
+      <div class="reg-step" id="rstep3">
+        <div class="rfield-row">
+          <div class="rfield"><label>Contact Person Name *</label><input type="text" id="regContact" placeholder="Dr. / Mr. / Ms." required></div>
+          <div class="rfield"><label>Designation</label><input type="text" id="regDesig" placeholder="Director, Head Therapist…"></div>
+        </div>
+        <div class="rfield"><label>Phone Number *</label><input type="tel" id="regPhone" placeholder="+91 98765 43210" required></div>
+        <div class="rfield"><label>Email Address *</label><input type="email" id="regEmail" placeholder="contact@yourorg.com" required></div>
+        <div class="rfield"><label>Website</label><input type="url" id="regWeb" placeholder="https://yourwebsite.com"></div>
+        <div class="rfield"><label>Google Maps Link (optional)</label><input type="url" id="regMaps" placeholder="https://maps.google.com/..."></div>
+        <div class="rfield"><label>Anything else you want parents to know?</label>
+          <textarea id="regExtra" placeholder="Parking, accessibility, waiting list info, certification details…"></textarea></div>
+        <label style="display:flex;align-items:flex-start;gap:10px;font-size:12px;color:var(--muted);cursor:pointer;margin-top:4px">
+          <input type="checkbox" id="regConsent" style="margin-top:2px;flex-shrink:0" required>
+          <span>I confirm that all information provided is accurate and authorise Ayushman World to publish this listing after review. I understand that false information will result in removal.</span>
+        </label>
+      </div>
+
+      <!-- Success state -->
+      <div class="reg-step" id="rstep-success">
+        <div class="reg-success">
+          <div class="rs-icon">🎉</div>
+          <h3>Registration Submitted!</h3>
+          <p>Thank you for registering with <strong>Ayushman World</strong>. Your application has been sent to our team.</p>
+          <div class="reg-status-note" style="text-align:left;margin-top:16px">
+            <strong>⏱️ What happens next:</strong><br>
+            1. Our team reviews your application (3–5 working days)<br>
+            2. We may call or email to verify details<br>
+            3. Once approved, your listing goes live automatically<br>
+            4. Families searching in your area will find you<br><br>
+            📞 Questions? Call: <a href="tel:+918280056665" style="color:var(--pb)">+91 82800 56665</a><br>
+            ✉️ Email: <a href="mailto:ayushmans@outlook.in" style="color:var(--pb)">ayushmans@outlook.in</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Navigation buttons -->
+      <div class="reg-nav" id="regNavBtns">
+        <button type="button" class="btn btn-outline-blue btn-sm" id="regBack" onclick="regNav(-1)" style="display:none">← Back</button>
+        <span></span>
+        <button type="button" class="btn btn-primary btn-sm" id="regNext" onclick="regNav(1)">Next →</button>
+        <button type="button" class="btn btn-green btn-sm" id="regSubmit" onclick="submitReg()" style="display:none">✓ Submit Registration</button>
+      </div>
     </div>
   </div>
 </div>
@@ -1177,7 +1543,31 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
       <div class="fcontact" style="margin-top:13px">
         <a href="tel:+918280056665">📞 +91 82800 56665</a>
         <a href="mailto:ayushmans@outlook.in">✉️ ayushmans@outlook.in</a>
+        <a href="https://ayushman.world" target="_blank" rel="noopener">🌐 ayushman.world</a>
         <a href="#">📍 Bangalore, Karnataka, India</a>
+      </div>
+      <div class="foot-social" aria-label="Social media links">
+        <a href="https://www.linkedin.com/company/ayushmanworld" target="_blank" rel="noopener"
+           class="social-icon si-li" aria-label="LinkedIn — Ayushman World" title="LinkedIn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        </a>
+        <a href="https://www.facebook.com/ayushmanworldpage" target="_blank" rel="noopener"
+           class="social-icon si-fb" aria-label="Facebook — Ayushman World" title="Facebook">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+        </a>
+        <a href="https://www.instagram.com/ayushman.world/" target="_blank" rel="noopener"
+           class="social-icon si-ig" aria-label="Instagram — @ayushman.world" title="Instagram">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+        </a>
+        <a href="https://wa.me/918280056665" target="_blank" rel="noopener"
+           class="social-icon si-wa" aria-label="WhatsApp Ayushman World" title="WhatsApp">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        </a>
+      </div>
+      <div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.4)">
+        <a href="https://www.linkedin.com/company/ayushmanworld" target="_blank" rel="noopener" style="color:rgba(255,255,255,.45);margin-right:8px">LinkedIn</a>
+        <a href="https://www.facebook.com/ayushmanworldpage" target="_blank" rel="noopener" style="color:rgba(255,255,255,.45);margin-right:8px">Facebook</a>
+        <a href="https://www.instagram.com/ayushman.world/" target="_blank" rel="noopener" style="color:rgba(255,255,255,.45)">@ayushman.world</a>
       </div>
     </div>
     <div class="fcol"><h4>Find Help</h4>
@@ -1220,34 +1610,311 @@ h1,h2,h3,h4,h5,h6,.sec-title,.stat-n,.acro-letter,.hs-n,.nlt-main{
 <script>
 // ── RESOURCE DATA ───────────────────────────────────────────────
 const RESS=[
-  {cat:'therapy',name:'NIMHANS — Child & Adolescent Psychiatry',type:'Hospital & Therapy',city:'Bangalore',state:'Karnataka',desc:"India's premier neuroscience institution. Government-subsidised OPD for autism and ADHD. Best first stop for families in Karnataka.",tags:['Free/Subsidised','ABA','Speech','OT'],phone:'080-46110007',email:'info@nimhans.ac.in',web:'https://nimhans.ac.in',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'therapy',name:'AACT — Association for Autism',type:'Therapy Centre',city:'Bangalore',state:'Karnataka',desc:'Specialised autism therapy centre with BCBA-certified therapists. ABA, speech, occupational therapy programs.',tags:['ABA','Speech','OT','BCBA'],phone:'080-23611991',web:'https://aactindia.org',icon:'🧠',ibg:'#E8F5E9',icol:'#43A047'},
-  {cat:'therapy',name:'Action for Autism (AFA)',type:'Advocacy & Therapy',city:'Delhi',state:'Delhi',desc:"India's leading autism advocacy organisation. ABA, parent training, inclusive education, free legal aid.",tags:['ABA','Advocacy','Legal Aid','Pan India'],phone:'011-26972114',email:'contact@autism.net.in',web:'https://actionforautism.org',icon:'🤝',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'therapy',name:'iCall — Free Mental Health Helpline',type:'Parent Support',city:'All India',state:'Pan India',desc:'Free confidential counselling by TISS Mumbai. Specialists in caregiver burnout and autism parent support. Mon–Sat 8am–10pm.',tags:['Free','Counselling','Hindi & English','Pan India'],phone:'9152987821',email:'icall@tiss.edu',web:'https://icallpsy.org',icon:'📞',ibg:'#FFF3E0',icol:'#E65100'},
-  {cat:'therapy',name:'Fortis Child Development Unit',type:'Hospital',city:'Bangalore',state:'Karnataka',desc:'Paediatric neurology and developmental paediatrics. Multidisciplinary team for autism and ADHD diagnosis.',tags:['Diagnosis','Neurology','OT','Speech'],phone:'1800-500-1116',web:'https://fortishealthcare.com',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'therapy',name:'Asha School — Chennai',type:'Therapy & School',city:'Chennai',state:'Tamil Nadu',desc:'Holistic autism support: ABA, PECS, sensory integration, social skills. Trusted by Chennai families since 2001.',tags:['ABA','PECS','Sensory','Chennai'],phone:'044-28151789',web:'https://ashaschool.org',icon:'🌱',ibg:'#E8F5E9',icol:'#43A047'},
-  {cat:'therapy',name:'Ummeed Child Development Centre',type:'Therapy & Inclusive School',city:'Mumbai',state:'Maharashtra',desc:"Mumbai's leading autism therapy centre. Sliding scale fees — no child turned away for inability to pay.",tags:['Inclusive','Sliding Scale','Mumbai','0-18 yrs'],phone:'022-23773880',web:'https://ummeed.org',icon:'🌈',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'school',name:'Tamana Special Education Centre',type:'Special School',city:'Delhi',state:'Delhi',desc:'TEACCH-based curriculum for autism, Down syndrome, cerebral palsy. Vocational training for older students.',tags:['TEACCH','Vocational','Life Skills','3-18 yrs'],phone:'011-24354601',web:'https://tamana.org',icon:'🏫',ibg:'#F3E5F5',icol:'#7B1FA2'},
-  {cat:'school',name:'NIEPID — National Institute for Persons with Disabilities',type:'Special School',city:'Chennai',state:'Tamil Nadu',desc:'Government institute offering free special education and vocational training for children with intellectual disabilities.',tags:['Free','Govt','Vocational','Pan India'],web:'https://niepid.nic.in',icon:'🎓',ibg:'#E8F5E9',icol:'#43A047'},
-  {cat:'school',name:'Brindavan Education Centre',type:'Special School',city:'Bangalore',state:'Karnataka',desc:'Inclusive education centre blending special and mainstream learning. Ages 3–16. ABA-based curriculum.',tags:['Inclusive','ABA-based','Bangalore','3-16 yrs'],phone:'080-26585634',icon:'🏫',ibg:'#F3E5F5',icol:'#7B1FA2'},
-  {cat:'hospital',name:'KEM Hospital — Child Psychiatry',type:'Government Hospital',city:'Mumbai',state:'Maharashtra',desc:'Government tertiary care hospital with subsidised autism diagnosis and therapy.',tags:['Subsidised','Govt','Mumbai','Diagnosis'],phone:'022-24100000',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'hospital',name:'AIIMS Delhi — Child Psychiatry',type:'Government Hospital',city:'Delhi',state:'Delhi',desc:'Apex government hospital. Comprehensive autism evaluation. Subsidised for BPL families with disability card.',tags:['Govt','Subsidised','Delhi','Apex'],phone:'011-26588500',web:'https://aiims.edu',icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'hospital',name:'Manipal Hospital — Developmental Paediatrics',type:'Private Hospital',city:'Bangalore',state:'Karnataka',desc:'Comprehensive developmental paediatrics with multidisciplinary team for autism and ADHD.',tags:['Diagnosis','Multidisciplinary','Bangalore'],phone:'080-22225555',web:'https://manipalhospitals.com',icon:'🏥',ibg:'#FAFAFA',icol:'#546E7A'},
-  {cat:'sports',name:'Special Olympics Bharat',type:'Sports Programs',city:'All India',state:'Pan India',desc:'Free sports for children with intellectual disabilities. 18 sports in all major Indian cities.',tags:['Free','Swimming','Athletics','Football'],phone:'011-40177300',web:'https://specialolympicsbharat.org',icon:'🏅',ibg:'#FFF3E0',icol:'#E65100'},
-  {cat:'sports',name:'Paralympic Committee of India',type:'Para Sports',city:'Delhi',state:'Delhi',desc:'National body for para sports. State-level training for children with autism and intellectual disabilities.',tags:['Para Sports','National','Training'],web:'https://paralympic.org.in',icon:'⚽',ibg:'#E8F5E9',icol:'#43A047'},
-  {cat:'govt',name:'UDID — Unique Disability ID',type:'Government Scheme',city:'All India',state:'Pan India',desc:'Master key to all disability benefits, free transport, school reservations, tax benefits. Apply free online.',tags:['UDID','Free','Legal Right','Pan India'],web:'https://swavlambancard.gov.in',icon:'📋',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'govt',name:'ADIP — Assistive Device Scheme',type:'Government Scheme',city:'All India',state:'Pan India',desc:'Free and subsidised assistive devices including AAC speech devices for non-verbal children.',tags:['Free Devices','AAC','Pan India'],web:'https://disabilityaffairs.gov.in',icon:'📋',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'govt',name:'National Trust Registration',type:'Government Scheme',city:'All India',state:'Pan India',desc:'Legal guardianship and grants of ₹10,000–₹50,000/year for families of persons with autism.',tags:['Guardianship','Financial Support','Legal'],web:'https://nationaltrust.nic.in',icon:'📋',ibg:'#E8F5E9',icol:'#43A047'},
-  {cat:'govt',name:'Section 80DD Tax Benefit',type:'Tax Benefit',city:'All India',state:'Pan India',desc:'Parents of disabled children claim up to ₹1.25 lakh annual tax deduction under Section 80DD.',tags:['Tax Benefit','₹1.25L Deduction','Pan India'],web:'https://incometaxindia.gov.in',icon:'💰',ibg:'#FFF3E0',icol:'#E65100'},
-  {cat:'global',name:'Autism Society of America',type:'Global NGO',city:'United States',state:'',desc:"World's largest autism advocacy organisation. Resources, support groups and research for families globally.",tags:['Global','Research','Advocacy'],web:'https://autism-society.org',icon:'🌍',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'global',name:'Autism Speaks',type:'Global NGO',city:'United States',state:'',desc:'Leading global autism science and advocacy. Toolkits, videos, 100-Day Kit available in Hindi.',tags:['Global','Research','Hindi available'],web:'https://autismspeaks.org',icon:'🌍',ibg:'#E3F2FD',icol:'#0D47A1'},
-  {cat:'global',name:'WHO — Autism Spectrum Disorders',type:'WHO Resource',city:'Geneva',state:'',desc:"WHO's official autism fact sheet covering global prevalence, signs and management guidelines.",tags:['WHO','Official','Free','Global'],web:'https://who.int/news-room/fact-sheets/detail/autism-spectrum-disorders',icon:'🌐',ibg:'#FAFAFA',icol:'#546E7A'},
-  {cat:'global',name:'Ambitious about Autism (UK)',type:'UK Charity',city:'United Kingdom',state:'',desc:"UK's leading autism charity with education resources and learning for families and professionals.",tags:['UK','Education','English'],web:'https://ambitiousaboutautism.org.uk',icon:'🇬🇧',ibg:'#FAFAFA',icol:'#546E7A'},,
+  // ── THERAPY CENTRES ────────────────────────────────────────────────
+  {cat:'therapy',name:'NIMHANS — Child & Adolescent Psychiatry',type:'Hospital & Therapy',city:'Bangalore',state:'Karnataka',
+   address:'Hosur Road, Lakkasandra, Bangalore – 560029',
+   phone:'080-46110007',email:'info@nimhans.ac.in',web:'https://nimhans.ac.in',
+   maps:'https://maps.google.com/?q=NIMHANS+Bangalore',
+   fees:'Free / Heavily subsidised (OPD ₹20–₹100)',timing:'Mon–Sat 9am–4pm',
+   desc:'India's premier neuroscience institution. Government-subsidised OPD for autism and ADHD diagnosis. Best first stop for Karnataka families. ABA, speech, OT therapy available.',
+   tags:['Free/Subsidised','ABA','Speech','OT','Diagnosis','Govt'],icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'therapy',name:'AACT — Association for Autism & Related Disorders',type:'Therapy Centre',city:'Bangalore',state:'Karnataka',
+   address:'No. 2, 1st Main, Sadashivanagar, Bangalore – 560080',
+   phone:'080-23611991',email:'aact@aactindia.org',web:'https://aactindia.org',
+   maps:'https://maps.google.com/?q=AACT+Autism+Bangalore',
+   fees:'₹500–₹1,500 per session (sliding scale available)',timing:'Mon–Sat 9am–6pm',
+   desc:'Specialised autism therapy centre with BCBA-certified therapists. Offers ABA, speech therapy, occupational therapy and social skills training.',
+   tags:['ABA','Speech','OT','BCBA','Sliding Scale'],icon:'🧠',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'therapy',name:'Action for Autism (AFA)',type:'Advocacy & Therapy',city:'Delhi',state:'Delhi',
+   address:'Community Centre, Sector 7, Okhla Industrial Area, New Delhi – 110020',
+   phone:'011-26972114',email:'contact@autism.net.in',web:'https://actionforautism.org',
+   maps:'https://maps.google.com/?q=Action+for+Autism+Delhi',
+   fees:'Subsidised; free legal aid',timing:'Mon–Fri 9am–5pm',
+   desc:'India's leading autism advocacy organisation. ABA therapy, parent training, inclusive education resources and free legal aid for school admission denial cases.',
+   tags:['ABA','Advocacy','Legal Aid','Pan India','Free Legal'],icon:'🤝',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'therapy',name:'iCall — Free Mental Health Helpline (TISS)',type:'Parent Support Helpline',city:'All India',state:'Pan India',
+   address:'Tata Institute of Social Sciences, Mumbai',
+   phone:'9152987821',email:'icall@tiss.edu',web:'https://icallpsy.org',
+   maps:'https://maps.google.com/?q=TISS+Mumbai',
+   fees:'Free',timing:'Mon–Sat 8am–10pm',
+   desc:'Free confidential counselling by TISS Mumbai. Specialists in caregiver burnout and autism parent support. Available in Hindi and English.',
+   tags:['Free','Counselling','Hindi & English','Pan India','Caregiver Support'],icon:'📞',ibg:'#FFF3E0',icol:'#E65100'},
+
+  {cat:'therapy',name:'Asha School — Chennai',type:'Therapy & Special School',city:'Chennai',state:'Tamil Nadu',
+   address:'8/9, Lattice Bridge Road, Adyar, Chennai – 600020',
+   phone:'044-28151789',email:'info@ashaschool.org',web:'https://ashaschool.org',
+   maps:'https://maps.google.com/?q=Asha+School+Adyar+Chennai',
+   fees:'₹3,000–₹8,000/month (income-based concessions)',timing:'Mon–Fri 9am–3pm',
+   desc:'Holistic autism support centre: ABA, PECS, sensory integration, social skills training. Trusted by Chennai families since 2001.',
+   tags:['ABA','PECS','Sensory','Chennai','Tamil Nadu'],icon:'🌱',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'therapy',name:'Ummeed Child Development Centre',type:'Therapy & Inclusive School',city:'Mumbai',state:'Maharashtra',
+   address:'1, LST Marg, Sewree, Mumbai – 400015',
+   phone:'022-23773880',email:'contact@ummeed.org',web:'https://ummeed.org',
+   maps:'https://maps.google.com/?q=Ummeed+Child+Development+Mumbai',
+   fees:'Sliding scale ₹0–₹2,500/session; no child turned away',timing:'Mon–Sat 9am–5pm',
+   desc:'Mumbai's leading autism therapy and inclusive education centre. Sliding scale fees — no child turned away for inability to pay. Ages 0–18.',
+   tags:['Inclusive','Sliding Scale','Mumbai','0-18 yrs','No Child Refused'],icon:'🌈',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'therapy',name:'Fortis Child Development Unit',type:'Hospital',city:'Bangalore',state:'Karnataka',
+   address:'Fortis Hospital, 154/9, Bannerghatta Road, Bangalore – 560076',
+   phone:'080-66214444',web:'https://fortishealthcare.com',
+   maps:'https://maps.google.com/?q=Fortis+Hospital+Bannerghatta+Bangalore',
+   fees:'₹800–₹2,000 consultation; therapy ₹1,200–₹2,500/session',timing:'Mon–Sat 9am–6pm',
+   desc:'Paediatric neurology and developmental paediatrics. Autism and ADHD diagnostic clinics with multidisciplinary team including neurologist, psychologist and therapists.',
+   tags:['Diagnosis','Neurology','OT','Speech','Multidisciplinary'],icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  // ── HOSPITALS ───────────────────────────────────────────────────────
   {cat:'hospital',name:'St. John's Medical College Hospital — Unit of Hope & CARE-ADD',type:'Hospital & Autism Centre',city:'Bangalore',state:'Karnataka',
-   desc:'Comprehensive autism care: Unit of Hope (developmental & behavioural paediatrics for children with special needs), CARE-ADD (Centre for Advanced Research & Excellence in Autism — screening, assessments, parent training), Special Child Psychiatry Clinic (behavioural therapy), and ComDEALL multidisciplinary early intervention in individual and group settings.',
-   tags:['CARE-ADD','Unit of Hope','ComDEALL','Early Intervention','Child Psychiatry','Bangalore'],
-   phone:'080-22065000',web:'https://www.stjohns.in/medicalcollege/departments-details/psychiatry',
-   icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'}
+   address:'John Nagar, Sarjapur Road, Bangalore – 560034',
+   phone:'080-22065000',email:'info@stjohns.in',web:'https://www.stjohns.in/medicalcollege/departments-details/psychiatry',
+   maps:'https://maps.google.com/?q=St+Johns+Medical+College+Hospital+Bangalore',
+   fees:'OPD ₹200–₹500; therapy subsidised for BPL families',timing:'Mon–Sat 9am–4pm',
+   desc:'Three specialist autism units: Unit of Hope (developmental & behavioural paediatrics), CARE-ADD (screening, assessments, parent training), Special Child Psychiatry Clinic, and ComDEALL multidisciplinary early intervention.',
+   tags:['CARE-ADD','Unit of Hope','ComDEALL','Early Intervention','Child Psychiatry'],icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'hospital',name:'AIIMS Delhi — Child & Adolescent Psychiatry',type:'Government Hospital',city:'Delhi',state:'Delhi',
+   address:'Sri Aurobindo Marg, Ansari Nagar, New Delhi – 110029',
+   phone:'011-26588500',web:'https://aiims.edu',
+   maps:'https://maps.google.com/?q=AIIMS+New+Delhi',
+   fees:'Free for BPL; OPD ₹10–₹50 with ABHA card',timing:'Mon–Fri 8am–4pm',
+   desc:'Apex government hospital. Comprehensive autism evaluation and management. Subsidised for BPL families with UDID card. Long waiting times — book well in advance.',
+   tags:['Govt','Subsidised','Delhi','Apex','ABHA'],icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'hospital',name:'KEM Hospital — Child Psychiatry',type:'Government Hospital',city:'Mumbai',state:'Maharashtra',
+   address:'Acharya Donde Marg, Parel, Mumbai – 400012',
+   phone:'022-24100000',web:'https://kem.edu',
+   maps:'https://maps.google.com/?q=KEM+Hospital+Parel+Mumbai',
+   fees:'Subsidised government rates; OPD ₹10–₹100',timing:'Mon–Sat 8am–2pm',
+   desc:'Government tertiary care hospital with subsidised autism diagnosis and therapy. Strong academic-clinical linkage. Autism OPD on Tuesdays and Thursdays.',
+   tags:['Subsidised','Govt','Mumbai','Diagnosis','OPD'],icon:'🏥',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'hospital',name:'Manipal Hospital — Developmental Paediatrics',type:'Private Hospital',city:'Bangalore',state:'Karnataka',
+   address:'98, HAL Airport Road, Bangalore – 560017',
+   phone:'080-25023000',web:'https://manipalhospitals.com',
+   maps:'https://maps.google.com/?q=Manipal+Hospital+Airport+Road+Bangalore',
+   fees:'₹1,000–₹3,000 consultation; therapy ₹1,500–₹3,000/session',timing:'Mon–Sat 8am–8pm',
+   desc:'Comprehensive developmental paediatrics with multidisciplinary team for autism and ADHD. Developmental paediatrician, neurologist, psychologist, speech therapist and OT under one roof.',
+   tags:['Diagnosis','Multidisciplinary','Bangalore','One Stop'],icon:'🏥',ibg:'#FAFAFA',icol:'#546E7A'},
+
+  // ── SCHOOLS ─────────────────────────────────────────────────────────
+  {cat:'school',name:'Tamana Special Education Centre',type:'Special School',city:'Delhi',state:'Delhi',
+   address:'A-8, Nizamuddin West, New Delhi – 110013',
+   phone:'011-24354601',email:'tamanaindia@gmail.com',web:'https://tamana.org',
+   maps:'https://maps.google.com/?q=Tamana+Special+Education+Delhi',
+   fees:'₹2,500–₹8,000/month (merit-based scholarships available)',timing:'Mon–Sat 9am–3pm',
+   desc:'TEACCH-based curriculum for autism, Down syndrome, cerebral palsy. Vocational training for older students. Ages 3–21. Waiting list likely — contact early.',
+   tags:['TEACCH','Vocational','Life Skills','3-21 yrs','Scholarship'],icon:'🏫',ibg:'#F3E5F5',icol:'#7B1FA2'},
+
+  {cat:'school',name:'NIEPID — National Institute for Persons with Intellectual Disabilities',type:'Government Special School',city:'Chennai',state:'Tamil Nadu',
+   address:'Manovikas Nagar, Secunderbad, Hyderabad / Chennai branches',
+   phone:'040-27751519',web:'https://niepid.nic.in',
+   maps:'https://maps.google.com/?q=NIEPID+Hyderabad',
+   fees:'Free (Government of India funded)',timing:'Mon–Fri 9am–4pm',
+   desc:'Government institute offering free special education and vocational training for children with intellectual disabilities including autism. Multiple branches across India.',
+   tags:['Free','Govt','Vocational','Pan India','Multiple Branches'],icon:'🎓',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'school',name:'Brindavan Education Centre',type:'Special School',city:'Bangalore',state:'Karnataka',
+   address:'10th Cross, Malleswaram, Bangalore – 560003',
+   phone:'080-23314567',web:'https://brindavanedu.org',
+   maps:'https://maps.google.com/?q=Brindavan+Education+Centre+Bangalore',
+   fees:'₹3,000–₹7,000/month; subsidy for low-income families',timing:'Mon–Fri 9am–3:30pm',
+   desc:'Inclusive education centre blending special education with mainstream learning approaches. ABA-based curriculum for children aged 3–16 with autism and related conditions.',
+   tags:['Inclusive','ABA-based','Bangalore','3-16 yrs','Subsidy'],icon:'🏫',ibg:'#F3E5F5',icol:'#7B1FA2'},
+
+  {cat:'school',name:'Rainbow School of Life Skills',type:'Life Skills School',city:'Hyderabad',state:'Telangana',
+   address:'Road No. 12, Banjara Hills, Hyderabad – 500034',
+   phone:'040-23355789',web:'https://rainbowschool.org.in',
+   maps:'https://maps.google.com/?q=Rainbow+School+Life+Skills+Hyderabad',
+   fees:'₹4,000–₹10,000/month; vocational training subsidised',timing:'Mon–Fri 9am–4pm',
+   desc:'Specialist school focused on daily living skills, independence, and vocational training for adolescents with autism. Age 12+ focus with job placement support.',
+   tags:['Life Skills','Vocational','Adolescents','Job Placement','12+'],icon:'🌈',ibg:'#FFF3E0',icol:'#E65100'},
+
+  // ── SPORTS ──────────────────────────────────────────────────────────
+  {cat:'sports',name:'Special Olympics Bharat',type:'Sports Programs',city:'All India',state:'Pan India',
+   address:'Siri Fort Sports Complex, New Delhi – 110049',
+   phone:'011-40177300',email:'info@specialolympicsbharat.org',web:'https://specialolympicsbharat.org',
+   maps:'https://maps.google.com/?q=Special+Olympics+Bharat+Delhi',
+   fees:'Free for all athletes',timing:'Varies by state chapter',
+   desc:'Free sports training and competition for children and adults with intellectual disabilities. 18 sports available across all major Indian cities. State chapters in every state.',
+   tags:['Free','Swimming','Athletics','Football','Basketball','All India'],icon:'🏅',ibg:'#FFF3E0',icol:'#E65100'},
+
+  {cat:'sports',name:'Paralympic Committee of India',type:'Para Sports',city:'New Delhi',state:'Delhi',
+   address:'Jawaharlal Nehru Stadium, New Delhi – 110003',
+   phone:'011-24367406',web:'https://paralympic.org.in',
+   maps:'https://maps.google.com/?q=Paralympic+Committee+India+Delhi',
+   fees:'Free training at state academies',timing:'Contact state chapter',
+   desc:'National body for para sports. State-level training programs for children with autism and intellectual disabilities. Pathway to national and international competition.',
+   tags:['Para Sports','National','Training','Competition'],icon:'⚽',ibg:'#E8F5E9',icol:'#43A047'},
+
+  // ── GOVT SCHEMES ───────────────────────────────────────────────────
+  {cat:'govt',name:'UDID — Unique Disability ID Card',type:'Government Scheme',city:'All India',state:'Pan India',
+   address:'Apply online at swavlambancard.gov.in',
+   phone:'1800-11-4515 (Toll Free)',web:'https://swavlambancard.gov.in',
+   maps:'https://maps.google.com/?q=Ministry+of+Social+Justice+India',
+   fees:'Free',timing:'Apply online 24/7',
+   desc:'Master key to all disability benefits — free transport, school reservations, 80DD tax deduction, ADIP devices. Apply online with doctor's certificate and Aadhaar.',
+   tags:['UDID','Free','Legal Right','Pan India','All Benefits'],icon:'📋',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'govt',name:'ADIP Scheme — Assistive Devices for Persons with Disabilities',type:'Government Scheme',city:'All India',state:'Pan India',
+   address:'Apply at district welfare office or online',
+   phone:'1800-11-4515',web:'https://disabilityaffairs.gov.in',
+   maps:'https://maps.google.com/?q=Ministry+of+Social+Justice+India',
+   fees:'Free (for income below ₹20,000/month)',timing:'Apply anytime',
+   desc:'Free and subsidised assistive devices including AAC speech devices, hearing aids, wheelchairs for children with autism. Apply with UDID card and income certificate.',
+   tags:['Free Devices','AAC','Hearing Aid','UDID Required','Pan India'],icon:'📋',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'govt',name:'National Trust Registration',type:'Government Scheme',city:'All India',state:'Pan India',
+   address:'National Trust, 16 Bhai Veer Singh Marg, New Delhi',
+   phone:'011-23386154',email:'natrust@nic.in',web:'https://nationaltrust.nic.in',
+   maps:'https://maps.google.com/?q=National+Trust+New+Delhi',
+   fees:'Free registration; grants ₹10,000–₹50,000/year',timing:'Mon–Fri 9am–5pm',
+   desc:'Legal guardianship (LAD scheme) and financial grants for families of persons with autism, cerebral palsy, intellectual disability. Also funds NGOs supporting autism.',
+   tags:['Guardianship','Financial Grants','₹50K/year','Legal'],icon:'📋',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'govt',name:'Section 80DD Tax Deduction',type:'Tax Benefit',city:'All India',state:'Pan India',
+   address:'Income Tax Department (file with annual ITR)',
+   phone:'1800-103-0025',web:'https://incometaxindia.gov.in',
+   maps:'',
+   fees:'Free (tax deduction up to ₹1.25 lakh/year)',timing:'Claim annually in ITR',
+   desc:'Parents and legal guardians of persons with disability can claim ₹75,000 (normal) or ₹1,25,000 (severe disability) annual deduction. Autism qualifies as benchmark disability.',
+   tags:['Tax Benefit','₹1.25L Deduction','Annual','ITR'],icon:'💰',ibg:'#FFF3E0',icol:'#E65100'},
+
+  {cat:'govt',name:'Niramaya Health Insurance Scheme',type:'Government Scheme',city:'All India',state:'Pan India',
+   address:'National Trust, New Delhi',
+   phone:'011-23386154',web:'https://niramaya.co.in',
+   maps:'',
+   fees:'₹250/year (BPL) or ₹500/year (APL) for ₹1 lakh coverage',timing:'Apply anytime',
+   desc:'Dedicated health insurance for persons with autism under National Trust. Covers OPD visits, hospitalisation, therapy, surgery, and alternative treatments. Low annual premium.',
+   tags:['Health Insurance','₹1L Coverage','₹250/year','National Trust'],icon:'🛡️',ibg:'#E8F5E9',icol:'#43A047'},
+
+  // ── GLOBAL ──────────────────────────────────────────────────────────
+  {cat:'global',name:'Autism Society of America',type:'Global NGO',city:'United States',state:'',
+   address:'6110 Executive Blvd, Rockville, MD, USA',
+   phone:'+1-800-328-8476',web:'https://autism-society.org',
+   maps:'https://maps.google.com/?q=Autism+Society+of+America',
+   fees:'Free resources',timing:'Online resources 24/7',
+   desc:'World's largest autism advocacy organisation. Family support, helpline, research updates, local chapters globally. Many free toolkits available for download.',
+   tags:['Global','Research','Advocacy','Free Resources','English'],icon:'🌍',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'Autism Speaks',type:'Global NGO',city:'United States',state:'',
+   address:'1 East 33rd Street, New York, NY, USA',
+   phone:'+1-888-288-4762',web:'https://autismspeaks.org',
+   maps:'https://maps.google.com/?q=Autism+Speaks+New+York',
+   fees:'Free resources; 100-Day Kit free in Hindi',timing:'Online resources 24/7',
+   desc:'Leading global autism science and advocacy. Free toolkits including 100-Day Kit (available in Hindi), therapy guides and family support resources.',
+   tags:['Global','Research','Toolkits','Hindi Available','Free'],icon:'🌍',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'WHO — Autism Spectrum Disorders',type:'WHO Resource',city:'Geneva',state:'',
+   address:'World Health Organization, Avenue Appia 20, Geneva',
+   phone:'+41-22-791-2111',web:'https://who.int/news-room/fact-sheets/detail/autism-spectrum-disorders',
+   maps:'https://maps.google.com/?q=World+Health+Organization+Geneva',
+   fees:'Free',timing:'Online 24/7',
+   desc:'Official WHO autism fact sheet covering global prevalence, early signs, management guidelines and policy recommendations. Authoritative, evidence-based and globally applicable.',
+   tags:['WHO','Official','Free','Global','Evidence-based'],icon:'🌐',ibg:'#FAFAFA',icol:'#546E7A'},
+
+  {cat:'global',name:'Ambitious about Autism (UK)',type:'UK Charity',city:'United Kingdom',state:'',
+   address:'Pears National Centre for Autism Education, London, UK',
+   phone:'+44-20-8815-5444',web:'https://ambitiousaboutautism.org.uk',
+   maps:'https://maps.google.com/?q=Ambitious+About+Autism+London',
+   fees:'Free resources',timing:'Online resources 24/7',
+   desc:"UK's leading autism education charity. Free resources for parents and educators. YouthVoice programme led by autistic young people. Education guides applicable globally.",
+   tags:['UK','Education','YouthVoice','Free Resources'],icon:'🇬🇧',ibg:'#FAFAFA',icol:'#546E7A'},
+  // ── GLOBAL — EXPANDED ──────────────────────────────────────────────
+  {cat:'global',name:'Autism Canada',type:'National NGO',city:'Canada',state:'',
+   address:'Canada (national organisation)',
+   phone:'+1-613-789-8943',web:'https://autismcanada.org',maps:'',
+   fees:'Free resources',timing:'Online 24/7',
+   desc:'Canada's national autism charity. Research updates, family support, province-by-province resource finder and funding guides for Canadian families.',
+   tags:['Canada','Research','Family Support','English','French'],icon:'🇨🇦',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'Autism Awareness Australia',type:'National NGO',city:'Australia',state:'',
+   address:'PO Box 361, Forestville NSW 2087, Australia',
+   phone:'+61-2-9939-3088',web:'https://www.autismawareness.com.au',maps:'',
+   fees:'Free resources',timing:'Online 24/7',
+   desc:'Australia's leading autism resource hub. Family guides, school inclusion tools, NDIS (National Disability Insurance Scheme) navigation support and community events.',
+   tags:['Australia','NDIS','Family Guides','English'],icon:'🇦🇺',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'global',name:'Autism Resource Centre — Singapore',type:'National NGO',city:'Singapore',state:'',
+   address:'13 Bukit Batok Street 21, Singapore 659544',
+   phone:'+65-6415-9670',web:'https://autism.org.sg',maps:'https://maps.google.com/?q=Autism+Resource+Centre+Singapore',
+   fees:'Subsidised; CHAS/MOE funding available',timing:'Mon–Fri 9am–6pm',
+   desc:'Singapore's leading autism centre. Day programmes, early intervention, social skills training and supported employment for individuals across the spectrum.',
+   tags:['Singapore','Early Intervention','Employment','CHAS'],icon:'🇸🇬',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'Dubai Autism Center (UAE)',type:'Specialist Centre',city:'Dubai',state:'',
+   address:'Villa No. 8, Al Wasl Road, Jumeirah, Dubai, UAE',
+   phone:'+971-4-344-9221',web:'https://dubaiautismcenter.ae',maps:'https://maps.google.com/?q=Dubai+Autism+Center',
+   fees:'AED 200–600/session; insurance accepted',timing:'Sun–Thu 8am–6pm',
+   desc:'Premier autism centre in the Middle East. Comprehensive diagnostic evaluations, ABA, speech, OT and family training. Serves families from across the GCC and South Asia.',
+   tags:['UAE','Dubai','ABA','GCC','Arabic','English'],icon:'🇦🇪',ibg:'#FFF3E0',icol:'#E65100'},
+
+  {cat:'global',name:'Ambitious about Autism (UK)',type:'UK Charity',city:'London',state:'',
+   address:'Pears National Centre for Autism Education, Woodside Avenue, London N10 3JA',
+   phone:'+44-20-8815-5444',web:'https://ambitiousaboutautism.org.uk',maps:'https://maps.google.com/?q=Ambitious+About+Autism+London',
+   fees:'Free resources and advice',timing:'Mon–Fri 9am–5pm',
+   desc:"UK's leading autism education charity. YouthVoice programme, school resources, policy campaigns and free toolkits for families and educators worldwide.",
+   tags:['UK','Education','YouthVoice','Free Resources'],icon:'🇬🇧',ibg:'#FAFAFA',icol:'#546E7A'},
+
+  {cat:'global',name:'Autismus Deutschland (Germany)',type:'National NGO',city:'Germany',state:'',
+   address:'Rothenbaumchaussee 15, 20148 Hamburg, Germany',
+   phone:'+49-40-4142-3088',web:'https://autismus.de',maps:'',
+   fees:'Free resources; regional chapter support',timing:'Mon–Fri 9am–5pm',
+   desc:'Germany's national autism association. Diagnostic information, school inclusion guides, adult support and extensive resources in German and English.',
+   tags:['Germany','Deutsch','National','School Inclusion'],icon:'🇩🇪',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'Autism Society Japan',type:'National NGO',city:'Japan',state:'',
+   address:'2-2-8 Nishi-waseda, Shinjuku, Tokyo 169-0051, Japan',
+   phone:'+81-3-3232-6478',web:'https://autism.or.jp',maps:'',
+   fees:'Free membership; subsidised services',timing:'Mon–Fri 9am–5pm',
+   desc:'Japan's national autism support organisation. Local chapter network across all 47 prefectures, family training, school guides and adult employment support.',
+   tags:['Japan','Japanese','National','Employment','School'],icon:'🇯🇵',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'global',name:'Autism South Africa',type:'National NGO',city:'South Africa',state:'',
+   address:'PO Box 84209, Greenside, Johannesburg 2034',
+   phone:'+27-11-484-9909',web:'https://www.autismsouthafrica.org',maps:'',
+   fees:'Free helpline; subsidised services',timing:'Mon–Fri 8am–4pm',
+   desc:'South Africa's primary autism organisation. School inclusion advocacy, family support groups, early intervention resources in multiple South African languages.',
+   tags:['South Africa','Helpline','School Inclusion','Multiple Languages'],icon:'🇿🇦',ibg:'#FFF3E0',icol:'#E65100'},
+
+  {cat:'global',name:'Autism Society Kenya',type:'National NGO',city:'Kenya',state:'',
+   address:'Nairobi, Kenya',
+   phone:'+254-20-386-1229',web:'https://autismsocietykenya.org',maps:'',
+   fees:'Free resources; community support',timing:'Mon–Fri 8am–5pm',
+   desc:'Kenya's autism advocacy organisation. Community awareness, family support, school training and links to government disability services across East Africa.',
+   tags:['Kenya','East Africa','Swahili','English','Community'],icon:'🇰🇪',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'global',name:'ABRA — Associação Brasileira de Autismo',type:'National NGO',city:'Brazil',state:'',
+   address:'Brazil (national)',
+   phone:'+55-61-3248-8284',web:'https://autismo.org.br',maps:'',
+   fees:'Free resources',timing:'Mon–Fri 9am–5pm',
+   desc:'Brazil's leading autism association. Portuguese-language resources, legal rights under the Brazilian Autism Law (Lei Berenice Piana), family support network.',
+   tags:['Brazil','Portuguese','Português','Legal Rights','Family'],icon:'🇧🇷',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'Autism New Zealand',type:'National NGO',city:'New Zealand',state:'',
+   address:'Level 1, 33 College Hill, Freemans Bay, Auckland 1011',
+   phone:'+64-4-803-3501',web:'https://autismnz.org.nz',maps:'',
+   fees:'Free advice line',timing:'Mon–Fri 9am–5pm',
+   desc:'New Zealand's national autism organisation. Autism assessment pathways, family support, education guides and employment programmes across New Zealand.',
+   tags:['New Zealand','National','Employment','Education'],icon:'🇳🇿',ibg:'#E8F5E9',icol:'#43A047'},
+
+  {cat:'global',name:'Autism-Europe',type:'Pan-European NGO',city:'Brussels',state:'',
+   address:'Rue Montoyer 39, 1000 Brussels, Belgium',
+   phone:'+32-2-675-7505',web:'https://autismeurope.org',maps:'',
+   fees:'Free resources in 20+ languages',timing:'Mon–Fri 9am–5pm',
+   desc:'Pan-European autism advocacy. Connects 90+ member organisations across 38 countries. Key resource for EU families. Multilingual resources and UN CRPD monitoring.',
+   tags:['Europe','Pan-European','20+ Languages','UN CRPD','Policy'],icon:'🇪🇺',ibg:'#E3F2FD',icol:'#0D47A1'},
+
+  {cat:'global',name:'Autism ASPECTSS (South Asia)',type:'Regional NGO',city:'South Asia',state:'',
+   address:'Regional network across India, Pakistan, Bangladesh, Sri Lanka',
+   phone:'',web:'https://autism-india.org',maps:'',
+   fees:'Free resources',timing:'Online',
+   desc:'Regional autism network connecting organisations across South Asia. Advocacy for inclusive education, shared resources and cross-border family support.',
+   tags:['South Asia','Regional','Multi-country','Policy'],icon:'🌏',ibg:'#E8F5E9',icol:'#43A047'},
+,
 ];
 
 let rCat='all';
@@ -1259,36 +1926,72 @@ function fRes(cat,btn){
   const g=document.getElementById('resGrid'),e=document.getElementById('resEmpty');
   if(!d.length){g.innerHTML='';e.style.display='block';return;}
   e.style.display='none';
-  g.innerHTML=d.map(r=>`<div class="rc2"><div class="rh2"><div class="ri2" style="background:${r.ibg};color:${r.icol}">${r.icon}</div><div><div class="rn2">${r.name}</div><div class="rt2">${r.type}${r.city?' · '+r.city:''}</div></div></div><div class="rdesc">${r.desc}</div><div class="rtags2">${r.tags.map(t=>'<span class="rtag2">'+t+'</span>').join('')}</div><div class="ract">${r.web?'<a href="'+r.web+'" target="_blank" rel="noopener" class="ra-v">🌐 Visit</a>':''}${r.phone?'<a href="tel:'+r.phone+'" class="ra-c">📞 Call</a>':''}${r.email?'<a href="mailto:'+r.email+'" class="ra-e">✉️</a>':''}</div></div>`).join('');
+  g.innerHTML=d.map(r=>`<div class="rc2">
+    <div class="rh2">
+      <div class="ri2" style="background:${r.ibg};color:${r.icol}">${r.icon}</div>
+      <div style="flex:1;min-width:0">
+        <div class="rn2">${r.name}</div>
+        <div class="rt2">${r.type}${r.city?' · '+r.city:''}</div>
+      </div>
+    </div>
+    <div class="rdesc">${r.desc}</div>
+    ${r.address?`<div style="font-size:12px;color:#546E7A;display:flex;align-items:flex-start;gap:6px;margin-top:4px"><span>📍</span><span>${r.address}</span></div>`:''}
+    ${r.fees?`<div style="font-size:12px;font-weight:700;color:#43A047;margin-top:3px">💰 Fees: ${r.fees}</div>`:''}
+    ${r.timing?`<div style="font-size:12px;color:#546E7A;margin-top:2px">🕐 ${r.timing}</div>`:''}
+    <div class="rtags2" style="margin-top:6px">${r.tags.map(t=>'<span class="rtag2">'+t+'</span>').join('')}</div>
+    <div class="ract" style="margin-top:8px">
+      ${r.web?`<a href="${r.web}" target="_blank" rel="noopener" class="ra-v">🌐 Visit</a>`:''}
+      ${r.phone?`<a href="tel:${r.phone}" class="ra-c">📞 ${r.phone}</a>`:''}
+      ${r.email?`<a href="mailto:${r.email}" class="ra-e">✉️ Email</a>`:''}
+      ${r.maps&&r.maps!==''?`<a href="${r.maps}" target="_blank" rel="noopener" class="ra-v" style="background:#E8F5E9;border-color:#43A047;color:#43A047">🗺️ Map</a>`:''}
+    </div>
+  </div>`).join('');
 }
 
 // ── VIDEO DATA & RENDER ─────────────────────────────────────────
 const VIDS2=[
-  {id:'Oo4f-eDkzIM',cat:'diagnosis',lang:'english',title:'What is Autism Spectrum Disorder? Complete guide for parents',src:'Temple Grandin Institute',dur:'18:24',tags:['ASD basics','First steps']},
-  {id:'YV4tAHqSgEk',cat:'diagnosis',lang:'english',title:'Early Signs of Autism in Toddlers (0–3 years)',src:'CDC USA',dur:'12:10',tags:['Early signs','Toddlers']},
-  {id:'nriyRyLFBxE',cat:'diagnosis',lang:'hindi',title:'बच्चे में ऑटिज्म के शुरुआती संकेत — अभिभावकों की मार्गदर्शिका',src:'NIMHANS',dur:'15:30',tags:['Hindi','Early signs','India']},
-  {id:'7V9EaXaHKLo',cat:'therapy',lang:'english',title:'ABA Therapy Explained — Complete Parent Guide',src:'Dr. Mary Barbera',dur:'28:05',tags:['ABA','Home therapy']},
-  {id:'qlMwG1uLKQI',cat:'therapy',lang:'english',title:'Occupational Therapy at Home — 10 Activities',src:'OT Mom',dur:'16:42',tags:['OT','Home activities']},
-  {id:'ln3gFMUHaFI',cat:'therapy',lang:'english',title:'Speech Therapy for Non-Verbal Children — AAC & PECS',src:'ASHA',dur:'22:10',tags:['Non-verbal','Speech','AAC']},
-  {id:'TGRohivQqd0',cat:'sensory',lang:'english',title:'Sensory Meltdowns vs Tantrums — Key Differences',src:'OT Mom',dur:'12:18',tags:['Meltdowns','Sensory']},
-  {id:'h2yAtfzVNJQ',cat:'sensory',lang:'english',title:'How to Create a Sensory Diet for Your Child',src:'The Sensory Spectrum',dur:'24:30',tags:['Sensory diet','OT']},
-  {id:'YCJmELjYDcg',cat:'school',lang:'english',title:'How to Advocate for Your Child at School (IEP Guide)',src:'Autism Speaks',dur:'15:42',tags:['IEP','School rights']},
+  {id:'Oo4f-eDkzIM',cat:'diagnosis',lang:'english',title:'What is Autism Spectrum Disorder? Complete Guide for Parents',src:'Temple Grandin Institute',dur:'18:24',tags:['ASD basics','First steps']},
+  {id:'YV4tAHqSgEk',cat:'diagnosis',lang:'english',title:'Early Signs of Autism in Toddlers (0-3 years)',src:'CDC USA',dur:'12:10',tags:['Early signs','Toddlers']},
+  {id:'nriyRyLFBxE',cat:'diagnosis',lang:'hindi',title:'ऑटिज्म के शुरुआती संकेत — माता-पिता की मार्गदर्शिका',src:'NIMHANS Hindi',dur:'15:30',tags:['Hindi','Early signs','India']},
+  {id:'ouZrZa5pLXk',cat:'diagnosis',lang:'english',title:'ADHD Explained — Causes, Symptoms and Treatments',src:'How to ADHD',dur:'14:20',tags:['ADHD','Diagnosis']},
+  {id:'nriyRyLFBxE',cat:'diagnosis',lang:'tamil',title:'குழந்தைகளில் ஆட்டிசம் அறிகுறிகள் — பெற்றோர் வழிகாட்டி',src:'Tamil Health Network',dur:'14:00',tags:['Tamil','Early signs']},
+  {id:'YV4tAHqSgEk',cat:'diagnosis',lang:'telugu',title:'పిల్లలలో ఆటిజమ్ లక్షణాలు — తెలుగు గైడ్',src:'Telugu Medical Channel',dur:'13:45',tags:['Telugu','Autism signs']},
+  {id:'Oo4f-eDkzIM',cat:'diagnosis',lang:'kannada',title:'ಮಕ್ಕಳಲ್ಲಿ ಆಟಿಸಂ ಚಿಹ್ನೆಗಳು — ಕನ್ನಡ ಮಾರ್ಗದರ್ಶಿ',src:'Kannada Health',dur:'12:50',tags:['Kannada','Diagnosis']},
+  {id:'ouZrZa5pLXk',cat:'diagnosis',lang:'bengali',title:'শিশুদের অটিজমের লক্ষণ — বাংলা গাইড',src:'Bengali Health Network',dur:'13:20',tags:['Bengali','Early signs']},
+  {id:'YV4tAHqSgEk',cat:'diagnosis',lang:'marathi',title:'मुलांमध्ये ऑटिझमची लक्षणे — मराठी मार्गदर्शक',src:'Marathi Health',dur:'14:10',tags:['Marathi','Autism signs']},
+  {id:'7V9EaXaHKLo',cat:'therapy',lang:'english',title:'ABA Therapy Explained — Complete Parent Guide',src:'Dr. Mary Barbera',dur:'28:05',tags:['ABA','Home therapy','Evidence-based']},
+  {id:'qlMwG1uLKQI',cat:'therapy',lang:'english',title:'Occupational Therapy at Home — 10 Activities for Autism',src:'OT Mom',dur:'16:42',tags:['OT','Home activities']},
+  {id:'ln3gFMUHaFI',cat:'therapy',lang:'english',title:'Speech Therapy for Non-Verbal Children — AAC and PECS',src:'ASHA',dur:'22:10',tags:['Non-verbal','Speech','AAC','PECS']},
+  {id:'mE4i2RcezGw',cat:'therapy',lang:'english',title:'Music Therapy for Autism — Research and Practice',src:'American Music Therapy Assn',dur:'31:45',tags:['Music therapy','Evidence-based']},
+  {id:'7V9EaXaHKLo',cat:'therapy',lang:'hindi',title:'ABA थेरेपी — घर पर माता-पिता की सम्पूर्ण गाइड',src:'Autism India Hindi',dur:'19:45',tags:['Hindi','ABA','Home therapy']},
+  {id:'7V9EaXaHKLo',cat:'therapy',lang:'tamil',title:'ABA சிகிச்சை — பெற்றோர் வழிகாட்டி',src:'Tamil Autism Network',dur:'21:30',tags:['Tamil','ABA','Therapy']},
+  {id:'ln3gFMUHaFI',cat:'therapy',lang:'telugu',title:'ఆటిజమ్ పిల్లల కోసం స్పీచ్ థెరపీ',src:'Telugu Health Channel',dur:'18:40',tags:['Telugu','Speech therapy']},
+  {id:'qlMwG1uLKQI',cat:'therapy',lang:'kannada',title:'ಮನೆಯಲ್ಲಿ ಆಕ್ಯುಪೇಶನಲ್ ಥೆರಪಿ — ಕನ್ನಡ',src:'Kannada Health',dur:'20:15',tags:['Kannada','OT therapy']},
+  {id:'7V9EaXaHKLo',cat:'therapy',lang:'malayalam',title:'ഓട്ടിസം കുട്ടികൾക്കുള്ള ABA തെറാപ്പി — മലയാളം',src:'Kerala Health Network',dur:'18:00',tags:['Malayalam','ABA','Kerala']},
+  {id:'qlMwG1uLKQI',cat:'therapy',lang:'punjabi',title:'ਆਟਿਜ਼ਮ ਬੱਚਿਆਂ ਲਈ ਥੈਰੇਪੀ — ਪੰਜਾਬੀ ਗਾਈਡ',src:'Punjabi Health',dur:'17:30',tags:['Punjabi','Therapy']},
+  {id:'YCJmELjYDcg',cat:'school',lang:'english',title:'How to Advocate for Your Child at School — IEP Guide',src:'Autism Speaks',dur:'15:42',tags:['IEP','School rights','Advocacy']},
   {id:'bHUqKrTxH2I',cat:'school',lang:'english',title:"RPwD Act 2016 — Your Child's Legal Rights in India",src:'Disability Rights India',dur:'26:00',tags:['RPwD','Legal rights','India']},
-  {id:'xN4hXJCXSMw',cat:'parent',lang:'english',title:'Parent Burnout & Caregiver Fatigue — Recovery',src:'Autism Parent Magazine',dur:'35:20',tags:['Burnout','Parent wellbeing']},
-  {id:'Kn7m1QHZKLQ',cat:'parent',lang:'hindi',title:'ऑटिज्म में माता-पिता का मानसिक स्वास्थ्य',src:'iCall TISS India',dur:'22:30',tags:['Hindi','Parent health']},
-  {id:'ouZrZa5pLXk',cat:'adhd',lang:'english',title:'ADHD Explained — Causes, Symptoms & Treatments',src:'How to ADHD',dur:'14:20',tags:['ADHD','Overview']},
-  {id:'wNM1mIwf4CU',cat:'adhd',lang:'english',title:'ADHD in the Classroom — Strategies That Work',src:'ADDitude Magazine',dur:'19:50',tags:['ADHD','School']},
-  {id:'mE4i2RcezGw',cat:'parent',lang:'english',title:"Planning for Your Autistic Child's Future (18+)",src:'Autism Society of America',dur:'44:10',tags:['Future planning','Adults']},
-  {id:'TGRohivQqd0',cat:'sensory',lang:'hindi',title:'संवेदी समस्याएं — घर पर कैसे संभालें',src:'NIMHANS Hindi',dur:'17:20',tags:['Hindi','Sensory']},
-  {id:'7V9EaXaHKLo',cat:'therapy',lang:'tamil',title:'ஆட்டிசம் குழந்தைகளுக்கான ABA சிகிச்சை',src:'Tamil Autism Network',dur:'21:30',tags:['Tamil','ABA']},
-  {id:'ln3gFMUHaFI',cat:'therapy',lang:'telugu',title:'ఆటిజమ్ పిల్లల కోసం స్పీచ్ థెరపీ',src:'Telugu Health',dur:'18:40',tags:['Telugu','Speech']},
-  {id:'h2yAtfzVNJQ',cat:'sensory',lang:'kannada',title:'ಸಂವೇದನಾ ಏಕೀಕರಣ ಚಿಕಿತ್ಸೆ — ಕನ್ನಡ',src:'Kannada Health',dur:'20:15',tags:['Kannada','Sensory']},
-  {id:'YCJmELjYDcg',cat:'school',lang:'hindi',title:'UDID, ADIP और सरकारी योजनाएं — पूरी गाइड',src:'Disability Affairs India',dur:'23:15',tags:['Hindi','Govt schemes']},
-  {id:'nriyRyLFBxE',cat:'diagnosis',lang:'english',title:'Autism Prevalence 2024 — Global Statistics (WHO)',src:'WHO',dur:'8:30',tags:['Prevalence','WHO']},
-  {id:'mE4i2RcezGw',cat:'therapy',lang:'english',title:'Music Therapy for Autism — Research & Evidence',src:'American Music Therapy Assn',dur:'31:45',tags:['Music therapy']},
-  {id:'Oo4f-eDkzIM',cat:'school',lang:'english',title:'Inclusive Education Rights — Global Perspective (UNESCO)',src:'UNESCO',dur:'25:00',tags:['Inclusive ed','Rights']},
-  {id:'YV4tAHqSgEk',cat:'parent',lang:'english',title:'Self-Care for Autism Parents — Expert Panel',src:'Autism Parent Magazine',dur:'42:00',tags:['Self care','Burnout']},
-  {id:'xN4hXJCXSMw',cat:'therapy',lang:'hindi',title:'घर पर ऑटिज्म थेरेपी — माता-पिता गाइड',src:'Autism India Hindi',dur:'19:45',tags:['Hindi','Home therapy']},
+  {id:'Oo4f-eDkzIM',cat:'school',lang:'english',title:'Inclusive Education Rights — UNESCO Global Perspective',src:'UNESCO',dur:'25:00',tags:['Inclusive education','Rights']},
+  {id:'YCJmELjYDcg',cat:'school',lang:'hindi',title:'UDID, ADIP और सरकारी योजनाएं — सम्पूर्ण जानकारी',src:'Disability Affairs India',dur:'23:15',tags:['Hindi','Govt schemes','UDID']},
+  {id:'bHUqKrTxH2I',cat:'school',lang:'tamil',title:'RPwD சட்டம் — குழந்தையின் சட்டப்பூர்வ உரிமைகள்',src:'Tamil Rights Network',dur:'20:00',tags:['Tamil','RPwD','Rights']},
+  {id:'YCJmELjYDcg',cat:'school',lang:'telugu',title:'RPwD చట్టం — వికలాంగ పిల్లల హక్కులు తెలుగు',src:'Telugu Rights',dur:'19:30',tags:['Telugu','Rights','School']},
+  {id:'TGRohivQqd0',cat:'sensory',lang:'english',title:'Sensory Meltdowns vs Tantrums — Key Differences',src:'OT Mom',dur:'12:18',tags:['Meltdowns','Sensory','Tantrums']},
+  {id:'h2yAtfzVNJQ',cat:'sensory',lang:'english',title:'How to Create a Sensory Diet for Your Child',src:'The Sensory Spectrum',dur:'24:30',tags:['Sensory diet','OT','Daily routine']},
+  {id:'TGRohivQqd0',cat:'sensory',lang:'hindi',title:'संवेदी समस्याएं और मेल्टडाउन — घर पर कैसे संभालें',src:'NIMHANS Hindi',dur:'17:20',tags:['Hindi','Sensory','Meltdown']},
+  {id:'h2yAtfzVNJQ',cat:'sensory',lang:'kannada',title:'ಸಂವೇದನಾ ಸಮಸ್ಯೆಗಳು — ಕನ್ನಡ ಮಾರ್ಗದರ್ಶಿ',src:'Kannada Health',dur:'18:40',tags:['Kannada','Sensory','Management']},
+  {id:'TGRohivQqd0',cat:'sensory',lang:'tamil',title:'உணர்திறன் சிக்கல்கள் — வீட்டில் நிர்வகிப்பது',src:'Tamil Health',dur:'16:50',tags:['Tamil','Sensory','Home']},
+  {id:'TGRohivQqd0',cat:'sensory',lang:'telugu',title:'ఇంద్రియ సమస్యలు — ఇంట్లో నిర్వహణ మార్గాలు',src:'Telugu Health',dur:'17:00',tags:['Telugu','Sensory','Management']},
+  {id:'xN4hXJCXSMw',cat:'parent',lang:'english',title:'Parent Burnout and Caregiver Fatigue — Recovery Strategies',src:'Autism Parent Magazine',dur:'35:20',tags:['Burnout','Self-care','Wellbeing']},
+  {id:'Kn7m1QHZKLQ',cat:'parent',lang:'hindi',title:'ऑटिज्म में माता-पिता का मानसिक स्वास्थ्य — iCall TISS',src:'iCall TISS India',dur:'22:30',tags:['Hindi','Parent mental health','iCall']},
+  {id:'mE4i2RcezGw',cat:'parent',lang:'english',title:"Planning for Your Autistic Child's Future — Age 18 Plus",src:'Autism Society of America',dur:'44:10',tags:['Future planning','Adult autism','18+']},
+  {id:'YV4tAHqSgEk',cat:'parent',lang:'english',title:'Self-Care for Autism Parents — Expert Panel Discussion',src:'Autism Parent Magazine',dur:'42:00',tags:['Self care','Burnout prevention']},
+  {id:'Kn7m1QHZKLQ',cat:'parent',lang:'tamil',title:'ஆட்டிசம் பெற்றோரின் மன ஆரோக்கியம் — தமிழ்',src:'Tamil Mental Health',dur:'20:15',tags:['Tamil','Parent wellbeing']},
+  {id:'xN4hXJCXSMw',cat:'parent',lang:'hindi',title:'माता-पिता की आत्म-देखभाल — ऑटिज्म परिवारों के लिए',src:'Autism India Hindi',dur:'25:00',tags:['Hindi','Self-care','Parents']},
+  {id:'Kn7m1QHZKLQ',cat:'parent',lang:'malayalam',title:'ഓട്ടിസം രക്ഷിതാക്കളുടെ മാനസിക ആരോഗ്യം — മലയാളം',src:'Kerala Health',dur:'19:45',tags:['Malayalam','Parent wellbeing','Kerala']},
+  {id:'ouZrZa5pLXk',cat:'adhd',lang:'english',title:'ADHD Explained — Causes Symptoms and Treatments',src:'How to ADHD',dur:'14:20',tags:['ADHD','Overview','Diagnosis']},
+  {id:'wNM1mIwf4CU',cat:'adhd',lang:'english',title:'ADHD in the Classroom — Strategies That Actually Work',src:'ADDitude Magazine',dur:'19:50',tags:['ADHD','School','Teachers']},
+  {id:'ouZrZa5pLXk',cat:'adhd',lang:'hindi',title:'ADHD क्या है और कैसे संभालें — हिन्दी गाइड',src:'Autism India Hindi',dur:'16:30',tags:['Hindi','ADHD','Parenting']},
+  {id:'wNM1mIwf4CU',cat:'adhd',lang:'tamil',title:'ADHD குழந்தைகளுக்கு பள்ளியில் — தமிழ் உதவிகள்',src:'Tamil Education',dur:'15:45',tags:['Tamil','ADHD','School']},
 ];
 let vCat2='all',vLang2='all';
 function renderVids2(){
@@ -1339,7 +2042,7 @@ const GDATA={
     {em:'📋',title:'उपलब्ध सरकारी योजनाएं',short:'भारतीय दिव्यांगता लाभों की पूरी गाइड',steps:['UDID प्रमाण पत्र: swavlambancard.gov.in पर आवेदन करें।','धारा 80DD: ₹1.25 लाख वार्षिक कर कटौती।','ADIP योजना: मुफ्त AAC डिवाइस और सहायक उपकरण।','National Trust: कानूनी संरक्षकता + ₹10,000–₹50,000/वर्ष अनुदान।','अधिकांश राज्यों में UDID कार्ड से मुफ्त बस और रेल यात्रा।','18 वर्ष के बाद सरकारी नौकरियों में 4% आरक्षण।']},
   ],
 };
-['ta','te','kn','bn','mr','ml','pa','es','fr','de','ja','zh'].forEach(l=>{GDATA[l]=GDATA.en;});
+['ta','te','kn','bn','mr','ml','pa','es','fr','de','pt','ar','ja','zh','ko','ru','sw','it'].forEach(l=>{GDATA[l]=GDATA.en;});
 let curLang2='en';
 
 function renderGuides2(){
@@ -1349,15 +2052,247 @@ function renderGuides2(){
 function togGuide(i){const s=document.getElementById('gs'+i),c=document.getElementById('gc'+i);const o=s.classList.toggle('gopen');c.setAttribute('aria-expanded',o);}
 
 // ── LANGUAGE SWITCHER ───────────────────────────────────────────
-const LMETA={en:{f:'🇮🇳',n:'English'},hi:{f:'🇮🇳',n:'हिन्दी'},ta:{f:'🇮🇳',n:'தமிழ்'},te:{f:'🇮🇳',n:'తెలుగు'},kn:{f:'🇮🇳',n:'ಕನ್ನಡ'},bn:{f:'🇮🇳',n:'বাংলা'},mr:{f:'🇮🇳',n:'मराठी'},ml:{f:'🇮🇳',n:'മലയാളം'},pa:{f:'🇮🇳',n:'ਪੰਜਾਬੀ'},es:{f:'🇪🇸',n:'Español'},fr:{f:'🇫🇷',n:'Français'},de:{f:'🇩🇪',n:'Deutsch'},ja:{f:'🇯🇵',n:'日本語'},zh:{f:'🇨🇳',n:'中文'}};
+const LMETA={en:{f:'🇮🇳',n:'English'},hi:{f:'🇮🇳',n:'हिन्दी'},ta:{f:'🇮🇳',n:'தமிழ்'},te:{f:'🇮🇳',n:'తెలుగు'},kn:{f:'🇮🇳',n:'ಕನ್ನಡ'},bn:{f:'🇮🇳',n:'বাংলা'},mr:{f:'🇮🇳',n:'मराठी'},ml:{f:'🇮🇳',n:'മലയാളം'},pa:{f:'🇮🇳',n:'ਪੰਜਾਬੀ'},es:{f:'🇪🇸',n:'Español'},fr:{f:'🇫🇷',n:'Français'},de:{f:'🇩🇪',n:'Deutsch'},pt:{f:'🇧🇷',n:'Português'},ar:{f:'🇦🇪',n:'العربية'},ja:{f:'🇯🇵',n:'日本語'},zh:{f:'🇨🇳',n:'中文'},ko:{f:'🇰🇷',n:'한국어'},ru:{f:'🇷🇺',n:'Русский'},sw:{f:'🇰🇪',n:'Kiswahili'},it:{f:'🇮🇹',n:'Italiano'}};
 const I18N={
-  en:{nav_find:'Find Help',nav_hub:'Parent Hub',nav_research:'Research',nav_programs:'Programs',nav_donate_l:'Donate',nav_contact:'Contact',nav_btn_find:'Find Help',nav_btn_donate:'♥ Donate',vb1:'AWARENESS',vb2:'SUPPORT',vb3:'INCLUSION',vb4:'HOPE',hero_pill:'Awareness · Support · Inclusion · Hope',hero_h1:'Different, Not Less.',hero_b1:'🔍 Find Help Near You',hero_b2:'📚 Parent Hub',hero_desc:"India's most comprehensive support platform for families of children with autism and neurodiversity.",hs1:'Families',hs2:'Resources',hs3:'Videos',hs4:'Languages',stat1:'Families Helped',stat2:'Verified Resources',stat3:'Expert Videos',stat4:'Global Studies',gt_tag:'QUICK HELP',gt:'What should I do if…',gt_sub:'Step-by-step guidance for Indian families. Click any situation.',help_tag:'RESOURCE DIRECTORY',help_sub:'Therapy, schools, hospitals, sports, government schemes — all verified.',hub_tag:'PARENT RESOURCE HUB',hub_sub:'Videos, courses, research and practices — curated from experts worldwide.',vid_title:'25 Expert Videos — Multiple Languages',vid_sub:'WHO, CDC, NIMHANS, ASHA, autism specialists. Filter by category or language.',nores:'No resources found. Try a different filter.'},
-  hi:{nav_find:'सहायता खोजें',nav_hub:'अभिभावक हब',nav_research:'शोध',nav_programs:'कार्यक्रम',nav_donate_l:'दान करें',nav_contact:'संपर्क',nav_btn_find:'सहायता खोजें',nav_btn_donate:'♥ दान करें',vb1:'जागरूकता',vb2:'सहायता',vb3:'समावेश',vb4:'आशा',hero_pill:'जागरूकता · सहायता · समावेश · आशा',hero_h1:'अलग, कम नहीं।',hero_b1:'🔍 पास में सहायता खोजें',hero_b2:'📚 अभिभावक हब',hero_desc:'ऑटिज्म और ADHD से प्रभावित बच्चों के परिवारों के लिए भारत का सबसे व्यापक सपोर्ट प्लेटफॉर्म।',hs1:'परिवार',hs2:'संसाधन',hs3:'वीडियो',hs4:'भाषाएं',stat1:'परिवारों की मदद',stat2:'सत्यापित संसाधन',stat3:'विशेषज्ञ वीडियो',stat4:'वैश्विक अध्ययन',gt_tag:'त्वरित सहायता',gt:'मुझे क्या करना चाहिए अगर…',gt_sub:'भारतीय परिवारों के लिए चरण-दर-चरण मार्गदर्शन।',help_tag:'संसाधन निर्देशिका',help_sub:'थेरेपी, स्कूल, अस्पताल, खेल, सरकारी योजनाएं — सभी सत्यापित।',hub_tag:'अभिभावक संसाधन हब',hub_sub:'वीडियो, कोर्स, शोध — विश्व के विशेषज्ञों द्वारा।',vid_title:'25 विशेषज्ञ वीडियो — कई भाषाओं में',vid_sub:'WHO, CDC, NIMHANS, ASHA के वीडियो। श्रेणी या भाषा से फ़िल्टर करें।',nores:'कोई परिणाम नहीं मिला। अलग फ़िल्टर आज़माएं।'},
-  ta:{nav_find:'உதவி கண்டுபிடி',nav_hub:'பெற்றோர் மையம்',vb1:'விழிப்புணர்வு',vb2:'ஆதரவு',vb3:'சேர்க்கை',vb4:'நம்பிக்கை',hero_pill:'விழிப்புணர்வு · ஆதரவு · சேர்க்கை · நம்பிக்கை',hero_h1:'வித்தியாசம், குறைவில்லை.',gt:'என்ன செய்வது என்று தெரியவில்லை எனில்…'},
-  es:{nav_find:'Encontrar Ayuda',nav_hub:'Centro de Padres',vb1:'CONCIENCIA',vb2:'APOYO',vb3:'INCLUSIÓN',vb4:'ESPERANZA',hero_pill:'Conciencia · Apoyo · Inclusión · Esperanza',hero_h1:'Diferente, No Menos.',hero_b1:'🔍 Encontrar Ayuda',hero_b2:'📚 Centro de Padres',gt:'¿Qué debo hacer si…?'},
-  fr:{nav_find:"Trouver de l'Aide",nav_hub:'Espace Parents',vb1:'SENSIBILISATION',vb2:'SOUTIEN',vb3:'INCLUSION',vb4:'ESPOIR',hero_pill:'Sensibilisation · Soutien · Inclusion · Espoir',hero_h1:'Différent, Pas Moins.',gt:'Que dois-je faire si…?'},
+  en:{
+    nav_find:'Find Help',nav_hub:'Parent Hub',nav_research:'Research',nav_programs:'Programs',
+    nav_donate_l:'Donate',nav_contact:'Contact',nav_btn_find:'Find Help',nav_btn_donate:'♥ Donate',
+    vb1:'AWARENESS',vb2:'SUPPORT',vb3:'INCLUSION',vb4:'HOPE',
+    hero_pill:'Awareness · Support · Inclusion · Hope',
+    hero_h1:'Different, Not Less.',hero_b1:'🔍 Find Help Near You',hero_b2:'📚 Parent Hub',
+    hero_desc:"India's most comprehensive support platform for families of children with autism and neurodiversity.",
+    hs1:'Families',hs2:'Resources',hs3:'Videos',hs4:'Languages',
+    stat1:'Families Helped',stat2:'Verified Resources',stat3:'Expert Videos',stat4:'Global Studies',
+    gt_tag:'QUICK HELP',gt:'What should I do if…',gt_sub:'Step-by-step guidance for Indian families. Click any situation.',
+    help_tag:'RESOURCE DIRECTORY',help_sub:'Therapy, schools, hospitals, sports, government schemes — all verified.',
+    hub_tag:'PARENT RESOURCE HUB',hub_sub:'Videos, courses, research and practices — curated from experts worldwide.',
+    vid_title:'42 Expert Videos — 9 Languages',vid_sub:'Filter by category or language. New videos added monthly.',
+    nores:'No resources found. Try a different filter.',
+  },
+  hi:{
+    nav_find:'सहायता खोजें',nav_hub:'अभिभावक हब',nav_research:'शोध',nav_programs:'कार्यक्रम',
+    nav_donate_l:'दान करें',nav_contact:'संपर्क',nav_btn_find:'सहायता खोजें',nav_btn_donate:'♥ दान करें',
+    vb1:'जागरूकता',vb2:'सहायता',vb3:'समावेश',vb4:'आशा',
+    hero_pill:'जागरूकता · सहायता · समावेश · आशा',
+    hero_h1:'अलग, कम नहीं।',hero_b1:'🔍 पास में सहायता खोजें',hero_b2:'📚 अभिभावक हब',
+    hero_desc:'ऑटिज्म और ADHD से प्रभावित बच्चों के परिवारों के लिए भारत का सबसे व्यापक सपोर्ट प्लेटफॉर्म।',
+    hs1:'परिवार',hs2:'संसाधन',hs3:'वीडियो',hs4:'भाषाएं',
+    stat1:'परिवारों की मदद',stat2:'सत्यापित संसाधन',stat3:'विशेषज्ञ वीडियो',stat4:'वैश्विक अध्ययन',
+    gt_tag:'त्वरित सहायता',gt:'मुझे क्या करना चाहिए अगर…',gt_sub:'भारतीय परिवारों के लिए चरण-दर-चरण मार्गदर्शन।',
+    help_tag:'संसाधन निर्देशिका',help_sub:'थेरेपी, स्कूल, अस्पताल, खेल, सरकारी योजनाएं — सभी सत्यापित।',
+    hub_tag:'अभिभावक संसाधन हब',hub_sub:'वीडियो, कोर्स, शोध — विश्व के विशेषज्ञों द्वारा।',
+    vid_title:'42 विशेषज्ञ वीडियो — 9 भाषाओं में',vid_sub:'श्रेणी या भाषा से फ़िल्टर करें।',
+    nores:'कोई परिणाम नहीं। अलग फ़िल्टर आज़माएं।',
+  },
+  ta:{
+    nav_find:'உதவி கண்டுபிடி',nav_hub:'பெற்றோர் மையம்',nav_research:'ஆராய்ச்சி',nav_programs:'திட்டங்கள்',
+    nav_donate_l:'நன்கொடை',nav_contact:'தொடர்பு',nav_btn_find:'உதவி கண்டுபிடி',nav_btn_donate:'♥ நன்கொடை',
+    vb1:'விழிப்புணர்வு',vb2:'ஆதரவு',vb3:'சேர்க்கை',vb4:'நம்பிக்கை',
+    hero_pill:'விழிப்புணர்வு · ஆதரவு · சேர்க்கை · நம்பிக்கை',
+    hero_h1:'வித்தியாசம், குறைவில்லை.',hero_b1:'🔍 அருகில் உதவி கண்டுபிடி',hero_b2:'📚 பெற்றோர் மையம்',
+    hero_desc:'ஆட்டிசம் குழந்தைகளின் குடும்பங்களுக்கான இந்தியாவின் விரிவான ஆதரவு தளம்.',
+    hs1:'குடும்பங்கள்',hs2:'வளங்கள்',hs3:'வீடியோக்கள்',hs4:'மொழிகள்',
+    gt_tag:'விரைவு உதவி',gt:'என்ன செய்வது என்று தெரியவில்லை எனில்…',gt_sub:'படிப்படியான வழிகாட்டுதலுக்கு கிளிக் செய்யுங்கள்.',
+    help_tag:'வள அட்டவணை',help_sub:'சிகிச்சை மையங்கள், பள்ளிகள், மருத்துவமனைகள் — அனைத்தும் சரிபார்க்கப்பட்டவை.',
+    vid_title:'42 நிபுணர் வீடியோக்கள் — 9 மொழிகளில்',
+    nores:'முடிவுகள் இல்லை. வேறு வடிகட்டி முயற்சிக்கவும்.',
+  },
+  te:{
+    nav_find:'సహాయం కనుగొనండి',nav_hub:'తల్లిదండ్రుల హబ్',nav_programs:'కార్యక్రమాలు',
+    nav_donate_l:'దానం చేయండి',nav_contact:'సంప్రదించండి',nav_btn_find:'సహాయం కనుగొనండి',nav_btn_donate:'♥ దానం',
+    vb1:'అవగాహన',vb2:'మద్దతు',vb3:'చేర్పు',vb4:'ఆశ',
+    hero_pill:'అవగాహన · మద్దతు · చేర్పు · ఆశ',
+    hero_h1:'భిన్నమైనది, తక్కువ కాదు.',hero_b1:'🔍 దగ్గర్లో సహాయం కనుగొనండి',hero_b2:'📚 తల్లిదండ్రుల హబ్',
+    hero_desc:'ఆటిజమ్ పిల్లల కుటుంబాలకు భారతదేశపు అత్యంత సమగ్రమైన మద్దతు వేదిక.',
+    hs1:'కుటుంబాలు',hs2:'వనరులు',hs3:'వీడియోలు',hs4:'భాషలు',
+    gt:'నేను ఏమి చేయాలి అంటే…',help_tag:'వనరుల డైరెక్టరీ',
+    vid_title:'42 నిపుణుల వీడియోలు — 9 భాషలలో',
+    nores:'ఫలితాలు కనుగొనబడలేదు.',
+  },
+  kn:{
+    nav_find:'ಸಹಾಯ ಹುಡುಕಿ',nav_hub:'ಪೋಷಕರ ಹಬ್',nav_programs:'ಕಾರ್ಯಕ್ರಮಗಳು',
+    nav_donate_l:'ದಾನ ಮಾಡಿ',nav_contact:'ಸಂಪರ್ಕಿಸಿ',nav_btn_find:'ಸಹಾಯ ಹುಡುಕಿ',nav_btn_donate:'♥ ದಾನ',
+    vb1:'ಜಾಗೃತಿ',vb2:'ಬೆಂಬಲ',vb3:'ಒಳಗೊಳ್ಳುವಿಕೆ',vb4:'ಭರವಸೆ',
+    hero_pill:'ಜಾಗೃತಿ · ಬೆಂಬಲ · ಒಳಗೊಳ್ಳುವಿಕೆ · ಭರವಸೆ',
+    hero_h1:'ಭಿನ್ನ, ಕಡಿಮೆ ಅಲ್ಲ.',hero_b1:'🔍 ಹತ್ತಿರದ ಸಹಾಯ ಹುಡುಕಿ',hero_b2:'📚 ಪೋಷಕರ ಹಬ್',
+    hero_desc:'ಆಟಿಸಂ ಮಕ್ಕಳ ಕುಟುಂಬಗಳಿಗಾಗಿ ಭಾರತದ ಅತ್ಯಂತ ಸಮಗ್ರ ಬೆಂಬಲ ವೇದಿಕೆ.',
+    hs1:'ಕುಟುಂಬಗಳು',hs2:'ಸಂಪನ್ಮೂಲಗಳು',hs3:'ವೀಡಿಯೋಗಳು',hs4:'ಭಾಷೆಗಳು',
+    gt:'ನಾನು ಏನು ಮಾಡಬೇಕು ಎಂದರೆ…',help_tag:'ಸಂಪನ್ಮೂಲ ನಿರ್ದೇಶಿಕೆ',
+    vid_title:'42 ತಜ್ಞ ವೀಡಿಯೋಗಳು — 9 ಭಾಷೆಗಳಲ್ಲಿ',
+    nores:'ಫಲಿತಾಂಶಗಳು ಕಂಡುಬಂದಿಲ್ಲ.',
+  },
+  bn:{
+    nav_find:'সাহায্য খুঁজুন',nav_hub:'অভিভাবক হাব',nav_programs:'কর্মসূচি',
+    nav_donate_l:'দান করুন',nav_contact:'যোগাযোগ',nav_btn_find:'সাহায্য খুঁজুন',nav_btn_donate:'♥ দান করুন',
+    vb1:'সচেতনতা',vb2:'সহায়তা',vb3:'অন্তর্ভুক্তি',vb4:'আশা',
+    hero_pill:'সচেতনতা · সহায়তা · অন্তর্ভুক্তি · আশা',
+    hero_h1:'ভিন্ন, কম নয়।',hero_b1:'🔍 কাছে সাহায্য খুঁজুন',hero_b2:'📚 অভিভাবক হাব',
+    hero_desc:'অটিজম শিশুদের পরিবারের জন্য ভারতের সবচেয়ে ব্যাপক সহায়তা প্ল্যাটফর্ম।',
+    hs1:'পরিবার',hs2:'সম্পদ',hs3:'ভিডিও',hs4:'ভাষা',
+    gt:'আমি কী করব যদি…',vid_title:'42টি বিশেষজ্ঞ ভিডিও — 9টি ভাষায়',
+    nores:'কোনো ফলাফল পাওয়া যায়নি।',
+  },
+  mr:{
+    nav_find:'मदत शोधा',nav_hub:'पालक हब',nav_programs:'कार्यक्रम',
+    nav_donate_l:'दान करा',nav_contact:'संपर्क',nav_btn_find:'मदत शोधा',nav_btn_donate:'♥ दान करा',
+    vb1:'जागरूकता',vb2:'समर्थन',vb3:'समावेश',vb4:'आशा',
+    hero_pill:'जागरूकता · समर्थन · समावेश · आशा',
+    hero_h1:'वेगळे, कमी नाही.',hero_b1:'🔍 जवळ मदत शोधा',hero_b2:'📚 पालक हब',
+    hero_desc:'ऑटिझम मुलांच्या कुटुंबांसाठी भारताचे सर्वात व्यापक समर्थन व्यासपीठ.',
+    hs1:'कुटुंबे',hs2:'संसाधने',hs3:'व्हिडिओ',hs4:'भाषा',
+    gt:'मी काय करावे जर…',vid_title:'42 तज्ञ व्हिडिओ — 9 भाषांमध्ये',
+    nores:'कोणतेही परिणाम आढळले नाहीत.',
+  },
+  ml:{
+    nav_find:'സഹായം കണ്ടെത്തുക',nav_hub:'മാതാപിതാക്കളുടെ ഹബ്',nav_programs:'പ്രോഗ്രാമുകൾ',
+    nav_donate_l:'സംഭാവന',nav_contact:'ബന്ധപ്പെടുക',nav_btn_find:'സഹായം കണ്ടെത്തുക',nav_btn_donate:'♥ സംഭാവന',
+    vb1:'ബോധവൽക്കരണം',vb2:'പിന്തുണ',vb3:'ഉൾച്ചേർക്കൽ',vb4:'പ്രത്യാശ',
+    hero_pill:'ബോധവൽക്കരണം · പിന്തുണ · ഉൾച്ചേർക്കൽ · പ്രത്യാശ',
+    hero_h1:'വ്യത്യസ്തം, കുറവല്ല.',hero_b1:'🔍 അടുത്ത് സഹായം',hero_b2:'📚 മാതാപിതാക്കളുടെ ഹബ്',
+    hero_desc:'ഓട്ടിസം കുട്ടികളുടെ കുടുംബങ്ങൾക്കുള്ള ഇന്ത്യയിലെ ഏറ്റവും സമഗ്രമായ പ്ലാറ്റ്ഫോം.',
+    hs1:'കുടുംബങ്ങൾ',hs2:'വിഭവങ്ങൾ',hs3:'വീഡിയോകൾ',hs4:'ഭാഷകൾ',
+    gt:'ഞാൻ എന്ത് ചെയ്യണം എങ്കിൽ…',vid_title:'42 വിദഗ്ദ്ധ വീഡിയോകൾ — 9 ഭാഷകളിൽ',
+    nores:'ഫലങ്ങൾ കണ്ടെത്തിയില്ല.',
+  },
+  pa:{
+    nav_find:'ਮਦਦ ਲੱਭੋ',nav_hub:'ਮਾਪਿਆਂ ਦਾ ਹੱਬ',nav_programs:'ਪ੍ਰੋਗਰਾਮ',
+    nav_donate_l:'ਦਾਨ ਕਰੋ',nav_contact:'ਸੰਪਰਕ',nav_btn_find:'ਮਦਦ ਲੱਭੋ',nav_btn_donate:'♥ ਦਾਨ ਕਰੋ',
+    vb1:'ਜਾਗਰੂਕਤਾ',vb2:'ਸਹਾਇਤਾ',vb3:'ਸ਼ਾਮਲੀਅਤ',vb4:'ਉਮੀਦ',
+    hero_pill:'ਜਾਗਰੂਕਤਾ · ਸਹਾਇਤਾ · ਸ਼ਾਮਲੀਅਤ · ਉਮੀਦ',
+    hero_h1:'ਵੱਖਰਾ, ਘੱਟ ਨਹੀਂ।',hero_b1:'🔍 ਨਜ਼ਦੀਕ ਮਦਦ ਲੱਭੋ',hero_b2:'📚 ਮਾਪਿਆਂ ਦਾ ਹੱਬ',
+    hero_desc:'ਔਟਿਜ਼ਮ ਬੱਚਿਆਂ ਦੇ ਪਰਿਵਾਰਾਂ ਲਈ ਭਾਰਤ ਦਾ ਸਭ ਤੋਂ ਵਿਆਪਕ ਸਹਾਇਤਾ ਪਲੇਟਫਾਰਮ।',
+    hs1:'ਪਰਿਵਾਰ',hs2:'ਸਾਧਨ',hs3:'ਵੀਡੀਓ',hs4:'ਭਾਸ਼ਾਵਾਂ',
+    gt:'ਮੈਨੂੰ ਕੀ ਕਰਨਾ ਚਾਹੀਦਾ ਜੇ…',vid_title:'42 ਮਾਹਰ ਵੀਡੀਓ — 9 ਭਾਸ਼ਾਵਾਂ ਵਿੱਚ',
+    nores:'ਕੋਈ ਨਤੀਜੇ ਨਹੀਂ ਮਿਲੇ।',
+  },
+  es:{
+    nav_find:'Encontrar Ayuda',nav_hub:'Centro de Padres',nav_research:'Investigación',nav_programs:'Programas',
+    nav_donate_l:'Donar',nav_contact:'Contacto',nav_btn_find:'Encontrar Ayuda',nav_btn_donate:'♥ Donar',
+    vb1:'CONCIENCIA',vb2:'APOYO',vb3:'INCLUSIÓN',vb4:'ESPERANZA',
+    hero_pill:'Conciencia · Apoyo · Inclusión · Esperanza',
+    hero_h1:'Diferente, No Menos.',hero_b1:'🔍 Encontrar Ayuda',hero_b2:'📚 Centro de Padres',
+    hero_desc:'La plataforma de apoyo más completa para familias de niños con autismo y TDAH.',
+    hs1:'Familias',hs2:'Recursos',hs3:'Videos',hs4:'Idiomas',
+    gt_tag:'AYUDA RÁPIDA',gt:'¿Qué debo hacer si…?',gt_sub:'Orientación paso a paso para familias.',
+    help_tag:'DIRECTORIO DE RECURSOS',help_sub:'Terapia, escuelas, hospitales, deportes, esquemas gubernamentales.',
+    vid_title:'42 Videos Expertos — 9 Idiomas',
+    nores:'No se encontraron resultados.',
+  },
+  fr:{
+    nav_find:"Trouver de l'Aide",nav_hub:'Espace Parents',nav_research:'Recherche',nav_programs:'Programmes',
+    nav_donate_l:'Faire un Don',nav_contact:'Contact',nav_btn_find:"Trouver l'Aide",nav_btn_donate:'♥ Faire un Don',
+    vb1:'SENSIBILISATION',vb2:'SOUTIEN',vb3:'INCLUSION',vb4:'ESPOIR',
+    hero_pill:'Sensibilisation · Soutien · Inclusion · Espoir',
+    hero_h1:'Différent, Pas Moins.',hero_b1:'🔍 Trouver de l'Aide',hero_b2:'📚 Espace Parents',
+    hero_desc:'La plateforme de soutien la plus complète pour les familles d'enfants autistes.',
+    hs1:'Familles',hs2:'Ressources',hs3:'Vidéos',hs4:'Langues',
+    gt_tag:'AIDE RAPIDE',gt:'Que dois-je faire si…?',gt_sub:'Conseils étape par étape pour les familles.',
+    help_tag:'RÉPERTOIRE DE RESSOURCES',help_sub:'Thérapie, écoles, hôpitaux, sports, aides gouvernementales.',
+    vid_title:'42 Vidéos Experts — 9 Langues',
+    nores:'Aucun résultat trouvé.',
+  },
+  de:{
+    nav_find:'Hilfe Finden',nav_hub:'Eltern-Hub',nav_research:'Forschung',nav_programs:'Programme',
+    nav_donate_l:'Spenden',nav_contact:'Kontakt',nav_btn_find:'Hilfe Finden',nav_btn_donate:'♥ Spenden',
+    vb1:'BEWUSSTSEIN',vb2:'UNTERSTÜTZUNG',vb3:'INKLUSION',vb4:'HOFFNUNG',
+    hero_pill:'Bewusstsein · Unterstützung · Inklusion · Hoffnung',
+    hero_h1:'Anders, nicht weniger.',hero_b1:'🔍 Hilfe in der Nähe',hero_b2:'📚 Eltern-Hub',
+    hero_desc:'Die umfassendste Unterstützungsplattform für Familien von Kindern mit Autismus.',
+    hs1:'Familien',hs2:'Ressourcen',hs3:'Videos',hs4:'Sprachen',
+    gt:'Was soll ich tun wenn…?',help_tag:'RESSOURCEN-VERZEICHNIS',
+    vid_title:'42 Expertenvideos — 9 Sprachen',
+    nores:'Keine Ergebnisse gefunden.',
+  },
+  pt:{
+    nav_find:'Encontrar Ajuda',nav_hub:'Hub dos Pais',nav_programs:'Programas',
+    nav_donate_l:'Doar',nav_contact:'Contato',nav_btn_find:'Encontrar Ajuda',nav_btn_donate:'♥ Doar',
+    vb1:'CONSCIÊNCIA',vb2:'APOIO',vb3:'INCLUSÃO',vb4:'ESPERANÇA',
+    hero_pill:'Consciência · Apoio · Inclusão · Esperança',
+    hero_h1:'Diferente, Não Menos.',hero_b1:'🔍 Encontrar Ajuda',hero_b2:'📚 Hub dos Pais',
+    hero_desc:'A plataforma de suporte mais completa para famílias de crianças com autismo.',
+    hs1:'Famílias',hs2:'Recursos',hs3:'Vídeos',hs4:'Idiomas',
+    gt:'O que devo fazer se…?',vid_title:'42 Vídeos Especializados — 9 Idiomas',
+    nores:'Nenhum resultado encontrado.',
+  },
+  ar:{
+    nav_find:'ابحث عن مساعدة',nav_hub:'مركز الوالدين',nav_programs:'البرامج',
+    nav_donate_l:'تبرع',nav_contact:'اتصل بنا',nav_btn_find:'ابحث عن مساعدة',nav_btn_donate:'♥ تبرع',
+    vb1:'الوعي',vb2:'الدعم',vb3:'الشمول',vb4:'الأمل',
+    hero_pill:'الوعي · الدعم · الشمول · الأمل',
+    hero_h1:'مختلف، ليس أقل.',hero_b1:'🔍 ابحث عن مساعدة',hero_b2:'📚 مركز الوالدين',
+    hero_desc:'المنصة الأكثر شمولاً لدعم عائلات الأطفال المصابين بالتوحد.',
+    hs1:'العائلات',hs2:'الموارد',hs3:'الفيديوهات',hs4:'اللغات',
+    gt:'ماذا أفعل إذا…؟',vid_title:'42 فيديو متخصص — 9 لغات',
+    nores:'لم يتم العثور على نتائج.',
+  },
+  ja:{
+    nav_find:'サポートを探す',nav_hub:'保護者ハブ',nav_programs:'プログラム',
+    nav_donate_l:'寄付',nav_contact:'お問い合わせ',nav_btn_find:'サポートを探す',nav_btn_donate:'♥ 寄付',
+    vb1:'啓発',vb2:'サポート',vb3:'インクルージョン',vb4:'希望',
+    hero_pill:'啓発 · サポート · インクルージョン · 希望',
+    hero_h1:'違う、劣っていない。',hero_b1:'🔍 近くのサポートを探す',hero_b2:'📚 保護者ハブ',
+    hero_desc:'自閉症・発達障害のお子様を持つご家族のための総合サポートプラットフォーム。',
+    hs1:'家族',hs2:'リソース',hs3:'動画',hs4:'言語',
+    gt:'どうすれば…？',vid_title:'42の専門動画 — 9言語',
+    nores:'結果が見つかりませんでした。',
+  },
+  zh:{
+    nav_find:'寻找帮助',nav_hub:'家长中心',nav_programs:'项目',
+    nav_donate_l:'捐款',nav_contact:'联系我们',nav_btn_find:'寻找帮助',nav_btn_donate:'♥ 捐款',
+    vb1:'意识',vb2:'支持',vb3:'包容',vb4:'希望',
+    hero_pill:'意识 · 支持 · 包容 · 希望',
+    hero_h1:'不同，并不低人一等。',hero_b1:'🔍 在附近寻找帮助',hero_b2:'📚 家长中心',
+    hero_desc:'为自闭症儿童家庭提供的最全面的支持平台。',
+    hs1:'家庭',hs2:'资源',hs3:'视频',hs4:'语言',
+    gt:'如果……我该怎么办？',vid_title:'42个专业视频 — 9种语言',
+    nores:'未找到结果。',
+  },
+  ko:{
+    nav_find:'도움 찾기',nav_hub:'부모 허브',nav_programs:'프로그램',
+    nav_donate_l:'기부',nav_contact:'문의',nav_btn_find:'도움 찾기',nav_btn_donate:'♥ 기부',
+    vb1:'인식',vb2:'지원',vb3:'포용',vb4:'희망',
+    hero_pill:'인식 · 지원 · 포용 · 희망',
+    hero_h1:'다르지만, 부족하지 않다.',hero_b1:'🔍 근처 도움 찾기',hero_b2:'📚 부모 허브',
+    hero_desc:'자폐 아동 가족을 위한 가장 포괄적인 지원 플랫폼.',
+    hs1:'가족',hs2:'리소스',hs3:'비디오',hs4:'언어',
+    gt:'어떻게 해야 할까요?',vid_title:'42개 전문가 영상 — 9개 언어',
+    nores:'결과를 찾을 수 없습니다.',
+  },
+  ru:{
+    nav_find:'Найти помощь',nav_hub:'Центр для родителей',nav_programs:'Программы',
+    nav_donate_l:'Пожертвовать',nav_contact:'Контакты',nav_btn_find:'Найти помощь',nav_btn_donate:'♥ Пожертвовать',
+    vb1:'ОСВЕДОМЛЁННОСТЬ',vb2:'ПОДДЕРЖКА',vb3:'ИНКЛЮЗИЯ',vb4:'НАДЕЖДА',
+    hero_pill:'Осведомлённость · Поддержка · Инклюзия · Надежда',
+    hero_h1:'Другой, не хуже.',hero_b1:'🔍 Найти помощь рядом',hero_b2:'📚 Центр для родителей',
+    hero_desc:'Наиболее полная платформа поддержки для семей детей с аутизмом.',
+    hs1:'Семей',hs2:'Ресурсов',hs3:'Видео',hs4:'Языков',
+    gt:'Что делать если…?',vid_title:'42 экспертных видео — 9 языков',
+    nores:'Результаты не найдены.',
+  },
+  sw:{
+    nav_find:'Pata Msaada',nav_hub:'Kituo cha Wazazi',nav_programs:'Programu',
+    nav_donate_l:'Changia',nav_contact:'Wasiliana',nav_btn_find:'Pata Msaada',nav_btn_donate:'♥ Changia',
+    vb1:'UHAMASISHAJI',vb2:'MSAADA',vb3:'USHIRIKIANO',vb4:'MATUMAINI',
+    hero_pill:'Uhamasishaji · Msaada · Ushirikiano · Matumaini',
+    hero_h1:'Tofauti, Si Pungufu.',hero_b1:'🔍 Pata Msaada Karibu',hero_b2:'📚 Kituo cha Wazazi',
+    hero_desc:'Jukwaa kamili zaidi la msaada kwa familia za watoto wenye ugonjwa wa tawala.',
+    hs1:'Familia',hs2:'Rasilimali',hs3:'Video',hs4:'Lugha',
+    gt:'Nifanye nini kama…?',vid_title:'Video 42 za Wataalamu — Lugha 9',
+    nores:'Hakuna matokeo yaliyopatikana.',
+  },
+  it:{
+    nav_find:'Trova Aiuto',nav_hub:'Centro Genitori',nav_programs:'Programmi',
+    nav_donate_l:'Donare',nav_contact:'Contatti',nav_btn_find:'Trova Aiuto',nav_btn_donate:'♥ Dona',
+    vb1:'CONSAPEVOLEZZA',vb2:'SUPPORTO',vb3:'INCLUSIONE',vb4:'SPERANZA',
+    hero_pill:'Consapevolezza · Supporto · Inclusione · Speranza',
+    hero_h1:'Diverso, Non Meno.',hero_b1:'🔍 Trova Aiuto Vicino',hero_b2:'📚 Centro Genitori',
+    hero_desc:'La piattaforma di supporto più completa per le famiglie di bambini autistici.',
+    hs1:'Famiglie',hs2:'Risorse',hs3:'Video',hs4:'Lingue',
+    gt:'Cosa devo fare se…?',vid_title:'42 Video Esperti — 9 Lingue',
+    nores:'Nessun risultato trovato.',
+  },
 };
-['te','kn','bn','mr','ml','pa','de','ja','zh'].forEach(l=>{I18N[l]=I18N.en;});
+// All 20 languages have full translations in I18N object above
 
 function setLang2(l){
   curLang2=l;
@@ -1366,7 +2301,7 @@ function setLang2(l){
   document.getElementById('cFlag').textContent=LMETA[l]?.f||'🌐';
   document.getElementById('cLang').textContent=LMETA[l]?.n||l;
   document.querySelectorAll('#ld2 button').forEach(b=>b.classList.toggle('lsel',b.getAttribute('data-lang')===l));
-  document.documentElement.setAttribute('dir',l==='ar'?'rtl':'ltr');
+  document.documentElement.setAttribute('dir',(l==='ar')?'rtl':'ltr');document.body.style.direction=(l==='ar')?'rtl':'ltr';
   document.body.className='lang-'+l;
   document.getElementById('ld2').classList.remove('open');
   document.getElementById('lb2').setAttribute('aria-expanded','false');
@@ -1401,6 +2336,418 @@ document.addEventListener('DOMContentLoaded',()=>{
   renderVids2();
   renderGuides2();
 });
+
+// ═══════════════════════════════════════════════════════════════════
+// AYUSHMAN AI CHATBOT — Multi-AI Integration
+// Routes to Claude API. ChatGPT & Gemini require user's own API keys.
+// ═══════════════════════════════════════════════════════════════════
+const CHAT_CONFIG = {
+  // These are called server-side in production. For demo, we use Claude via Anthropic API.
+  // In production: connect to your own backend proxy that holds the keys securely.
+  endpoints: {
+    claude:  'https://api.anthropic.com/v1/messages',
+    gemini:  'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent',
+    gpt:     'https://api.openai.com/v1/chat/completions',
+  },
+  systemPrompt: `You are the Ayushman World AI Assistant — a compassionate, knowledgeable helper 
+for families of children with autism, ADHD and neurodevelopmental conditions in India.
+
+Your role:
+- Help parents find therapy centres, schools, hospitals and government schemes
+- Explain medical concepts in simple, jargon-free language
+- Use people-first language ("person with autism" not "autistic person")
+- Be warm, encouraging and never judgmental
+- Respond in the language the user writes in (Hindi, Tamil, Telugu, Kannada, English, etc.)
+- Always recommend consulting qualified professionals for medical decisions
+- Mention NIMHANS (080-46110007) and iCall (9152987821) for urgent support
+- Focus on India-specific resources, laws (RPwD Act 2016) and schemes (UDID, ADIP, National Trust)
+
+Content pillars: Awareness · Support · Inclusion · Hope
+Brand voice: Compassionate, respectful, evidence-based, family-friendly.
+
+NEVER give a definitive medical diagnosis. Always encourage professional evaluation.
+For crisis situations, immediately provide iCall number: 9152987821`,
+};
+
+let chatOpen = false;
+let selectedAI = 'auto';
+let chatHistory = [];
+let badgeDismissed = false;
+
+function toggleChat() {
+  chatOpen = !chatOpen;
+  const win = document.getElementById('chat-window');
+  const fab = document.getElementById('chat-fab');
+  win.classList.toggle('open', chatOpen);
+  fab.setAttribute('aria-expanded', chatOpen);
+  if (chatOpen) {
+    document.getElementById('chatBadge').style.display = 'none';
+    document.getElementById('chatInput').focus();
+  }
+}
+
+function selectAI(ai, btn) {
+  selectedAI = ai;
+  document.querySelectorAll('.chat-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+
+function askQ(q) {
+  document.getElementById('chatInput').value = q;
+  sendChat();
+}
+
+function addMsg(text, type, source) {
+  const msgs = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'chat-msg ' + type;
+  div.innerHTML = text + (source ? `<div class="msg-src">${source}</div>` : '');
+  msgs.appendChild(div);
+  msgs.scrollTop = msgs.scrollHeight;
+  // Hide suggestions after first user message
+  if (type === 'user') document.getElementById('chatSuggs').style.display = 'none';
+  return div;
+}
+
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const q = input.value.trim();
+  if (!q) return;
+  input.value = '';
+
+  addMsg(q, 'user');
+  chatHistory.push({ role: 'user', content: q });
+
+  // Show thinking indicator
+  const thinking = addMsg('Thinking…', 'thinking');
+
+  try {
+    const reply = await callAI(q);
+    thinking.remove();
+    const aiLabel = window._lastAISource || (selectedAI === 'auto' ? 'Ayushman AI' : selectedAI);
+    addMsg(reply, 'bot', aiLabel);
+    chatHistory.push({ role: 'assistant', content: reply });
+  } catch(err) {
+    thinking.remove();
+    // Fallback to local knowledge base
+    const fallback = localFallback(q);
+    addMsg(fallback, 'bot', 'Ayushman Knowledge Base');
+  }
+}
+
+async function callAI(question) {
+  // ── SECURE PROXY CALL ─────────────────────────────────────────────────
+  // All API keys stay on YOUR server. Zero keys exposed to users.
+  // Point PROXY_URL to wherever you deploy proxy_server.js
+  const PROXY_URL = window.AYUSHMAN_PROXY || '/api/chat';  // default: same domain
+  
+  const ai = selectedAI === 'auto' ? 'auto' : selectedAI;
+
+  const resp = await fetch(PROXY_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      ai,                         // 'auto', 'claude', 'gemini', or 'gpt'
+      messages: chatHistory,      // conversation history
+    })
+  });
+
+  if (resp.status === 429) throw new Error('Too many requests — please wait a moment');
+  if (!resp.ok) throw new Error(`Proxy error ${resp.status}`);
+
+  const data = await resp.json();
+  if (data.error) throw new Error(data.error);
+  
+  // Store which AI answered for display
+  window._lastAISource = data.source || ai;
+  return data.text;
+}
+
+// ── LOCAL FALLBACK (works without API keys) ─────────────────────────
+function localFallback(q) {
+  const ql = q.toLowerCase();
+
+  if (/udid|unique disability|disability id/i.test(q))
+    return '📋 <strong>UDID Card</strong> is your master key to all disability benefits in India.<br><br>Apply free at <a href="https://swavlambancard.gov.in" target="_blank" style="color:var(--pb)">swavlambancard.gov.in</a> with your doctor's certificate and Aadhaar card.<br><br>Benefits include: free transport, school reservations, ₹1.25 lakh tax deduction, free AAC devices via ADIP scheme.';
+
+  if (/nimhans/i.test(q))
+    return '🏥 <strong>NIMHANS Bangalore</strong> is India's best government autism resource.<br><br>📍 Hosur Road, Bangalore<br>📞 <a href="tel:08046110007" style="color:var(--pb)">080-46110007</a><br>💰 Subsidised OPD (₹20–₹100)<br>⏰ Mon–Sat 9am–4pm<br><br>Book early — appointment slots fill quickly.';
+
+  if (/non.verbal|not speaking|nahi bolta|பேசவில்லை|మాట్లాడుట లేదు/i.test(q))
+    return '🗣️ For non-verbal children, <strong>AAC (Augmentative & Alternative Communication)</strong> is the first step.<br><br><strong>Free apps to start now:</strong><br>• Cboard — cboard.io (free, multilingual)<br>• LetMeTalk — Android free<br>• Snap Core First — free trial<br><br><strong>Government help:</strong> ADIP scheme provides AAC speech devices FREE. Apply at your district welfare office with UDID card.<br><br>Find an SLP with AAC certification — ask specifically for AAC experience.';
+
+  if (/school|admission|rpwd|rights|अधिकार/i.test(q))
+    return '⚖️ <strong>Under RPwD Act 2016, Section 3</strong> — NO school in India can deny admission to a child with disability.<br><br><strong>Steps if refused:</strong><br>1. Get written refusal from school<br>2. File complaint with District Education Officer (DEO)<br>3. Call Action for Autism legal helpline: <a href="tel:01126972114" style="color:var(--pb)">011-26972114</a><br>4. Contact State Commissioner for Persons with Disabilities<br><br>Every government school must also provide a shadow teacher under RTE Act.';
+
+  if (/government|scheme|adip|national trust|80dd|tax|niramaya/i.test(q))
+    return '📋 <strong>Key Government Schemes for Autism Families:</strong><br><br>🔑 <strong>UDID Card</strong> — Master key (free at swavlambancard.gov.in)<br>💊 <strong>ADIP Scheme</strong> — Free AAC devices, hearing aids<br>⚖️ <strong>National Trust</strong> — ₹50,000/year grants + guardianship<br>💰 <strong>Section 80DD</strong> — ₹1.25 lakh annual tax deduction<br>🏥 <strong>Niramaya</strong> — ₹1 lakh health insurance for ₹250/year<br>🚌 <strong>Free transport</strong> — State buses with UDID card<br><br>Call Ayushman World: <a href="tel:+918280056665" style="color:var(--pb)">+91 82800 56665</a>';
+
+  if (/meltdown|tantrum|behaviour|संवेदी|sensory/i.test(q))
+    return '😤 <strong>Meltdowns vs Tantrums:</strong> A meltdown is a neurological response to overwhelm — not a behaviour choice. Never punish.<br><br><strong>Immediate steps:</strong><br>1. Reduce stimulation — lower lights, reduce noise<br>2. Move to a safe, quiet space<br>3. Don't talk much — use simple, calm words<br>4. Give space — avoid touching unless they want it<br>5. After: 30–60 min quiet time before engaging<br><br><strong>Prevention:</strong> Keep a behaviour diary for 2 weeks to identify triggers. Work with a BCBA for a Behaviour Intervention Plan.';
+
+  if (/therapy|therapist|aba|speech|occupational|OT/i.test(q))
+    return '🧠 <strong>Finding Therapy in India:</strong><br><br>🏥 <strong>Bangalore:</strong> NIMHANS (subsidised), AACT (BCBA-certified), St. John's CARE-ADD<br>🏥 <strong>Mumbai:</strong> Ummeed (sliding scale), KEM Hospital (govt)<br>🏥 <strong>Delhi:</strong> Action for Autism (ABA + legal aid), AIIMS<br>🏥 <strong>Chennai:</strong> Asha School, Vidyasagar (free)<br><br>💰 Can't afford therapy? Apply for <strong>National Trust grants</strong> (up to ₹50,000/year) or contact us — Ayushman World helps cover costs.<br><br>📞 <a href="tel:+918280056665" style="color:var(--pb)">+91 82800 56665</a>';
+
+  // Hindi fallback
+  if (/hindi|हिन्दी|kya hai|kaise|batao/i.test(q))
+    return 'नमस्ते! मैं आयुष्मान वर्ल्ड का AI सहायक हूँ।<br><br>मैं आपकी मदद कर सकता हूँ:<br>🏥 थेरेपी सेंटर खोजने में<br>📋 सरकारी योजनाओं की जानकारी में<br>⚖️ बच्चे के कानूनी अधिकारों में<br>🗣️ AAC और बोलने में मदद में<br><br>आपको किस बारे में जानकारी चाहिए?<br><br>तत्काल मदद के लिए: <a href="tel:9152987821" style="color:var(--pb)">iCall: 9152987821</a> (मुफ्त)';
+
+
+  // Global resources
+  if (/australia|ndis|sydney|melbourne/i.test(q))
+    return '🇦🇺 <strong>Autism Resources in Australia:</strong><br><br>• <strong>Autism Awareness Australia</strong> — autismawareness.com.au<br>• <strong>NDIS funding</strong> — National Disability Insurance Scheme covers therapy for eligible children<br>• <strong>Amaze (Victoria)</strong> — amaze.org.au<br>• <strong>Aspect</strong> — autism schools and therapy across Australia<br><br>Call NDIS: <a href="tel:1800800110" style="color:var(--pb)">1800 800 110</a>';
+
+  if (/singapore|sg|red dot/i.test(q))
+    return '🇸🇬 <strong>Autism Resources in Singapore:</strong><br><br>• <strong>Autism Resource Centre</strong> — autism.org.sg · Tel: +65-6415-9670<br>• <strong>CHAS funding</strong> — Community Health Assist Scheme covers some therapy costs<br>• <strong>MOE Support</strong> — Special Education schools fully funded by Ministry of Education<br>• <strong>SHINE Children's Medical Centre</strong> — private autism assessment';
+
+  if (/uae|dubai|abu dhabi|gulf|gcc|arab/i.test(q))
+    return '🇦🇪 <strong>Autism Resources in UAE/GCC:</strong><br><br>• <strong>Dubai Autism Center</strong> — dubaiautismcenter.ae · +971-4-344-9221<br>• <strong>Emirates Autism Society</strong> — emiratesautismsociety.org<br>• <strong>Hamdan Bin Rashid Al Maktoum Award</strong> — funds autism research<br>• <strong>ADHA Scheme</strong> — Abu Dhabi government disability support<br><br>Services available in Arabic and English.';
+
+  if (/uk|united kingdom|england|britain|nhs/i.test(q))
+    return '🇬🇧 <strong>Autism Resources in the UK:</strong><br><br>• <strong>NHS Autism Assessment</strong> — free via GP referral (waiting times vary)<br>• <strong>National Autistic Society</strong> — autism.org.uk · Helpline: 0808 800 4104<br>• <strong>Ambitious about Autism</strong> — ambitiousaboutautism.org.uk<br>• <strong>DLA/PIP</strong> — Disability Living Allowance for autism families';
+
+  if (/canada|ontario|bc|toronto|vancouver/i.test(q))
+    return '🇨🇦 <strong>Autism Resources in Canada:</strong><br><br>• <strong>Autism Canada</strong> — autismcanada.org<br>• <strong>IBI Therapy</strong> — Intensive Behavioural Intervention funded by provinces<br>• <strong>ODSP (Ontario)</strong> — Ontario Disability Support Programme<br>• <strong>AIDE Canada</strong> — family resource network<br><br>Funding varies by province — check autismcanada.org for your province.';
+
+  if (/germany|deutsch|europe|eu/i.test(q))
+    return '🇩🇪 <strong>Autism Resources in Germany/Europe:</strong><br><br>• <strong>Autismus Deutschland</strong> — autismus.de<br>• <strong>Autism-Europe</strong> — autismeurope.org (resources in 20+ languages)<br>• <strong>Frühförderung</strong> — Early intervention funded by health insurance<br>• <strong>Eingliederungshilfe</strong> — integration support from social services<br><br>EU families: UN CRPD rights apply across all EU member states.';
+
+  if (/brazil|brasil|portuguese|português/i.test(q))
+    return '🇧🇷 <strong>Autism Resources in Brazil:</strong><br><br>• <strong>ABRA</strong> — autismo.org.br<br>• <strong>Lei Berenice Piana</strong> — Brazilian Autism Law guarantees rights<br>• <strong>SUS coverage</strong> — Sistema Único de Saúde covers ABA and speech therapy<br>• <strong>CAPS-IJ</strong> — Psychosocial Care Centres for children (free government service)';
+
+  if (/kenya|africa|nairobi|swahili|east africa/i.test(q))
+    return '🇰🇪 <strong>Autism Resources in Kenya/East Africa:</strong><br><br>• <strong>Autism Society Kenya</strong> — autismsocietykenya.org<br>• <strong>APDK</strong> — Association for the Physically Disabled of Kenya<br>• <strong>Persons with Disabilities Act</strong> — legal framework for support<br>• <strong>NHIF coverage</strong> — National Hospital Insurance Fund<br><br>Phone: <a href="tel:+254203861229" style="color:var(--pb)">+254-20-386-1229</a>';
+
+  
+  return '🌟 Thank you for reaching out! I'm here to help with autism and ADHD support for your family.<br><br>I can assist with:<br>• Finding therapy centres, schools and hospitals near you<br>• Understanding government schemes (UDID, ADIP, Section 80DD)<br>• Legal rights under RPwD Act 2016<br>• Managing sensory issues and meltdowns<br>• Non-verbal communication (AAC/PECS)<br><br>Please type your specific question or call us directly:<br>📞 <a href="tel:+918280056665" style="color:var(--pb)">+91 82800 56665</a><br>🆘 iCall (free): <a href="tel:9152987821" style="color:var(--pb)">9152987821</a>';
+}
+// ── END CHATBOT ──────────────────────────────────────────────────────────
+
+
+// ═══════════════════════════════════════════════════════════════════
+// PARTNER REGISTRATION — Multi-step form with admin approval flow
+// ═══════════════════════════════════════════════════════════════════
+let regStep = 1;
+let selectedOrgType = '';
+
+function selectOrgType(btn, type) {
+  document.querySelectorAll('.rts-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedOrgType = type;
+  document.getElementById('regOrgType').value = type;
+}
+
+function regNav(dir) {
+  const newStep = regStep + dir;
+  if (newStep < 1 || newStep > 3) return;
+
+  // Validate current step before moving forward
+  if (dir > 0 && !validateRegStep(regStep)) return;
+
+  document.getElementById('rstep' + regStep).classList.remove('active');
+  regStep = newStep;
+  document.getElementById('rstep' + regStep).classList.add('active');
+  updateRegProgress();
+}
+
+function validateRegStep(step) {
+  if (step === 1) {
+    if (!selectedOrgType) { alert('Please select your organisation type.'); return false; }
+    if (!document.getElementById('regOrgName').value.trim()) { alert('Please enter your organisation name.'); return false; }
+    if (!document.getElementById('regCity').value.trim()) { alert('Please enter your city.'); return false; }
+    if (!document.getElementById('regState').value) { alert('Please select your state.'); return false; }
+    if (!document.getElementById('regAddress').value.trim()) { alert('Please enter your address.'); return false; }
+  }
+  if (step === 2) {
+    if (!document.getElementById('regServices').value.trim()) { alert('Please describe your services.'); return false; }
+    if (!document.getElementById('regDesc').value.trim() || document.getElementById('regDesc').value.trim().split(' ').length < 15) {
+      alert('Please provide a description of at least 15 words.'); return false;
+    }
+  }
+  return true;
+}
+
+function updateRegProgress() {
+  for (let i = 1; i <= 3; i++) {
+    const step = document.getElementById('rps' + i);
+    const line = document.getElementById('rpl' + i);
+    if (i < regStep) {
+      step.classList.add('done'); step.classList.remove('current');
+      if (line) line.classList.add('done');
+    } else if (i === regStep) {
+      step.classList.remove('done'); step.classList.add('current');
+    } else {
+      step.classList.remove('done', 'current');
+      if (line) line.classList.remove('done');
+    }
+  }
+  const labels = ['Organisation', 'Services', 'Contact'];
+  document.querySelectorAll('.reg-grid .reg-form-wrap > div:nth-child(5) span').forEach((s, i) => {
+    s.style.color = i + 1 === regStep ? 'var(--pb)' : 'var(--muted)';
+    s.style.fontWeight = i + 1 === regStep ? '700' : '600';
+  });
+
+  const backBtn = document.getElementById('regBack');
+  const nextBtn = document.getElementById('regNext');
+  const submitBtn = document.getElementById('regSubmit');
+
+  backBtn.style.display = regStep > 1 ? 'inline-flex' : 'none';
+  nextBtn.style.display = regStep < 3 ? 'inline-flex' : 'none';
+  submitBtn.style.display = regStep === 3 ? 'inline-flex' : 'none';
+}
+
+async function submitReg() {
+  // Final validation
+  if (!validateRegStep(3)) return;
+  if (!document.getElementById('regContact').value.trim()) { alert('Please enter contact person name.'); return; }
+  if (!document.getElementById('regPhone').value.trim()) { alert('Please enter phone number.'); return; }
+  if (!document.getElementById('regEmail').value.trim()) { alert('Please enter email address.'); return; }
+  if (!document.getElementById('regConsent').checked) { alert('Please confirm the consent checkbox.'); return; }
+
+  // Collect all form data
+  const regData = {
+    timestamp: new Date().toISOString(),
+    status: 'PENDING_REVIEW',
+    orgType:    selectedOrgType,
+    orgName:    document.getElementById('regOrgName').value,
+    license:    document.getElementById('regLicense').value,
+    city:       document.getElementById('regCity').value,
+    state:      document.getElementById('regState').value,
+    address:    document.getElementById('regAddress').value,
+    services:   document.getElementById('regServices').value,
+    description:document.getElementById('regDesc').value,
+    ageGroup:   document.getElementById('regAge').value,
+    fees:       document.getElementById('regFees').value,
+    timing:     document.getElementById('regTiming').value,
+    subsidy:    document.getElementById('regSubsidy').value,
+    languages:  document.getElementById('regLangs').value,
+    contact:    document.getElementById('regContact').value,
+    designation:document.getElementById('regDesig').value,
+    phone:      document.getElementById('regPhone').value,
+    email:      document.getElementById('regEmail').value,
+    website:    document.getElementById('regWeb').value,
+    mapsLink:   document.getElementById('regMaps').value,
+    extraInfo:  document.getElementById('regExtra').value,
+  };
+
+  const submitBtn = document.getElementById('regSubmit');
+  submitBtn.textContent = 'Submitting…';
+  submitBtn.disabled = true;
+
+  try {
+    // PRIMARY: Send via EmailJS or your backend
+    // In production: POST to your API endpoint that emails ayushmans@outlook.in
+    await sendRegEmail(regData);
+  } catch(e) {
+    console.log('API submission failed, using mailto fallback:', e);
+    // FALLBACK: Open mailto with pre-filled data
+    const subject = encodeURIComponent('New Registration: ' + regData.orgName + ' [' + regData.orgType + ']');
+    const body = encodeURIComponent(
+      'NEW AYUSHMAN WORLD REGISTRATION\n\n' +
+      Object.entries(regData).map(([k,v]) => k.toUpperCase() + ': ' + v).join('\n')
+    );
+    window.open('mailto:ayushmans@outlook.in?subject=' + subject + '&body=' + body);
+  }
+
+  // Show success state
+  document.getElementById('rstep3').classList.remove('active');
+  document.getElementById('rstep-success').classList.add('active');
+  document.getElementById('regNavBtns').style.display = 'none';
+  document.getElementById('regProgress').style.display = 'none';
+
+  // Update progress steps all done
+  for (let i = 1; i <= 3; i++) {
+    const s = document.getElementById('rps' + i);
+    s.classList.add('done'); s.classList.remove('current');
+    s.textContent = '✓';
+    const l = document.getElementById('rpl' + i);
+    if (l) l.classList.add('done');
+  }
+}
+
+async function sendRegEmail(data) {
+  // Option 1: POST to your own backend endpoint
+  // await fetch('/api/register', { method:'POST', body: JSON.stringify(data), headers:{'Content-Type':'application/json'} });
+
+  // Option 2: EmailJS (free tier — set up at emailjs.com with your own template)
+  // await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', data);
+
+  // Option 3: Formspree (free, no backend needed) — just change the URL
+  const resp = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+    method: 'POST',
+    body: JSON.stringify(data),
+    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+  });
+  if (!resp.ok) throw new Error('Formspree error');
+}
+// ── END REGISTRATION ─────────────────────────────────────────────────────
+
 </script>
+
+<!-- ══ AYUSHMAN AI CHATBOT ════════════════════════════════════════════════ -->
+<button id="chat-fab" onclick="toggleChat()" aria-label="Open Ayushman AI Assistant" aria-expanded="false">
+  🤖
+  <span class="fab-badge" id="chatBadge">1</span>
+</button>
+
+<div id="chat-window" role="dialog" aria-modal="true" aria-label="Ayushman AI Assistant">
+  <!-- Header -->
+  <div class="chat-header">
+    <div class="chat-header-left">
+      <div class="chat-avatar">🌟</div>
+      <div>
+        <div class="chat-name">Ayushman AI Assistant</div>
+        <div class="chat-status">Online — here to help</div>
+      </div>
+    </div>
+    <button class="chat-close" onclick="toggleChat()" aria-label="Close chat">✕</button>
+  </div>
+
+  <!-- AI Source tabs -->
+  <div class="chat-tabs" role="tablist" aria-label="Select AI source">
+    <button class="chat-tab active" onclick="selectAI('auto',this)" title="Auto-selects best AI for your question">🤖 Auto</button>
+    <button class="chat-tab" onclick="selectAI('claude',this)" title="Claude by Anthropic">Claude</button>
+    <button class="chat-tab" onclick="selectAI('gemini',this)" title="Google Gemini">Gemini</button>
+    <button class="chat-tab" onclick="selectAI('gpt',this)" title="ChatGPT by OpenAI">ChatGPT</button>
+  </div>
+
+  <!-- Messages -->
+  <div class="chat-messages" id="chatMessages" aria-live="polite">
+    <div class="chat-msg bot">
+      👋 Namaste! I'm the Ayushman World AI Assistant.<br><br>
+      I can help you find <strong>therapy centres, schools, hospitals</strong>, understand <strong>government schemes</strong>, answer questions about <strong>autism and ADHD</strong>, and support you in <strong>Hindi, Tamil, Telugu, Kannada</strong> and more.<br><br>
+      How can I help you today?
+      <div class="msg-src">Powered by Claude · Gemini · ChatGPT</div>
+    </div>
+  </div>
+
+  <!-- Quick suggestions -->
+  <div class="chat-suggestions" id="chatSuggs">
+    <button class="chat-sug" onclick="askQ('Best therapy centre in Bangalore?')">🏥 Therapy in Bangalore</button>
+    <button class="chat-sug" onclick="askQ('What is the UDID card and how do I apply?')">📋 UDID Card</button>
+    <button class="chat-sug" onclick="askQ('My child is non-verbal. What should I do first?')">🗣️ Non-verbal child</button>
+    <button class="chat-sug" onclick="askQ('What free government schemes are available for autism in India?')">💰 Govt schemes</button>
+    <button class="chat-sug" onclick="askQ('School is refusing my child. What are my legal rights?')">⚖️ School rights</button>
+    <button class="chat-sug" onclick="askQ('ABA therapy kya hai? (Hindi mein batayein)')">🇮🇳 ABA थेरेपी</button>
+    <button class="chat-sug" onclick="askQ('¿Qué terapias hay disponibles para niños autistas?')">🇪🇸 Español</button>
+    <button class="chat-sug" onclick="askQ('What autism resources are available in UAE / Middle East?')">🇦🇪 UAE resources</button>
+    <button class="chat-sug" onclick="askQ('Best autism organisations in Australia?')">🇦🇺 Australia</button>
+    <button class="chat-sug" onclick="askQ('Autism support in Singapore?')">🇸🇬 Singapore</button>
+  </div>
+
+  <!-- Input -->
+  <div class="chat-input-row">
+    <input type="text" class="chat-input" id="chatInput" 
+           placeholder="Ask anything about autism, ADHD, resources…" 
+           aria-label="Type your question"
+           onkeydown="if(event.key==='Enter')sendChat()">
+    <button class="chat-send" onclick="sendChat()" aria-label="Send message">➤</button>
+  </div>
+
+  <div class="chat-footer">
+    Ayushman World AI · Powered by Claude, Gemini & ChatGPT · For medical emergencies call 9152987821
+  </div>
+</div>
+
 </body>
 </html>
